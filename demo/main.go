@@ -1,7 +1,8 @@
-package demo
+package main
+
 import (
 	"fmt"
-	"github.com/untre-ayp2/stack"
+	"github.com/untref-ayp2/stack"
 )
 
 func main() {
