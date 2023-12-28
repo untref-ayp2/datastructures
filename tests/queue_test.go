@@ -2,6 +2,7 @@ package tests
 
 import (
 	"testing"
+
 	"github.com/untref-ayp2/queue"
 )
 
@@ -13,22 +14,22 @@ func TestQueue(t *testing.T) {
 	q.Enqueue(3)
 
 	if q.IsEmpty() {
-		t.Error("queue should not be empty")
+		t.Error("La cola no debería estar vacía")
 	}
 
 	if v, _ := q.Dequeue(); v != 1 {
-		t.Error("first value should be 1")
+		t.Error("El primer valor debería ser 1")
 	}
 
 	if v, _ := q.Dequeue(); v != 2 {
-		t.Error("second value should be 2")
+		t.Error("El segundo valor debería ser 2")
 	}
 
 	if v, _ := q.Dequeue(); v != 3 {
-		t.Error("third value should be 3")
+		t.Error("El tercer valor debería ser 3")
 	}
 
 	if _, err := q.Dequeue(); err == nil {
-		t.Error("should return error when queue is empty")
+		t.Error("La cola debería estar vacía")
 	}
 }
