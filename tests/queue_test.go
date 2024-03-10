@@ -7,7 +7,7 @@ import (
 )
 
 func TestQueue(t *testing.T) {
-	q := queue.Queue{}
+	q := queue.New()
 
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -31,5 +31,45 @@ func TestQueue(t *testing.T) {
 
 	if _, err := q.Dequeue(); err == nil {
 		t.Error("La cola debería estar vacía")
+	}
+}
+
+func TestEmptyQueue(t *testing.T) {
+	q := queue.New()
+
+	if !q.IsEmpty() {
+		t.Error("La cola debería estar vacía")
+	}
+
+	if _, err := q.Dequeue(); err == nil {
+		t.Error("La cola debería estar vacía")
+	}
+
+	if _, err := q.Front(); err == nil {
+		t.Error("La cola debería estar vacía")
+	}
+}
+
+func TestFront(t *testing.T) {
+	q := queue.New()
+
+	q.Enqueue(1)
+	q.Enqueue(2)
+	q.Enqueue(3)
+
+	if v, _ := q.Front(); v != 1 {
+		t.Error("El frente de la cola debería ser 1")
+	}
+
+	q.Dequeue()
+
+	if v, _ := q.Front(); v != 2 {
+		t.Error("El frente de la cola debería ser 2")
+	}
+
+	q.Dequeue()
+
+	if v, _ := q.Front(); v != 3 {
+		t.Error("El frente de la cola debería ser 3")
 	}
 }
