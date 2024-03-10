@@ -1,6 +1,6 @@
 # Stack
 
-Una implementación simple de una estructura de datos de pila (stack) en Go.
+Una implementación simple de una estructura de datos tipo pila (stack) en Go.
 
 ## Métodos
 
