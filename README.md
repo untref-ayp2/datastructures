@@ -13,8 +13,6 @@ Crea y devuelve una nueva instancia de la pila vacía.
 
 Agrega un elemento al tope de la pila.
 
-- `value`: El valor a agregar a la pila.
-
 ### `Pop() (any, error)`
 
 Elimina y devuelve el elemento del tope de la pila.
