@@ -1,6 +1,7 @@
 # Stack
 
 Una implementación simple de una estructura de datos tipo pila (stack) en Go.
+La pila es genérica y puede almacenar cualquier tipo de datos (any) en ella.
 
 ## Métodos
 
@@ -8,7 +9,7 @@ Una implementación simple de una estructura de datos tipo pila (stack) en Go.
 
 Crea y devuelve una nueva instancia de la pila vacía.
 
-### `Push(value any)`
+### `Push(any)`
 
 Agrega un elemento al tope de la pila.
 
