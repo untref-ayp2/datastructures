@@ -11,7 +11,7 @@ import (
 )
 
 func InvertirCadena(cadena string) string {
-	s := *stack.New()
+	s := *stack.New[string]()
 	salida := ""
 	for _, c := range cadena {
 		s.Push(string(c))
@@ -19,19 +19,19 @@ func InvertirCadena(cadena string) string {
 
 	for !s.IsEmpty() {
 		c, _ := s.Pop()
-		salida += c.(string)
+		salida += c
 	}
 	return salida
 }
 
 func Demo() {
-	s := *stack.New()
+	s := *stack.New[string]()
 	fmt.Println("Encolando Hola")
 	s.Push("Hola")
 	fmt.Println("Encolando 2")
-	s.Push(2)
+	s.Push("2")
 	fmt.Println("Encolando 3")
-	s.Push(3)
+	s.Push("3")
 	fmt.Println("Desencolando todos los elementos:")
 	fmt.Println(s.Pop())
 	fmt.Println(s.Pop())

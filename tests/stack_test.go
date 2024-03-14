@@ -2,11 +2,12 @@ package tests
 
 import (
 	"testing"
+
 	"github.com/untref-ayp2/stack"
 )
 
 func TestPushPop(t *testing.T) {
-	s := *stack.New()
+	s := *stack.New[int]()
 
 	s.Push(1)
 	s.Push(2)
@@ -31,6 +32,4 @@ func TestPushPop(t *testing.T) {
 	if err == nil {
 		t.Error("Error en Push")
 	}
-
-
 }
