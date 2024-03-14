@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	q := queue.New()
+	q := queue.New[int]()
 	q.Enqueue(1)
 	q.Enqueue(2)
 	q.Enqueue(3)

@@ -7,7 +7,7 @@ import (
 )
 
 func TestQueue(t *testing.T) {
-	q := queue.New()
+	q := queue.New[int]()
 
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -35,7 +35,7 @@ func TestQueue(t *testing.T) {
 }
 
 func TestEmptyQueue(t *testing.T) {
-	q := queue.New()
+	q := queue.New[int]()
 
 	if !q.IsEmpty() {
 		t.Error("La cola debería estar vacía")
@@ -51,7 +51,7 @@ func TestEmptyQueue(t *testing.T) {
 }
 
 func TestFront(t *testing.T) {
-	q := queue.New()
+	q := queue.New[int]()
 
 	q.Enqueue(1)
 	q.Enqueue(2)
