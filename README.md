@@ -1,26 +1,27 @@
 # Stack
 
 Una implementación simple de una estructura de datos tipo pila (stack) en Go.
-La pila es genérica y puede almacenar cualquier tipo de datos (any) en ella.
+La pila está parametrizada, por lo que se puede instanciar para obtener una
+pila de enteros, o una pila de strings, etc.
 
 ## Métodos
 
-### `New() *Stack`
+### `New[T any]() *Stack[T]`
 
 Crea y devuelve una nueva instancia de la pila vacía.
 
-### `Push(any)`
+### `Push[T any](element T)`
 
 Agrega un elemento al tope de la pila.
 
-### `Pop() (any, error)`
+### `Pop[T any]() (T, error)`
 
 Elimina y devuelve el elemento del tope de la pila.
 
 - Retorna el valor del elemento eliminado.
 - Retorna un error si la pila está vacía.
 
-### `Top() (any, error)`
+### `Top[T any]() (T, error)`
 
 Devuelve el elemento del tope de la pila sin eliminarlo.
 
@@ -31,8 +32,6 @@ Devuelve el elemento del tope de la pila sin eliminarlo.
 
 Verifica si la pila está vacía.
 
-- Retorna `true` si la pila está vacía, de lo contrario retorna `false`.
-
 ## Ejemplo de uso
 
-En la carpeta  [demo](./demo) se encuentra un ejemplo de uso
+En la carpeta  [demo](./demo/main.go) se encuentra un ejemplo de uso.
