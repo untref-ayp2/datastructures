@@ -1,3 +1,3 @@
-module github.com/untref-ayp2/stack
+module github.com/untref-ayp2/structures/stack
 
-go 1.20
+go 1.22

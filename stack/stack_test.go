@@ -1,13 +1,9 @@
-package tests
+package stack
 
-import (
-	"testing"
-
-	"github.com/untref-ayp2/stack"
-)
+import "testing"
 
 func TestPushPop(t *testing.T) {
-	s := *stack.New[int]()
+	s := New[int]()
 
 	s.Push(1)
 	s.Push(2)
