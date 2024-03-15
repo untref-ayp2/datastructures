@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/untref-ayp2/queue"
+
+	"github.com/untref-ayp2/structures/queue"
 )
 
 func main() {

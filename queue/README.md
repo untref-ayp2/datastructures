@@ -1,8 +1,9 @@
 # Queue
 
 Una implementación simple de una estructura de datos tipo cola (queue) en Go.
-La cola por lo que se puede instanciar para obtener una
-cola de enteros, o una cola de strings, etc.
+
+La cola por lo que se puede instanciar para obtener una cola de enteros, o una
+cola de strings, etc.
 
 ## Métodos
 
@@ -34,4 +35,4 @@ Verifica si la cola está vacía.
 
 ## Ejemplo de uso
 
-En la carpeta  [demo](./demo/main.go) se encuentra un ejemplo de uso.
+En la carpeta [demo](./demo/main.go) se encuentra un ejemplo de uso.

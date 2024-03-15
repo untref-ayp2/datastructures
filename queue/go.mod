@@ -1,3 +1,3 @@
-module github.com/untref-ayp2/queue
+module github.com/untref-ayp2/structures/queue
 
-go 1.20
+go 1.22
