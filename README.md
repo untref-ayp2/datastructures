@@ -11,9 +11,9 @@ ese proyecto.
 1. Crear una nueva carpeta e inicializar un módulo de Go.
 
    ```bash
-   mkdir mi_proyecto
-   cd mi_proyecto
-   go mod init github.com/usuario/mi_proyecto # o cualquier otro nombre
+   mkdir mi-proyecto
+   cd mi-proyecto
+   go mod init github.com/usuario/mi-proyecto # o cualquier otro nombre
    ```
 
 2. Agregar la dependencia en el archivo `go.mod` del proyecto.
@@ -97,7 +97,7 @@ siguientes pasos.
    ```bash
    untref-ayp2/
    ├── data-structures/
-   └── mi_proyecto/
+   └── mi-proyecto/
    ```
 
 4. Se crea el archivo `go.work` que servirá para que Go pueda encontrar el
@@ -115,7 +115,7 @@ siguientes pasos.
 
     use (
         ./data-structures
-        ./mi_proyecto
+        ./mi-proyecto
     )
    ```
 
@@ -131,7 +131,7 @@ siguientes pasos.
     }
    ```
 
-   Ahora podemos correr el proyecto `mi_proyecto` y ver si se imprime el mensaje
+   Ahora podemos correr el proyecto `mi-proyecto` y ver si se imprime el mensaje
    que acabamos de agregar. Cabe destacar que dado que estamos trabajando dentro
    de un _workspace_, tenemos varias formas de ejecutar el código de nuestro
    módulo. Por ejemplo:
@@ -139,7 +139,7 @@ siguientes pasos.
    Accediendo a la carpeta del proyecto y corriendo el comando `go run .`:
 
    ```bash
-   cd mi_proyecto
+   cd mi-proyecto
    go run .
    ```
 
@@ -147,14 +147,14 @@ siguientes pasos.
    módulo:
 
    ```bash
-   go run ./mi_proyecto
+   go run ./mi-proyecto
    ```
 
    Si todo está funcionando correctamente, deberíamos ver el mensaje que
    acabamos de agregar.
 
    ```bash
-   untref-ayp2 ❯ go run ./mi_proyecto
+   untref-ayp2 ❯ go run ./mi-proyecto
    Usando la pila de forma local
    a l g o r i t m o
    ```
