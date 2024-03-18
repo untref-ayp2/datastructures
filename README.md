@@ -22,6 +22,9 @@ ese proyecto.
    go get github.com/untref-ayp2/datastructures
    ```
 
+   Nota: este paso podría saltearse y comenzar a utilizar un módulo, para luego
+   ejecutar `go mod tidy` y que se descarguen las dependencias.
+
 3. Utilizar el módulo en el código del proyecto (por ejemplo
    `my_proyecto/main.go`).
 
@@ -58,6 +61,10 @@ ese proyecto.
    ```bash
    go mod tidy
    ```
+
+   Este comando también se encarga de agregar las dependencias que se usan en el
+   código al archivo `go.mod`, y que no hayamos descargado previamente con
+   `go get`.
 
 5. Finalmente podemos correr el proyecto haciendo:
 
@@ -143,7 +150,8 @@ siguientes pasos.
    go run ./mi_proyecto
    ```
 
-   Si todo está funcionando correctamente, deberíamos ver el mensaje que acabamos de agregar.
+   Si todo está funcionando correctamente, deberíamos ver el mensaje que
+   acabamos de agregar.
 
    ```bash
    untref-ayp2 ❯ go run ./mi_proyecto
