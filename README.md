@@ -19,7 +19,7 @@ ese proyecto.
 2. Agregar la dependencia en el archivo `go.mod` del proyecto.
 
    ```bash
-   go get github.com/untref-ayp2/datastructures
+   go get github.com/untref-ayp2/data-structures
    ```
 
    Nota: este paso podría saltearse y comenzar a utilizar un módulo, para luego
@@ -34,7 +34,7 @@ ese proyecto.
    import (
         "fmt"
 
-        "github.com/untref-ayp2/datastructures/stack"
+        "github.com/untref-ayp2/data-structures/stack"
    )
 
    func main() {
@@ -88,7 +88,7 @@ siguientes pasos.
 2. Dentro de esta nueva carpeta, se clona el repositorio de este módulo.
 
    ```bash
-   git clone git@github.com:untref-ayp2/datastructures.git
+   git clone git@github.com:untref-ayp2/data-structures.git
    ```
 
 3. La carpeta de nuestro proyecto debería estar dentro de este mismo
@@ -96,12 +96,12 @@ siguientes pasos.
 
    ```bash
    untref-ayp2/
-   ├── datastructures/
+   ├── data-structures/
    └── mi_proyecto/
    ```
 
 4. Se crea el archivo `go.work` que servirá para que Go pueda encontrar el
-   módulo `datastructures` de forma local.
+   módulo `data-structures` de forma local.
 
    ```bash
    go work init
@@ -114,13 +114,13 @@ siguientes pasos.
    go 1.22.0
 
     use (
-        ./datastructures
+        ./data-structures
         ./mi_proyecto
     )
    ```
 
 5. Para verificar que todo está funcionando correctamente podemos modificar el
-   código de algún paquete de `datastructures`. Por ejemplo, si agregámos un
+   código de algún paquete de `data-structures`. Por ejemplo, si agregámos un
    mensaje de log en la función `stack.New`:
 
    ```go
@@ -164,9 +164,9 @@ siguientes pasos.
 Siguiendo las guías de Go, la estructura de este repositorio es la siguiente:
 
 ```bash
-datastructures/ # módulo github.com/untref-ayp2/datastructures
-├── stack/      # paquete github.com/untref-ayp2/datastructures/stack
-└── queue/      # paquete github.com/untref-ayp2/datastructures/queue
+data-structures/ # módulo github.com/untref-ayp2/data-structures
+├── stack/      # paquete github.com/untref-ayp2/data-structures/stack
+└── queue/      # paquete github.com/untref-ayp2/data-structures/queue
 ```
 
 El objetivo de publicar todas la estructuras de datos en un unico repositorio es

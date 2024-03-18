@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/untref-ayp2/datastructures/stack"
+	"github.com/untref-ayp2/data-structures/stack"
 )
 
 func InvertirCadena(cadena string) string {

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/untref-ayp2/datastructures/queue"
+	"github.com/untref-ayp2/data-structures/queue"
 )
 
 func main() {
