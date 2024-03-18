@@ -165,8 +165,8 @@ Siguiendo las guías de Go, la estructura de este repositorio es la siguiente:
 
 ```bash
 data-structures/ # módulo github.com/untref-ayp2/data-structures
-├── stack/      # paquete github.com/untref-ayp2/data-structures/stack
-└── queue/      # paquete github.com/untref-ayp2/data-structures/queue
+├── stack/       # paquete github.com/untref-ayp2/data-structures/stack
+└── queue/       # paquete github.com/untref-ayp2/data-structures/queue
 ```
 
 El objetivo de publicar todas la estructuras de datos en un unico repositorio es
