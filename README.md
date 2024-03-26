@@ -111,7 +111,7 @@ siguientes pasos.
    el archivo `go.work` debería quedar de la siguiente forma:
 
    ```bash
-   go 1.22.0
+   go 1.20.0
 
     use (
         ./data-structures
