@@ -1,9 +1,8 @@
-package single_linked_list
+package circular_list
 
 import (
 	"testing"
 )
-
 func TestNewList(t *testing.T) {
 	list := NewList[int]()
 	if list == nil {

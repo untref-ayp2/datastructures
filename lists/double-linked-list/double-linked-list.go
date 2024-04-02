@@ -2,150 +2,138 @@ package double_linked_list
 
 import (
 	"cmp"
-	"errors"
 )
 
 // DoubleLinkedList implementa una lista enlazada doble genérica.
 type DoubleLinkedList[T cmp.Ordered] struct {
-	head *node[T]
-	tail *node[T]
+	head *Node[T]
+	tail *Node[T]
 	size int
 }
 
-func NewDoubleLinkedList[T cmp.Ordered]() *DoubleLinkedList[T] {
+func NewList[T cmp.Ordered]() *DoubleLinkedList[T] {
 	return &DoubleLinkedList[T]{}
 }
 
-func (l *DoubleLinkedList[T]) InsertAt(index int, data T) error {
-	if index < 0 || index > l.size {
-		return errors.New("index out of bounds")
-	}
+func (dll *DoubleLinkedList[T]) Head() *Node[T] {
+	return dll.head
+}
 
+func (dll *DoubleLinkedList[T]) Tail() *Node[T] {
+	return dll.tail
+}
+
+func (dll *DoubleLinkedList[T]) Size() int {
+	return dll.size
+}
+
+func (dll *DoubleLinkedList[T]) IsEmpty() bool {
+	return dll.size == 0
+}
+
+func (dll *DoubleLinkedList[T]) Clear() {
+	dll.head = nil
+	dll.tail = nil
+	dll.size = 0
+}
+
+func (dll *DoubleLinkedList[T]) Prepend(data T) {
 	newNode := newNode[T](data)
 
-	if l.size == 0 { // si la lista estaba vacía
-		l.head = newNode
-		l.tail = newNode
-	} else if index == 0 { // si se inserta al principio
-		newNode.setNext(l.head)
-		l.head.setPrev(newNode)
-		l.head = newNode
-	} else if index == l.size { // si se inserta al final
-		newNode.setPrev(l.tail)
-		l.tail.setNext(newNode)
-		l.tail = newNode
+	if dll.size == 0 {
+		dll.head = newNode
+		dll.tail = newNode
 	} else {
-		current := l.head
-		for i := 0; i < index-1; i++ {
-			current = current.getNext()
-		}
-
-		newNode.setNext(current.getNext())
-		newNode.setPrev(current)
-		current.setNext(newNode)
-		newNode.getNext().setPrev(newNode)
+		newNode.SetNext(dll.head)
+		dll.head.SetPrev(newNode)
+		dll.head = newNode
 	}
 
-	l.size++
+	dll.size++
+}
+
+func (dll *DoubleLinkedList[T]) Append(data T) {
+	newNode := newNode[T](data)
+
+	if dll.size == 0 {
+		dll.head = newNode
+		dll.tail = newNode
+	} else {
+		dll.tail.SetNext(newNode)
+		newNode.SetPrev(dll.tail)
+		dll.tail = newNode
+	}
+
+	dll.size++
+}
+
+func (dll *DoubleLinkedList[T]) Find(data T) *Node[T] {
+	current := dll.head
+
+	for current != nil {
+		if current.data == data {
+			return current
+		}
+		current = current.next
+	}
+
 	return nil
 }
 
-func (l *DoubleLinkedList[T]) RemoveAt(index int) (T, error) {
-	var data T
-	if index < 0 || index >= l.size {
-		return data, errors.New("indice fuera de rango")
+func (dll *DoubleLinkedList[T]) RemoveFirst(){
+	if dll.size == 0 {
+		return
 	}
 
-	var removed *node[T]
-	if l.size == 1 { // si la lista tiene un solo elemento
-		removed = l.head
-		l.head = nil
-		l.tail = nil
-	} else if index == 0 { // si se elimina el primer elemento
-		removed = l.head
-		l.head = l.head.getNext()
-		l.head.setPrev(nil)
-	} else if index == l.size-1 { // si se elimina el último elemento
-		removed = l.tail
-		l.tail = l.tail.getPrev()
-		l.tail.setNext(nil)
+	dll.head = dll.head.next
+	dll.size--
+
+	if dll.size == 0 {
+		dll.tail = nil
 	} else {
-		current := l.head
-		for i := 0; i < index-1; i++ {
-			current = current.getNext()
-		}
+		dll.head.SetPrev(nil)
+	}
+}
 
-		removed = current.getNext()
-		current.setNext(removed.getNext())
-		removed.getNext().setPrev(current)
+func (dll *DoubleLinkedList[T]) RemoveLast(){
+	if dll.size == 0 {
+		return
 	}
 
-	l.size--
-	return removed.getData(), nil
-}
-
-func (l *DoubleLinkedList[T]) Get(index int) (T, error) {
-	var data T
-	if index < 0 || index >= l.size {
-		return data, errors.New("indice fuera de rango")
+	if dll.size == 1 {
+		dll.head = nil
+		dll.tail = nil
+		dll.size = 0
+		return
 	}
 
-	current := l.head
-	for i := 0; i < index; i++ {
-		current = current.getNext()
+	dll.tail = dll.tail.prev
+	dll.tail.SetNext(nil)
+	dll.size--
+}
+
+func (dll *DoubleLinkedList[T]) Remove(data T){
+	node := dll.Find(data)
+
+	if node == nil {
+		return
 	}
 
-	return current.getData(), nil
-}
-
-func (l *DoubleLinkedList[T]) IndexOf(data T) int {
-	current := l.head
-	for i := 0; i < l.size; i++ {
-		if current.getData() == data {
-			return i
-		}
-		current = current.getNext()
-	}
-	return -1
-}
-
-func (l *DoubleLinkedList[T]) Set(index int, data T) error {
-	if index < 0 || index >= l.size {
-		return errors.New("indice fuera de rango")
+	if node == dll.head {
+		dll.RemoveFirst()
+		return
 	}
 
-	current := l.head
-	for i := 0; i < index; i++ {
-		current = current.getNext()
+	if node == dll.tail {
+		dll.RemoveLast()
+		return
 	}
 
-	current.setData(data)
-	return nil
+	node.prev.SetNext(node.next)
+	node.next.SetPrev(node.prev)
+	dll.size--
 }
 
-func (l *DoubleLinkedList[T]) Size() int {
-	return l.size
-}
 
-func (l *DoubleLinkedList[T]) IsEmpty() bool {
-	return l.size == 0
-}
 
-func (l *DoubleLinkedList[T]) Clear() {
-	l.head = nil
-	l.tail = nil
-	l.size = 0
-}
 
-func (l *DoubleLinkedList[T]) Iterate() <-chan T {
-	ch := make(chan T)
-	go func() {
-		current := l.head
-		for current != nil {
-			ch <- current.getData()
-			current = current.getNext()
-		}
-		close(ch)
-	}()
-	return ch
-}

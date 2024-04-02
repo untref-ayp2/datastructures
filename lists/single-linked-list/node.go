@@ -2,28 +2,32 @@ package single_linked_list
 
 import "cmp"
 
-type node[T cmp.Ordered] struct {
+type Node[T cmp.Ordered] struct {
 	data T
-	next *node[T]
+	next *Node[T]
 }
 
-func newNode[T cmp.Ordered](data T) *node[T] {
-	return &node[T]{data: data, next: nil}
+func NewNode[T cmp.Ordered](data T) *Node[T] {
+	return &Node[T]{data: data, next: nil}
 }
 
-func (n *node[T]) getData() T {
+func (n *Node[T]) Data() T {
 	return n.data
 }
 
-func (n *node[T]) setData(newData T) {
+func (n *Node[T]) SetData(newData T) {
 	n.data = newData
 }
 
-func (n *node[T]) getNext() *node[T] {
+func (n *Node[T]) Next() *Node[T] {
 	return n.next
 }
 
-func (n *node[T]) setNext(newNext *node[T]) {
+func (n *Node[T]) HasNext() bool {
+	return n.next != nil
+}
+
+func (n *Node[T]) SetNext(newNext *Node[T]) {
 	if newNext != nil {
 		n.next = newNext
 	} else {

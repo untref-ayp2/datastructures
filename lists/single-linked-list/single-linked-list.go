@@ -2,138 +2,133 @@ package single_linked_list
 
 import (
 	"cmp"
-	"errors"
 )
 
-
+// Lista enlazada simple
+// Se implementa con un nodo que contiene un dato y un puntero al siguiente nodo
 type SingleLinkedList[T cmp.Ordered] struct {
-	head *node[T]
-	tail *node[T]
+	head *Node[T]
+	tail *Node[T]
 	size int
 }
 
-func NewSingleLinkedList[T cmp.Ordered]() *SingleLinkedList[T] {
+// Crea una nueva lista vacía
+func NewList[T cmp.Ordered]() *SingleLinkedList[T] {
 	return &SingleLinkedList[T]{}
 }
 
+// Devuelve el primer nodo de la lista
+func (sll *SingleLinkedList[T]) Head() *Node[T] {
+	return sll.head
+}
+
+// Devuelve el último nodo de la lista
+func (sll *SingleLinkedList[T]) Tail() *Node[T] {
+	return sll.tail
+}
+
+// Devuelve el tamaño de la lista
 func (sll *SingleLinkedList[T]) Size() int {
 	return sll.size
 }
 
+// Devuelve True si la lista está vacía
 func (sll *SingleLinkedList[T]) IsEmpty() bool {
 	return sll.size == 0
 }
 
-func (ssl *SingleLinkedList[T]) InsertAt(index int, data T) error {
-	if index < 0 || index > ssl.size {
-		return errors.New("índice fuera de rango")
-	}
-	newNode := newNode(data)
-	// si la lista está vacía O(1)
-	if ssl.IsEmpty() {
-		ssl.head = newNode
-		ssl.tail = newNode
-	// si se inserta al inicio O(1)
-	} else if index == 0 {
-		newNode.setNext(ssl.head)
-		ssl.head = newNode
-	// si se inserta al final O(1)
-	} else if index == ssl.size {
-		ssl.tail.setNext(newNode)
-		ssl.tail = newNode
-	// si se inserta en cualquier otro lugar O(n)
-	} else {
-		current := ssl.head
-		for i := 0; i < index-1; i++ {
-			current = current.getNext()
-		}
-		newNode.setNext(current.getNext())
-		current.setNext(newNode)
-	}
-	ssl.size++
-	return nil
-}
-
-func (ssl* SingleLinkedList[T]) RemoveAt(index int) (T, error) {
-	var data T
-	if index < 0 || index >= ssl.size {
-		return data, errors.New("índice fuera de rango")
-	}
-	// si se elimina al inicio O(1)
-	if index == 0 {
-		data = ssl.head.getData()
-		ssl.head = ssl.head.getNext()
-		// si la lista queda vacía
-		if ssl.head == nil {
-			ssl.tail = nil
-		}
-	// si se elimina en cualquier otro lugar O(n)
-	} else {
-		current := ssl.head
-		for i := 0; i < index-1; i++ {
-			current = current.getNext()
-		}
-		data = current.getNext().getData()
-		current.setNext(current.getNext().getNext())
-		// si se elimina el último nodo
-		if index == ssl.size-1 {
-			ssl.tail = current
-		}
-	}
-	ssl.size--
-	return data, nil
-}
-
-func (ssl *SingleLinkedList[T]) Get(index int) (T, error) {
-	var data T
-	if index < 0 || index >= ssl.size {
-		return data, errors.New("índice fuera de rango")
-	}
-	current := ssl.head
-	for i := 0; i < index; i++ {
-		current = current.getNext()
-	}
-	return current.getData(), nil
-}
-
-func (ssl *SingleLinkedList[T]) IndexOf(data T) int {
-	current := ssl.head
-	for i := 0; i < ssl.size; i++ {
-		if current.getData() == data { 
-			return i
-		}
-		current = current.getNext()
-	}
-	return -1
-}
-
-func (ssl *SingleLinkedList[T]) Set(index int, data T) error {
-	if index < 0 || index >= ssl.size {
-		return errors.New("índice fuera de rango")
-	}
-	current := ssl.head
-	for i := 0; i < index; i++ {
-		current = current.getNext()
-	}
-	current.setData(data)
-	return nil
-}
-
+// Elimina todos los nodos de la lista
 func (ssl *SingleLinkedList[T]) Clear() {
 	ssl.head = nil
 	ssl.tail = nil
 	ssl.size = 0
 }
 
-func (ssl *SingleLinkedList[T]) Iterate() <-chan T {
-	ch := make(chan T)
-	go func() {
-		current := ssl.head
-		for current != nil {
-			ch <- current.getData()
-			current = current.getNext()
-		}
-		close(ch)
-	}()
-	return ch
+// Inserta un dato al inicio de la lista
+func (sll *SingleLinkedList[T]) Prepend(data T) {
+	newNode := NewNode(data)
+	if sll.IsEmpty() {
+		sll.head = newNode
+		sll.tail = newNode
+	} else {
+		newNode.SetNext(sll.head)
+		sll.head = newNode
+	}
+	sll.size++
 }
+
+// Inserta un dato al final de la lista
+func (sll *SingleLinkedList[T]) Append(data T) {
+	newNode := NewNode(data)
+	if sll.IsEmpty() {
+		sll.head = newNode
+		sll.tail = newNode
+	} else {
+		sll.tail.SetNext(newNode)
+		sll.tail = newNode
+	}
+	sll.size++
+}
+
+// Busca un dato en la lista, si lo encuentra devuelve el nodo correspondiente,
+// si no lo encuentra devuelve nil
+func (sll *SingleLinkedList[T]) Find(data T) *Node[T] {
+	current := sll.head
+	for current != nil {
+		if current.Data() == data {
+			return current
+		}
+		current = current.Next()
+	}
+	return nil
+}
+
+// Elimina el primer nodo de la lista
+func (sll *SingleLinkedList[T]) RemoveFirst() {
+	if !sll.IsEmpty() {
+		sll.head = sll.head.Next()
+		sll.size--
+		if sll.Head() == nil{
+			sll.tail = nil
+		}
+	}
+}
+
+// Elimina el último nodo de la lista
+func (sll *SingleLinkedList[T]) RemoveLast() {
+	if !sll.IsEmpty() {
+		if sll.Size() == 1 {
+			sll.head = nil
+			sll.tail = nil
+		} else {
+			current := sll.head
+			for current.Next() != sll.tail {
+				current = current.Next()
+			}
+			current.SetNext(nil)
+			sll.tail = current
+		}
+		sll.size--
+	}
+}
+
+// Elimina un la primera aparición de un dato en la lista
+func (sll *SingleLinkedList[T]) Remove(data T) {
+	nodo := sll.Find(data)
+	if nodo != nil{
+		if nodo != sll.Head(){
+			current := sll.Head()
+			for current.Next() != nodo{
+				current = current.Next()
+			}
+			current.SetNext(nodo.Next())
+			if nodo == sll.tail{
+				sll.tail = current
+			}
+			sll.size--
+		}else{
+			sll.RemoveFirst()
+		}
+	}
+}
+

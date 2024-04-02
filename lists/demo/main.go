@@ -3,41 +3,55 @@ package main
 import (
 	"fmt"
 
-	single_linked_list "github.com/untref-ayp2/data-structures/lists/single-linked-list"
-	double_linked_list "github.com/untref-ayp2/data-structures/lists/double-linked-list"
-	lists "github.com/untref-ayp2/data-structures/lists"
+	cl "github.com/untref-ayp2/data-structures/lists/circular-list"
+	dl "github.com/untref-ayp2/data-structures/lists/double-linked-list"
+	sl "github.com/untref-ayp2/data-structures/lists/single-linked-list"
 )
 
 func main() {
 	// Crear una lista enlazada simple de enteros
-	var listaEntero lists.List[int]
-	listaEntero = single_linked_list.NewSingleLinkedList[int]()
+
+	listaEntero := sl.NewList[int]()
 	// Insertar elementos en la lista
-	listaEntero.InsertAt(0, 1)
-	listaEntero.InsertAt(0, 2)
-	listaEntero.InsertAt(0, 3)
-	listaEntero.InsertAt(0, 4)
+	listaEntero.Append(1)
+	listaEntero.Append(2)
+	listaEntero.Append(3)
+	listaEntero.Append(4)
 	// Iterar la lista e imprimir los elementos
 	fmt.Println("Iterando lista simple de enteros")
 	i := 0
-	for dato := range listaEntero.Iterate() {
-		fmt.Printf("Elemento %d: %d\n", i, dato)
+	for actual := listaEntero.Head(); actual != nil; actual = actual.Next() {
+		fmt.Printf("Elemento %d: %d\n", i, actual.Data())
 		i++
 	}
 
 	listaEntero.Clear()
 
-	listaEntero = double_linked_list.NewDoubleLinkedList[int]()
+	listaDoble := dl.NewList[int]()
 	// Insertar elementos en la lista
-	listaEntero.InsertAt(0, 1)
-	listaEntero.InsertAt(0, 2)
-	listaEntero.InsertAt(0, 3)
-	listaEntero.InsertAt(0, 4)
+	listaDoble.Prepend(1)
+	listaDoble.Prepend(2)
+	listaDoble.Prepend(3)
+	listaDoble.Prepend(4)
 	// Iterar la lista e imprimir los elementos
 	fmt.Println("Iterando lista doble de enteros")
-	i = 0
-	for dato := range listaEntero.Iterate() {
-		fmt.Printf("Elemento %d: %d\n", i, dato)
-		i++
+	i = listaDoble.Size() - 1
+	for actual := listaDoble.Tail(); actual != nil; actual = actual.Prev() {
+		fmt.Printf("Elemento %d: %d\n", i, actual.Data())
+		i--
+	}
+
+	listaCircular := cl.NewList[int]()
+	// Insertar elementos en la lista
+	listaCircular.Prepend(1)
+	listaCircular.Prepend(2)
+	listaCircular.Prepend(3)
+	listaCircular.Prepend(4)
+	// Iterar la lista e imprimir los elementos
+	fmt.Println("Iterando lista circular de enteros")
+	current := listaCircular.Head()
+	for i := 0; i < listaCircular.Size(); i++ {
+		fmt.Printf("Elemento %d: %d\n", i, current.Data())
+		current = current.Next()
 	}
 }
