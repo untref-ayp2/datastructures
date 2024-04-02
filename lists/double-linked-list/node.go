@@ -10,7 +10,7 @@ type Node[T cmp.Ordered] struct {
 }
 
 // NewNode crea un nuevo nodo de lista enlazada doble con el dato especificado.
-func newNode[T cmp.Ordered](data T) *Node[T] {
+func NewNode[T cmp.Ordered](data T) *Node[T] {
 	return &Node[T]{data: data}
 }
 

@@ -41,7 +41,7 @@ func (cl *CircularList[T]) Clear() {
 }
 
 func (cl *CircularList[T]) Prepend(data T) {
-	node := newNode(data)
+	node := NewNode(data)
 	if cl.size == 0 {
 		cl.head = node
 		cl.head.SetNext(cl.head)
@@ -57,7 +57,7 @@ func (cl *CircularList[T]) Prepend(data T) {
 }
 
 func (cl *CircularList[T]) Append(data T) {
-	node := newNode(data)
+	node := NewNode(data)
 	if cl.size == 0 {
 		cl.head = node
 		cl.head.SetNext(cl.head)

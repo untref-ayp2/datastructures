@@ -38,7 +38,7 @@ func (dll *DoubleLinkedList[T]) Clear() {
 }
 
 func (dll *DoubleLinkedList[T]) Prepend(data T) {
-	newNode := newNode[T](data)
+	newNode := NewNode[T](data)
 
 	if dll.size == 0 {
 		dll.head = newNode
@@ -53,7 +53,7 @@ func (dll *DoubleLinkedList[T]) Prepend(data T) {
 }
 
 func (dll *DoubleLinkedList[T]) Append(data T) {
-	newNode := newNode[T](data)
+	newNode := NewNode[T](data)
 
 	if dll.size == 0 {
 		dll.head = newNode
