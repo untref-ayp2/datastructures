@@ -8,7 +8,7 @@ type Node[T cmp.Ordered] struct {
 }
 
 func NewNode[T cmp.Ordered](data T) *Node[T] {
-	return &Node[T]{data: data, next: nil}
+	return &Node[T]{data: data}
 }
 
 func (n *Node[T]) Data() T {

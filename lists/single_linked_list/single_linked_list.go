@@ -1,8 +1,6 @@
 package single_linked_list
 
-import (
-	"cmp"
-)
+import "cmp"
 
 // Lista enlazada simple
 // Se implementa con un nodo que contiene un dato y un puntero al siguiente nodo
@@ -88,7 +86,7 @@ func (sll *SingleLinkedList[T]) RemoveFirst() {
 	if !sll.IsEmpty() {
 		sll.head = sll.head.Next()
 		sll.size--
-		if sll.Head() == nil{
+		if sll.Head() == nil {
 			sll.tail = nil
 		}
 	}
@@ -115,20 +113,19 @@ func (sll *SingleLinkedList[T]) RemoveLast() {
 // Elimina un la primera aparición de un dato en la lista
 func (sll *SingleLinkedList[T]) Remove(data T) {
 	nodo := sll.Find(data)
-	if nodo != nil{
-		if nodo != sll.Head(){
+	if nodo != nil {
+		if nodo != sll.Head() {
 			current := sll.Head()
-			for current.Next() != nodo{
+			for current.Next() != nodo {
 				current = current.Next()
 			}
 			current.SetNext(nodo.Next())
-			if nodo == sll.tail{
+			if nodo == sll.tail {
 				sll.tail = current
 			}
 			sll.size--
-		}else{
+		} else {
 			sll.RemoveFirst()
 		}
 	}
 }
-

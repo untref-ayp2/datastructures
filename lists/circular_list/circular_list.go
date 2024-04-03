@@ -1,8 +1,6 @@
 package circular_list
 
-import (
-	"cmp"
-)
+import "cmp"
 
 // CircularList implementa una lista enlazada circular genérica.
 type CircularList[T cmp.Ordered] struct {
@@ -23,7 +21,7 @@ func (cl *CircularList[T]) Tail() *Node[T] {
 	if cl.size == 0 {
 		return nil
 	} else {
-	return cl.head.Prev()
+		return cl.head.Prev()
 	}
 }
 
@@ -135,4 +133,3 @@ func (cl *CircularList[T]) Remove(data T) {
 	node.Next().SetPrev(node.Prev())
 	cl.size--
 }
-

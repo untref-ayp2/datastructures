@@ -1,8 +1,6 @@
 package double_linked_list
 
-import (
-	"cmp"
-)
+import "cmp"
 
 // DoubleLinkedList implementa una lista enlazada doble genérica.
 type DoubleLinkedList[T cmp.Ordered] struct {
@@ -80,7 +78,7 @@ func (dll *DoubleLinkedList[T]) Find(data T) *Node[T] {
 	return nil
 }
 
-func (dll *DoubleLinkedList[T]) RemoveFirst(){
+func (dll *DoubleLinkedList[T]) RemoveFirst() {
 	if dll.size == 0 {
 		return
 	}
@@ -95,7 +93,7 @@ func (dll *DoubleLinkedList[T]) RemoveFirst(){
 	}
 }
 
-func (dll *DoubleLinkedList[T]) RemoveLast(){
+func (dll *DoubleLinkedList[T]) RemoveLast() {
 	if dll.size == 0 {
 		return
 	}
@@ -112,7 +110,7 @@ func (dll *DoubleLinkedList[T]) RemoveLast(){
 	dll.size--
 }
 
-func (dll *DoubleLinkedList[T]) Remove(data T){
+func (dll *DoubleLinkedList[T]) Remove(data T) {
 	node := dll.Find(data)
 
 	if node == nil {
@@ -133,7 +131,3 @@ func (dll *DoubleLinkedList[T]) Remove(data T){
 	node.next.SetPrev(node.prev)
 	dll.size--
 }
-
-
-
-

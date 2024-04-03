@@ -1,11 +1,8 @@
-package circular_list
+package double_linked_list
 
-import (
-	"cmp"
-)
+import "cmp"
 
 // Node representa un nodo de una lista enlazada doble.
-// La lista circular será doblemente enlazada.
 type Node[T cmp.Ordered] struct {
 	data T
 	next *Node[T]

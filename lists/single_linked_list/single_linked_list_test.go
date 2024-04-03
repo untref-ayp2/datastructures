@@ -1,8 +1,6 @@
-package double_linked_list
+package single_linked_list
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestNewList(t *testing.T) {
 	list := NewList[int]()

@@ -1,8 +1,9 @@
-package double_linked_list
+package circular_list
 
 import "cmp"
 
 // Node representa un nodo de una lista enlazada doble.
+// La lista circular será doblemente enlazada.
 type Node[T cmp.Ordered] struct {
 	data T
 	next *Node[T]
@@ -31,11 +32,7 @@ func (n *Node[T]) Next() *Node[T] {
 
 // setNext establece el nodo siguiente al nodo actual.
 func (n *Node[T]) SetNext(newNext *Node[T]) {
-	if newNext != nil {
-		n.next = newNext
-	} else {
-		n.next = nil
-	}
+	n.next = newNext
 }
 
 // Prev devuelve el nodo anterior al nodo actual.
@@ -45,11 +42,7 @@ func (n *Node[T]) Prev() *Node[T] {
 
 // setPrev establece el nodo anterior al nodo actual.
 func (n *Node[T]) SetPrev(newPrev *Node[T]) {
-	if newPrev != nil {
-		n.prev = newPrev
-	} else {
-		n.prev = nil
-	}
+	n.prev = newPrev
 }
 
 func (n *Node[T]) HasNext() bool {

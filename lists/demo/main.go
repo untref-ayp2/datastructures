@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	cl "github.com/untref-ayp2/data-structures/lists/circular-list"
-	dl "github.com/untref-ayp2/data-structures/lists/double-linked-list"
-	sl "github.com/untref-ayp2/data-structures/lists/single-linked-list"
+	cl "github.com/untref-ayp2/data-structures/lists/circular_list"
+	dl "github.com/untref-ayp2/data-structures/lists/double_linked_list"
+	sl "github.com/untref-ayp2/data-structures/lists/single_linked_list"
 )
 
 func main() {
