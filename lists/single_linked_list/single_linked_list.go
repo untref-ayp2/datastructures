@@ -1,17 +1,17 @@
 package single_linked_list
 
-import "cmp"
+import "github.com/untref-ayp2/data-structures/types"
 
 // Lista enlazada simple
 // Se implementa con un nodo que contiene un dato y un puntero al siguiente nodo
-type SingleLinkedList[T cmp.Ordered] struct {
+type SingleLinkedList[T types.Ordered] struct {
 	head *Node[T]
 	tail *Node[T]
 	size int
 }
 
 // Crea una nueva lista vacía
-func NewList[T cmp.Ordered]() *SingleLinkedList[T] {
+func NewList[T types.Ordered]() *SingleLinkedList[T] {
 	return &SingleLinkedList[T]{}
 }
 

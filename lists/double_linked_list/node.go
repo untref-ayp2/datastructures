@@ -1,16 +1,16 @@
 package double_linked_list
 
-import "cmp"
+import "github.com/untref-ayp2/data-structures/types"
 
 // Node representa un nodo de una lista enlazada doble.
-type Node[T cmp.Ordered] struct {
+type Node[T types.Ordered] struct {
 	data T
 	next *Node[T]
 	prev *Node[T]
 }
 
 // NewNode crea un nuevo nodo de lista enlazada doble con el dato especificado.
-func NewNode[T cmp.Ordered](data T) *Node[T] {
+func NewNode[T types.Ordered](data T) *Node[T] {
 	return &Node[T]{data: data}
 }
 

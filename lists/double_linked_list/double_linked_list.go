@@ -1,15 +1,15 @@
 package double_linked_list
 
-import "cmp"
+import "github.com/untref-ayp2/data-structures/types"
 
 // DoubleLinkedList implementa una lista enlazada doble genérica.
-type DoubleLinkedList[T cmp.Ordered] struct {
+type DoubleLinkedList[T types.Ordered] struct {
 	head *Node[T]
 	tail *Node[T]
 	size int
 }
 
-func NewList[T cmp.Ordered]() *DoubleLinkedList[T] {
+func NewList[T types.Ordered]() *DoubleLinkedList[T] {
 	return &DoubleLinkedList[T]{}
 }
 
