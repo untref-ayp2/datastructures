@@ -1,15 +1,15 @@
 package circular_list
 
-import "cmp"
+import "github.com/untref-ayp2/data-structures/types"
 
 // CircularList implementa una lista enlazada circular genérica.
-type CircularList[T cmp.Ordered] struct {
+type CircularList[T types.Ordered] struct {
 	head *Node[T]
 	size int
 }
 
 // NewList crea una nueva lista enlazada circular.
-func NewList[T cmp.Ordered]() *CircularList[T] {
+func NewList[T types.Ordered]() *CircularList[T] {
 	return &CircularList[T]{}
 }
 
