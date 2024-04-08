@@ -12,7 +12,7 @@ En [demo](./demo/main.go) se encuentra un ejemplo de uso de conjuntos.
 
 ## Métodos comunes
 
-### `NewSet[T types.Ordered](elements ...T) *Set[T]`
+### `NewSetList[T types.Ordered](elements ...T) *Set[T]`
 
 Crea y devuelve una nueva instancia de un conjunto.
 
