@@ -43,9 +43,7 @@ func (s *SetList[T]) Values() []T {
 
 func NewSetList[T types.Ordered](elements ...T) *SetList[T] {
 	set := &SetList[T]{*sl.NewList[T]()}
-	for _, element := range elements {
-		set.Add(element)
-	}
+	set.Add(elements...)
 	return set
 }
 
