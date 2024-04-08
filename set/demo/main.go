@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-	// Creo dos conjuntos de números
 	set := set.NewSet(1, 10, 5)
 	fmt.Println(set)
 	set.Add(7)

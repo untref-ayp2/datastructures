@@ -9,5 +9,4 @@ type Set[T types.Ordered] interface {
 	Remove(element T)
 	Size() int
 	Values() []T
-	String() string
 }
