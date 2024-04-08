@@ -7,13 +7,13 @@ import (
 )
 
 func main() {
-	set := set.NewSet(1, 10, 5)
+	set := set.NewSetList(1, 10, 5)
 	fmt.Println(set)
 	set.Add(7)
 	fmt.Println(set)
 	fmt.Println(set.Contains(7))
 	set.Remove(10)
 	fmt.Println(set.Contains(10))
+	fmt.Println(set)
 	fmt.Println(set.Values())
-
 }

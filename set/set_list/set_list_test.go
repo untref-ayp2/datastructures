@@ -3,7 +3,7 @@ package set_list
 import "testing"
 
 func TestNewSet(t *testing.T) {
-	set := NewSet[int]()
+	set := NewSetList[int]()
 	if set == nil {
 		t.Error("NewSet() devolvió nil")
 	}
@@ -13,7 +13,7 @@ func TestNewSet(t *testing.T) {
 }
 
 func TestAdd(t *testing.T) {
-	set := NewSet[int]()
+	set := NewSetList[int]()
 	set.Add(1)
 	if set.Size() != 1 {
 		t.Error("El tamaño del conjunto debería ser 1")
@@ -29,14 +29,14 @@ func TestAdd(t *testing.T) {
 }
 
 func TestContains(t *testing.T) {
-	set := NewSet[int]()
+	set := NewSetList[int]()
 	set.Add(1)
 	if !set.Contains(1) {
 		t.Error("El conjunto debería tener el número 1")
 	}
 }
 func TestRemove(t *testing.T) {
-	set := NewSet[int]()
+	set := NewSetList[int]()
 	set.Add(1)
 	set.Add(2)
 	set.Remove(1)
@@ -50,7 +50,7 @@ func TestRemove(t *testing.T) {
 }
 
 func TestValues(t *testing.T) {
-	set := NewSet(1, 2)
+	set := NewSetList(1, 2)
 	values := set.Values()
 	if len(values) != 2 {
 		t.Errorf("El tamaño de los valores del conjunto debería ser 2")
