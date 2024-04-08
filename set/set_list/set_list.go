@@ -15,9 +15,11 @@ func (s *SetList[T]) Contains(element T) bool {
 	return s.elements.Find(element) != nil
 }
 
-func (s *SetList[T]) Add(element T) {
-	if !s.Contains(element) {
-		s.elements.Append(element)
+func (s *SetList[T]) Add(elements ...T) {
+	for _, element := range elements {
+		if !s.Contains(element) {
+			s.elements.Append(element)
+		}
 	}
 }
 

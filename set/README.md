@@ -20,8 +20,8 @@ Crea y devuelve una nueva instancia de un conjunto.
 
 Devuelve si el conjunto contiene el elemento indicado.
 
-### `Add(element T)`
-Agrega un elemento al conjunto si este ya no lo contoene.
+### `(s *SetList[T]) Add(elements ...T)`
+Agrega uno o mas ementos al conjunto, si estos ya no estan en el conjunto.
 
 ### `Remove(element T)`
 Elimina el elemento indicado del conjunto.

@@ -26,6 +26,10 @@ func TestAdd(t *testing.T) {
 	if set.Size() != 2 {
 		t.Error("El tamaño del conjunto debería ser 2")
 	}
+	set.Add(3, 4)
+	if set.Size() != 4 {
+		t.Error("El tamaño del conjunto debería ser 4")
+	}
 }
 
 func TestContains(t *testing.T) {

@@ -16,4 +16,6 @@ func main() {
 	fmt.Println(set.Contains(10))
 	fmt.Println(set)
 	fmt.Println(set.Values())
+	set.Add(4, 12)
+	fmt.Println(set)
 }
