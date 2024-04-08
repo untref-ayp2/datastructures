@@ -6,8 +6,7 @@ Un conjunto no admite elementos repetidos ni garabtiza un orden en los elementos
 En [set](./set.go) se encuentra una
 implementación de un conjunto utilizando como estructura auxiliar una lista enlazada simple [single_linked_list](../lists/single_linked_list)
 
-En [demo](./demo/main.go) se encuentra un ejemplo de uso de las listas
-enlazadas.
+En [demo](./demo/main.go) se encuentra un ejemplo de uso de conjuntos.
 
 ## Métodos comunes
 
