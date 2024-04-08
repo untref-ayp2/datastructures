@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/untref-ayp2/data-structures/set"
+	set "github.com/untref-ayp2/data-structures/set/set_list"
 )
 
 func main() {
