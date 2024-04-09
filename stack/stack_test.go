@@ -1,6 +1,10 @@
 package stack
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestPushPop(t *testing.T) {
 	s := New[int]()
@@ -10,22 +14,17 @@ func TestPushPop(t *testing.T) {
 	s.Push(3)
 
 	v, err := s.Pop()
-	if err != nil || v != 3 {
-		t.Error("Error en Push")
-	}
+	assert.Equal(t, 3, v)
+	assert.NoError(t, err)
 
 	v, err = s.Pop()
-	if err != nil || v != 2 {
-		t.Error("Error en Push")
-	}
+	assert.Equal(t, 2, v)
+	assert.NoError(t, err)
 
 	v, err = s.Pop()
-	if err != nil || v != 1 {
-		t.Error("Error en Push")
-	}
+	assert.Equal(t, 1, v)
+	assert.NoError(t, err)
 
 	_, err = s.Pop()
-	if err == nil {
-		t.Error("Error en Push")
-	}
+	assert.Error(t, err, "pila vacía")
 }

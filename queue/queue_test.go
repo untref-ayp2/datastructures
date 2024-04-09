@@ -1,6 +1,10 @@
 package queue
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestQueue(t *testing.T) {
 	q := New[int]()
@@ -9,41 +13,31 @@ func TestQueue(t *testing.T) {
 	q.Enqueue(2)
 	q.Enqueue(3)
 
-	if q.IsEmpty() {
-		t.Error("La cola no debería estar vacía")
-	}
+	assert.False(t, q.IsEmpty())
 
-	if v, _ := q.Dequeue(); v != 1 {
-		t.Error("El primer valor debería ser 1")
-	}
+	v, _ := q.Dequeue()
+	assert.Equal(t, 1, v)
 
-	if v, _ := q.Dequeue(); v != 2 {
-		t.Error("El segundo valor debería ser 2")
-	}
+	v, _ = q.Dequeue()
+	assert.Equal(t, 2, v)
 
-	if v, _ := q.Dequeue(); v != 3 {
-		t.Error("El tercer valor debería ser 3")
-	}
+	v, _ = q.Dequeue()
+	assert.Equal(t, 3, v)
 
-	if _, err := q.Dequeue(); err == nil {
-		t.Error("La cola debería estar vacía")
-	}
+	_, err := q.Dequeue()
+	assert.Error(t, err, "cola vacía")
 }
 
 func TestEmptyQueue(t *testing.T) {
 	q := New[int]()
 
-	if !q.IsEmpty() {
-		t.Error("La cola debería estar vacía")
-	}
+	assert.True(t, q.IsEmpty())
 
-	if _, err := q.Dequeue(); err == nil {
-		t.Error("La cola debería estar vacía")
-	}
+	_, err := q.Dequeue()
+	assert.Error(t, err, "cola vacía")
 
-	if _, err := q.Front(); err == nil {
-		t.Error("La cola debería estar vacía")
-	}
+	_, err = q.Front()
+	assert.Error(t, err, "cola vacía")
 }
 
 func TestFront(t *testing.T) {
@@ -53,19 +47,16 @@ func TestFront(t *testing.T) {
 	q.Enqueue(2)
 	q.Enqueue(3)
 
-	if v, _ := q.Front(); v != 1 {
-		t.Error("El frente de la cola debería ser 1")
-	}
+	v, _ := q.Front()
+	assert.Equal(t, 1, v)
 
 	q.Dequeue()
 
-	if v, _ := q.Front(); v != 2 {
-		t.Error("El frente de la cola debería ser 2")
-	}
+	v, _ = q.Front()
+	assert.Equal(t, 2, v)
 
 	q.Dequeue()
 
-	if v, _ := q.Front(); v != 3 {
-		t.Error("El frente de la cola debería ser 3")
-	}
+	v, _ = q.Front()
+	assert.Equal(t, 3, v)
 }
