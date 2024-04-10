@@ -33,10 +33,8 @@ func (s *SetList[T]) Size() int {
 
 func (s *SetList[T]) Values() []T {
 	var values []T
-	i := 0
 	for node := s.elements.Head(); node != nil; node = node.Next() {
 		values = append(values, node.Data())
-		i++
 	}
 	return values
 }
