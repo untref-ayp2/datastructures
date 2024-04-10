@@ -10,6 +10,8 @@ func main() {
 	m := mapadebits.NewMapaDeBits()
 
 	m.Encender(3)
+	m.Encender(0)
+
 	fmt.Printf("%032b\n", *m)
 
 	m.Encender(5)
