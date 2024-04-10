@@ -11,6 +11,12 @@ type SetList[T types.Ordered] struct {
 	elements sl.SingleLinkedList[T]
 }
 
+func NewSetList[T types.Ordered](elements ...T) *SetList[T] {
+	set := &SetList[T]{*sl.NewList[T]()}
+	set.Add(elements...)
+	return set
+}
+
 func (s *SetList[T]) Contains(element T) bool {
 	return s.elements.Find(element) != nil
 }
@@ -37,12 +43,6 @@ func (s *SetList[T]) Values() []T {
 		values = append(values, node.Data())
 	}
 	return values
-}
-
-func NewSetList[T types.Ordered](elements ...T) *SetList[T] {
-	set := &SetList[T]{*sl.NewList[T]()}
-	set.Add(elements...)
-	return set
 }
 
 func (s *SetList[T]) String() string {
