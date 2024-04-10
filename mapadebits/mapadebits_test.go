@@ -7,6 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// Prueba que se enciendan todos los bits
 func TestEncenderTodosDeAUno(t *testing.T) {
 	m := NewMapaDeBits()
 	for i := uint8(0); i < 32; i++ {
@@ -18,6 +19,7 @@ func TestEncenderTodosDeAUno(t *testing.T) {
 
 }
 
+// Prueba que al intentar encender un bit encendido este no se apague
 func TestQueSigaEncendido(t *testing.T) {
 	m := NewMapaDeBits()
 	m.Encender(1)
@@ -27,6 +29,7 @@ func TestQueSigaEncendido(t *testing.T) {
 	assert.False(t, !aux, "Error en Encender multiple")
 }
 
+// Prueba que no se pyeda encender un bit de una posicion invalida
 func TestPosicionExcedida(t *testing.T) {
 	m := NewMapaDeBits()
 	err := m.Encender(32)
