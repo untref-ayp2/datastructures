@@ -5,7 +5,7 @@ se pueden comparar por igual o distinto.
 
 Un conjunto no admite elementos repetidos ni garantiza un orden en los elementos
 
-En [SetList](./set_list.go) se encuentra una implementación de un conjunto
+En [ListSet](./list_set.go) se encuentra una implementación de un conjunto
 utilizando como estructura auxiliar una lista enlazada simple
 [single_linked_list](../lists/single_linked_list)
 
@@ -16,7 +16,7 @@ En [demo](./demo/main.go) se encuentra un ejemplo de uso de conjuntos.
 
 ## Métodos comunes
 
-### `NewSetList[T types.Ordered](elements ...T) *Set[T]`
+### `NewListSet[T types.Ordered](elements ...T) *Set[T]`
 
 Crea y devuelve una nueva instancia de un conjunto.
 
