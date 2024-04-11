@@ -3,7 +3,7 @@
 El TAD conjunto representa matemáticamente un conjunto finito de elementos que
 se pueden comparar por igual o distinto.
 
-Un conjunto no admite elementos repetidos ni garabtiza un orden en los elementos
+Un conjunto no admite elementos repetidos ni garantiza un orden en los elementos
 
 En [SetList](./set_list.go) se encuentra una implementación de un conjunto
 utilizando como estructura auxiliar una lista enlazada simple

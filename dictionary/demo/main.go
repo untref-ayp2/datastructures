@@ -38,6 +38,10 @@ func main() {
 	ds.Put("uno", s)
 	ds.Put("dos", ss)
 	ds.Put("tres", ss)
-	fmt.Println("Clave: valor en el diccionario (String, Set[Int])")
+	fmt.Println("Clave: valor en el diccionario (String, SetList[Int])")
 	fmt.Println(ds)
+	fmt.Println("Claves en el diccionario:")
+	fmt.Println(ds.GetKeys())
+	fmt.Println("Valores en el diccionario:")
+	fmt.Println(ds.GetValues())
 }
