@@ -8,80 +8,81 @@ import (
 )
 
 func TestNewDictionary(t *testing.T) {
-	dic := NewDictionary[int, int]()
+	dict := NewDictionary[int, int]()
 
-	assert.NotNil(t, dic)
-	assert.Equal(t, 0, dic.Size())
+	assert.NotNil(t, dict)
+	assert.Equal(t, 0, dict.Size())
 }
-func TestContains(t *testing.T) {
-	dic := NewDictionary[string, int]()
-	dic.Put("Leo", 55)
-	dic.Put("lucas", 38)
 
-	assert.True(t, dic.Contains("Leo"))
-	assert.True(t, dic.Contains("lucas"))
-	assert.False(t, dic.Contains("Fede"))
+func TestContains(t *testing.T) {
+	dict := NewDictionary[string, int]()
+	dict.Put("Leo", 55)
+	dict.Put("lucas", 38)
+
+	assert.True(t, dict.Contains("Leo"))
+	assert.True(t, dict.Contains("lucas"))
+	assert.False(t, dict.Contains("Fede"))
 }
 
 func TestPut(t *testing.T) {
-	dic := NewDictionary[string, int]()
-	dic.Put("Leo", 55)
-	dic.Put("Lucas", 38)
+	dict := NewDictionary[string, int]()
+	dict.Put("Leo", 55)
+	dict.Put("Lucas", 38)
 
-	assert.Equal(t, 2, dic.Size())
+	assert.Equal(t, 2, dict.Size())
 }
 
 func TestPutEqualsElements(t *testing.T) {
-	dic := NewDictionary[string, int]()
-	dic.Put("Leo", 55)
-	dic.Put("Leo", 38)
+	dict := NewDictionary[string, int]()
+	dict.Put("Leo", 55)
+	dict.Put("Leo", 38)
 
-	assert.Equal(t, 1, dic.Size())
-	assert.Equal(t, 38, dic.Get("Leo"))
+	assert.Equal(t, 1, dict.Size())
+	assert.Equal(t, 38, dict.Get("Leo"))
 }
 
 func TestGet(t *testing.T) {
-	dic := NewDictionary[string, int]()
-	dic.Put("Lucas", 35)
+	dict := NewDictionary[string, int]()
+	dict.Put("Lucas", 35)
 
-	assert.Equal(t, 35, dic.Get("Lucas"))
-	assert.Equal(t, 0, dic.Get("Fede"))
+	assert.Equal(t, 35, dict.Get("Lucas"))
+	assert.Equal(t, 0, dict.Get("Fede"))
 }
 
 func TestRemove(t *testing.T) {
-	dic := NewDictionary[string, int]()
-	dic.Put("Leo", 55)
-	dic.Put("Lucas", 38)
+	dict := NewDictionary[string, int]()
+	dict.Put("Leo", 55)
+	dict.Put("Lucas", 38)
 
-	assert.Equal(t, 2, dic.Size())
+	assert.Equal(t, 2, dict.Size())
 
-	dic.Remove("Leo")
+	dict.Remove("Leo")
 
-	assert.Equal(t, 1, dic.Size())
-	assert.True(t, dic.Contains("Lucas"))
-	assert.False(t, dic.Contains("Leo"))
+	assert.Equal(t, 1, dict.Size())
+	assert.True(t, dict.Contains("Lucas"))
+	assert.False(t, dict.Contains("Leo"))
 }
 
-func TestGetValues(t *testing.T) {
+func TestValues(t *testing.T) {
 	dic := NewDictionary[int, int]()
 	dic.Put(1, 2)
 	dic.Put(3, 4)
 	dic.Put(5, 6)
 	esperado := []int{2, 4, 6}
-	obtenido := dic.GetValues()
+	obtenido := dic.Values()
 	sort.Ints(obtenido)
 
 	assert.Equal(t, esperado, obtenido)
 }
 
-func TestGetKeys(t *testing.T) {
-	dic := NewDictionary[int, int]()
-	dic.Put(1, 2)
-	dic.Put(3, 4)
-	dic.Put(5, 6)
+func TestKeys(t *testing.T) {
+	dict := NewDictionary[int, int]()
+	dict.Put(1, 2)
+	dict.Put(3, 4)
+	dict.Put(5, 6)
 	esperado := []int{1, 3, 5}
-	obtenido := dic.GetKeys()
-	sort.Ints(dic.GetKeys())
+	obtenido := dict.Keys()
+	sort.Ints(dict.Keys())
 
 	assert.Equal(t, esperado, obtenido)
 }
