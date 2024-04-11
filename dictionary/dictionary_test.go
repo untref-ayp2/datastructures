@@ -1,7 +1,6 @@
 package dictionary
 
 import (
-	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -68,11 +67,8 @@ func TestValues(t *testing.T) {
 	dic.Put(1, 2)
 	dic.Put(3, 4)
 	dic.Put(5, 6)
-	esperado := []int{2, 4, 6}
-	obtenido := dic.Values()
-	sort.Ints(obtenido)
 
-	assert.Equal(t, esperado, obtenido)
+	assert.ElementsMatch(t, []int{6, 4, 2}, dic.Values())
 }
 
 func TestKeys(t *testing.T) {
@@ -80,9 +76,6 @@ func TestKeys(t *testing.T) {
 	dict.Put(1, 2)
 	dict.Put(3, 4)
 	dict.Put(5, 6)
-	esperado := []int{1, 3, 5}
-	obtenido := dict.Keys()
-	sort.Ints(dict.Keys())
 
-	assert.Equal(t, esperado, obtenido)
+	assert.ElementsMatch(t, []int{1, 5, 3}, dict.Keys())
 }
