@@ -3,16 +3,17 @@ package set
 import (
 	"fmt"
 
-	sl "github.com/untref-ayp2/data-structures/lists/single_linked_list"
+	"github.com/untref-ayp2/data-structures/list"
 	"github.com/untref-ayp2/data-structures/types"
 )
 
+// SetList implementa un conjunto sobre una lista enlazada simple.
 type SetList[T types.Ordered] struct {
-	elements sl.SingleLinkedList[T]
+	elements *list.LinkedList[T]
 }
 
 func NewSetList[T types.Ordered](elements ...T) *SetList[T] {
-	set := &SetList[T]{*sl.NewList[T]()}
+	set := &SetList[T]{list.NewLinkedList[T]()}
 	set.Add(elements...)
 	return set
 }
