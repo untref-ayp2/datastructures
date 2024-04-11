@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	set := sl.NewSetList(1, 10, 5)
+	set := sl.NewListSet(1, 10, 5)
 	fmt.Println(set)
 	set.Add(7)
 	fmt.Println(set)
