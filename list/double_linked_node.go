@@ -37,7 +37,7 @@ func (n *DoubleLinkedNode[T]) HasNext() bool {
 	return n.next != nil
 }
 
-// setPrev establece el nodo anterior al nodo actual.
+// SetPrev establece el nodo anterior al nodo actual.
 func (n *DoubleLinkedNode[T]) SetPrev(newPrev *DoubleLinkedNode[T]) {
 	n.prev = newPrev
 }

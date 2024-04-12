@@ -6,7 +6,7 @@ type LinkedNode[T comparable] struct {
 	next *LinkedNode[T]
 }
 
-// NewDoubleLinkedListNode crea un nuevo nodo de lista enlazada doble con el dato especificado.
+// NewLinkedListNode crea un nuevo nodo de lista enlazada doble con el dato especificado.
 func NewLinkedListNode[T comparable](data T) *LinkedNode[T] {
 	return &LinkedNode[T]{data: data}
 }
