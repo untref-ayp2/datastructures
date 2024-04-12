@@ -1,8 +1,6 @@
 package set
 
-import "github.com/untref-ayp2/data-structures/types"
-
-type Set[T types.Ordered] interface {
+type Set[T comparable] interface {
 	Contains(element T) bool
 	Add(elements ...T)
 	Remove(element T)

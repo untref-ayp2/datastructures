@@ -4,15 +4,14 @@ import (
 	"fmt"
 
 	"github.com/untref-ayp2/data-structures/list"
-	"github.com/untref-ayp2/data-structures/types"
 )
 
 // ListSet implementa un conjunto sobre una lista enlazada simple.
-type ListSet[T types.Ordered] struct {
+type ListSet[T comparable] struct {
 	elements *list.LinkedList[T]
 }
 
-func NewListSet[T types.Ordered](elements ...T) *ListSet[T] {
+func NewListSet[T comparable](elements ...T) *ListSet[T] {
 	set := &ListSet[T]{list.NewLinkedList[T]()}
 	set.Add(elements...)
 	return set
@@ -47,10 +46,14 @@ func (s *ListSet[T]) Values() []T {
 }
 
 func (s *ListSet[T]) String() string {
-	result := "Conjunto: {"
-	for _, v := range s.Values() {
-		result += " " + fmt.Sprintf("%v", v)
+	str := "Set: {"
+	for i, v := range s.Values() {
+		if i > 0 {
+			str += ", "
+		}
+		str += fmt.Sprintf("%v", v)
+
 	}
-	result += " }"
-	return result
+	str += "}"
+	return str
 }
