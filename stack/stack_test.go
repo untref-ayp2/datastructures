@@ -26,5 +26,5 @@ func TestPushPop(t *testing.T) {
 	assert.NoError(t, err)
 
 	_, err = s.Pop()
-	assert.Error(t, err, "pila vacía")
+	assert.EqualError(t, err, "pila vacía")
 }

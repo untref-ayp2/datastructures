@@ -27,5 +27,5 @@ func TestQueSigaEncendido(t *testing.T) {
 func TestPosicionExcedida(t *testing.T) {
 	m := NewBitMap()
 	err := m.On(32)
-	assert.Error(t, err, "posición inválida")
+	assert.EqualError(t, err, "posición inválida")
 }

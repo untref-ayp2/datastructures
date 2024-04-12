@@ -25,7 +25,7 @@ func TestQueue(t *testing.T) {
 	assert.Equal(t, 3, v)
 
 	_, err := q.Dequeue()
-	assert.Error(t, err, "cola vacía")
+	assert.EqualError(t, err, "cola vacía")
 }
 
 func TestEmptyQueue(t *testing.T) {
@@ -34,10 +34,10 @@ func TestEmptyQueue(t *testing.T) {
 	assert.True(t, q.IsEmpty())
 
 	_, err := q.Dequeue()
-	assert.Error(t, err, "cola vacía")
+	assert.EqualError(t, err, "cola vacía")
 
 	_, err = q.Front()
-	assert.Error(t, err, "cola vacía")
+	assert.EqualError(t, err, "cola vacía")
 }
 
 func TestFront(t *testing.T) {

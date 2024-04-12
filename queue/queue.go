@@ -21,7 +21,7 @@ func (q *Queue[T]) Enqueue(v T) {
 func (q *Queue[T]) Dequeue() (T, error) {
 	var head T
 	if len(q.data) == 0 {
-		return head, errors.New("queue is empty")
+		return head, errors.New("cola vacía")
 	}
 	head = q.data[0]
 	q.data = q.data[1:]
@@ -32,7 +32,7 @@ func (q *Queue[T]) Dequeue() (T, error) {
 func (q *Queue[T]) Front() (T, error) {
 	var head T
 	if len(q.data) == 0 {
-		return head, errors.New("queue is empty")
+		return head, errors.New("cola vacía")
 	}
 	head = q.data[0]
 	return head, nil
