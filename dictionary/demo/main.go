@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/untref-ayp2/data-structures/dictionary"
+	"github.com/untref-ayp2/data-structures/list"
 	"github.com/untref-ayp2/data-structures/set"
 )
 
@@ -42,5 +43,22 @@ func main() {
 	fmt.Println(ds.Keys())
 	fmt.Println("Valores en el diccionario:")
 	fmt.Println(ds.Values())
-	fmt.Println(ds.Size())
+	fmt.Println("--------------------")
+
+	dl := dictionary.NewDictionary[string, list.LinkedList[int]]()
+	l1 := list.NewLinkedList[int]()
+	l2 := list.NewLinkedList[int]()
+	l1.Append(10)
+	l1.Append(20)
+	l2.Append(30)
+	l2.Append(40)
+	l2.Append(50)
+	dl.Put("uno", *l1)
+	dl.Put("dos", *l2)
+	fmt.Println("Clave: valor en el diccionario (String, LinkedList[int]]")
+	fmt.Println(dl)
+	fmt.Println("Claves en el diccionario:")
+	fmt.Println(dl.Keys())
+	fmt.Println("Valores en el diccionario:")
+	fmt.Println(dl.Values())
 }
