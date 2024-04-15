@@ -1,5 +1,7 @@
 # Tipos de Datos Abstractos
 
+[![codecov](https://codecov.io/gh/untref-ayp2/data-structures/graph/badge.svg?token=LIV0D9PK0X)](https://codecov.io/gh/untref-ayp2/data-structures)
+
 En este repositorio encontrarán una serie de estructuras de datos básicas que
 utilizaremos en el curso.
 
