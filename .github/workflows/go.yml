@@ -23,8 +23,8 @@ jobs:
       - name: Test
         run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
       
-      - name: Coverage
-        uses: codecov/codecov-action@v1
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
         with:
-          file: coverage.txt
-          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: untref-ayp2/data-structures
