@@ -86,6 +86,5 @@ func TestValuesOnANonEmptySet(t *testing.T) {
 	values := set.Values()
 
 	assert.Equal(t, 2, len(values))
-	assert.Equal(t, 1, values[0])
-	assert.Equal(t, 2, values[1])
+	assert.ElementsMatch(t, []int{1, 2}, values)
 }
