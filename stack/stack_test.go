@@ -6,25 +6,55 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestPushPop(t *testing.T) {
+func TestNew(t *testing.T) {
+	s := New[int]()
+	assert.NotNil(t, s)
+}
+
+func TestPush(t *testing.T) {
 	s := New[int]()
 
 	s.Push(1)
-	s.Push(2)
-	s.Push(3)
+	assert.False(t, s.IsEmpty())
+}
 
-	v, err := s.Pop()
-	assert.Equal(t, 3, v)
-	assert.NoError(t, err)
+func TestTop(t *testing.T) {
+	s := New[int]()
 
-	v, err = s.Pop()
-	assert.Equal(t, 2, v)
-	assert.NoError(t, err)
-
-	v, err = s.Pop()
+	s.Push(1)
+	v, err := s.Top()
 	assert.Equal(t, 1, v)
 	assert.NoError(t, err)
+}
 
-	_, err = s.Pop()
+func TestTopWhenEmpty(t *testing.T) {
+	s := New[int]()
+
+	_, err := s.Top()
 	assert.EqualError(t, err, "pila vacía")
+}
+
+func TestPop(t *testing.T) {
+	s := New[int]()
+
+	s.Push(1)
+
+	v, err := s.Pop()
+	assert.Equal(t, 1, v)
+	assert.NoError(t, err)
+}
+
+func TestPopWhenEmpty(t *testing.T) {
+	s := New[int]()
+
+	_, err := s.Pop()
+	assert.EqualError(t, err, "pila vacía")
+}
+
+func TestIsEmpty(t *testing.T) {
+	s := New[int]()
+	assert.True(t, s.IsEmpty())
+
+	s.Push(1)
+	assert.False(t, s.IsEmpty())
 }

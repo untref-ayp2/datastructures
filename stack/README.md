@@ -1,38 +1,25 @@
 # Stack
 
-Una implementación simple de una estructura de datos tipo pila (stack) en Go.
+[![docs - read](https://img.shields.io/badge/leer-documentacion-2ea44f)](https://pkg.go.dev/github.com/untref-ayp2/data-structures/stack)
 
-La pila está parametrizada, por lo que se puede instanciar para obtener una pila
-de enteros, o una pila de strings, etc.
 
-## Métodos
+Una implementación simple y parametrizada de una estructura de datos tipo pila (Stack) en Go.
 
-### `New[T any]() *Stack[T]`
+## Características
 
-Crea y devuelve una nueva instancia de la pila vacía.
+- **Parametrizada**: La pila está diseñada para ser parametrizada, lo que significa que se puede instanciar para almacenar cualquier tipo de dato, como enteros, cadenas, estructuras personalizadas, etc.
 
-### `Push[T any](element T)`
+- **Operaciones básicas**: Ofrece operaciones básicas de una pila, como Push (empujar), Pop (extraer), Top (observar el elemento en la cima de la pila) y IsEmpty (verificar si está vacía).
 
-Agrega un elemento al tope de la pila.
+## Instalación
 
-### `Pop[T any]() (T, error)`
+Para utilizar esta pila en tu proyecto Go, simplemente debe importarse el paquete `github.com/untref-ayp2/data-structures/stack`
 
-Elimina y devuelve el elemento del tope de la pila.
+```shell
+go get github.com/untref-ayp2/data-structures/stack
+```
 
-- Retorna el valor del elemento eliminado.
-- Retorna un error si la pila está vacía.
-
-### `Top[T any]() (T, error)`
-
-Devuelve el elemento del tope de la pila sin eliminarlo.
-
-- Retorna el valor del elemento del tope.
-- Retorna un error si la pila está vacía.
-
-### `IsEmpty() bool`
-
-Verifica si la pila está vacía.
-
-## Ejemplo de uso
-
-En la carpeta [demo](./demo/main.go) se encuentra un ejemplo de uso.
+## Ejemplos de uso
+Se proporcionan algunos ejemplos de uso en el repositorio de snippets de la cátedra:
+- [Uso de una pila](https://github.com/untref-ayp2/snippets/blob/master/stack/main.go)
+- [Invertir una cadena de texto](https://github.com/untref-ayp2/snippets/blob/master/stack/invertir_cadena/main.go)
