@@ -1,6 +1,6 @@
 # Stack
 
-[![docs - read](https://img.shields.io/badge/leer-documentacion-2ea44f)](https://pkg.go.dev/github.com/untref-ayp2/data-structures/stack)
+[![Go Reference](https://pkg.go.dev/badge/github.com/untref-ayp2/data-structures/stack.svg)](https://pkg.go.dev/github.com/untref-ayp2/data-structures/stack)
 
 
 Una implementación simple y parametrizada de una estructura de datos tipo pila (Stack) en Go.
