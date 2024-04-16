@@ -4,13 +4,13 @@ package stack
 
 import "errors"
 
-// Proporciona una pila cuyos elementos son de un tipo genérico.
+// Stack proporciona una pila cuyos elementos son de un tipo genérico.
 // La implementación se basa en un arreglo dinámico.
 type Stack[T any] struct {
 	data []T
 }
 
-// Crea una nueva pila vacía.
+// New crea una nueva pila vacía.
 //
 // Uso:
 //
@@ -19,7 +19,7 @@ func New[T any]() *Stack[T] {
 	return &Stack[T]{}
 }
 
-// Agrega un elemento a la pila.
+// Push agrega un elemento a la pila.
 //
 // Uso:
 //
@@ -28,7 +28,7 @@ func (s *Stack[T]) Push(x T) {
 	s.data = append(s.data, x)
 }
 
-// Remueve y retorna el elemento en el tope de la pila.
+// Pop remueve y retorna el elemento en el tope de la pila.
 // Si la pila está vacía, retorna un error.
 //
 // Uso:
@@ -48,7 +48,7 @@ func (s *Stack[T]) Pop() (T, error) {
 	return x, nil
 }
 
-// Retorna el elemento en el tope de la pila.
+// Top retorna el elemento en el tope de la pila.
 // Si la pila está vacía, retorna un error.
 //
 // Uso:
@@ -68,7 +68,7 @@ func (s *Stack[T]) Top() (T, error) {
 	return x, nil
 }
 
-// Retorna true si la pila está vacía.
+// IsEmpty retorna true si la pila está vacía.
 //
 // Uso:
 //
