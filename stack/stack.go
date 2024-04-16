@@ -58,7 +58,6 @@ func (s *Stack[T]) Pop() (T, error) {
 //	} else {
 //		fmt.Println(x)
 //	}
-
 func (s *Stack[T]) Top() (T, error) {
 	var x T
 	if s.IsEmpty() {
@@ -75,7 +74,6 @@ func (s *Stack[T]) Top() (T, error) {
 //	if s.IsEmpty() {
 //		fmt.Println("La pila está vacía")
 //	}
-
 func (s *Stack[T]) IsEmpty() bool {
 	return len(s.data) == 0
 }
