@@ -16,10 +16,10 @@ func TestNewDictionary(t *testing.T) {
 func TestContains(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
-	dict.Put("lucas", 38)
+	dict.Put("Lucas", 38)
 
 	assert.True(t, dict.Contains("Leo"))
-	assert.True(t, dict.Contains("lucas"))
+	assert.True(t, dict.Contains("Lucas"))
 	assert.False(t, dict.Contains("Fede"))
 }
 
@@ -31,7 +31,7 @@ func TestPut(t *testing.T) {
 	assert.Equal(t, 2, dict.Size())
 }
 
-func TestPutEqualsElements(t *testing.T) {
+func TestPutReplace(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
 	dict.Put("Leo", 38)
@@ -62,6 +62,26 @@ func TestRemove(t *testing.T) {
 	assert.False(t, dict.Contains("Leo"))
 }
 
+func TestRemoveNotExists(t *testing.T) {
+	dict := NewDictionary[string, int]()
+	dict.Put("Leo", 55)
+	dict.Put("Lucas", 38)
+
+	assert.Equal(t, 2, dict.Size())
+
+	dict.Remove("Fede")
+
+	assert.Equal(t, 2, dict.Size())
+}
+
+func TestSize(t *testing.T) {
+	dict := NewDictionary[string, int]()
+	dict.Put("Leo", 55)
+	dict.Put("Lucas", 38)
+
+	assert.Equal(t, 2, dict.Size())
+}
+
 func TestValues(t *testing.T) {
 	dic := NewDictionary[int, int]()
 	dic.Put(1, 2)
@@ -78,4 +98,19 @@ func TestKeys(t *testing.T) {
 	dict.Put(5, 6)
 
 	assert.ElementsMatch(t, []int{1, 5, 3}, dict.Keys())
+}
+
+func TestString(t *testing.T) {
+	dict := NewDictionary[int, int]()
+	dict.Put(1, 2)
+	dict.Put(3, 4)
+	dict.Put(5, 6)
+
+	assert.Equal(t, "Dictionary: {\n  1: 2\n  3: 4\n  5: 6\n}", dict.String())
+}
+
+func TestStringOnEmptyDictionary(t *testing.T) {
+	dict := NewDictionary[int, int]()
+
+	assert.Equal(t, "Dictionary: {}", dict.String())
 }

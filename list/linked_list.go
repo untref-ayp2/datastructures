@@ -1,5 +1,7 @@
 package list
 
+import "fmt"
+
 // LinkedList se implementa con un nodo que contiene un dato y un puntero al siguiente nodo.
 type LinkedList[T comparable] struct {
 	head *LinkedNode[T]
@@ -134,4 +136,16 @@ func (l *LinkedList[T]) Remove(data T) {
 		l.tail = current
 	}
 	l.size--
+}
+
+func (l *LinkedList[T]) String() string {
+	if l.IsEmpty() {
+		return "LinkedList: {}"
+	}
+
+	result := "LinkedList: {\n"
+	for current := l.head; current != nil; current = current.Next() {
+		result += fmt.Sprintf("  %v\n", current.Data())
+	}
+	return result + "}"
 }
