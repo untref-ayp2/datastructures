@@ -155,6 +155,10 @@ func (d *Dictionary[K, V]) Values() []V {
 //
 //	Una representación en `string` del diccionario.
 func (d *Dictionary[K, V]) String() string {
+	if d.Size() == 0 {
+		return "Dictionary: {}"
+	}
+
 	str := "Dictionary: {\n"
 	for key, value := range d.dict {
 		str += fmt.Sprintf("  %v: %v\n", key, value)

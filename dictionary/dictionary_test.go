@@ -108,3 +108,9 @@ func TestString(t *testing.T) {
 
 	assert.Equal(t, "Dictionary: {\n  1: 2\n  3: 4\n  5: 6\n}", dict.String())
 }
+
+func TestStringOnEmptyDictionary(t *testing.T) {
+	dict := NewDictionary[int, int]()
+
+	assert.Equal(t, "Dictionary: {}", dict.String())
+}
