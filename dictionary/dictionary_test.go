@@ -104,9 +104,9 @@ func TestString(t *testing.T) {
 	dict := NewDictionary[int, int]()
 	dict.Put(1, 2)
 	dict.Put(3, 4)
-	dict.Put(5, 6)
 
-	assert.Equal(t, "Dictionary: {\n  1: 2\n  3: 4\n  5: 6\n}", dict.String())
+	assert.True(t, dict.String() == "Dictionary: {\n  1: 2\n  3: 4\n}" ||
+		dict.String() == "Dictionary: {\n  3: 4\n  1: 2\n}")
 }
 
 func TestStringOnEmptyDictionary(t *testing.T) {
