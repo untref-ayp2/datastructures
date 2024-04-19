@@ -85,23 +85,13 @@ func (d *Dictionary[K, V]) Get(key K) (V, error) {
 //
 // Uso:
 //
-//	if d.Remove(10) {
-//		fmt.Println("Clave 10 removida.")
-//	}
+//	d.Remove(10)
 //
 // Parámetros:
 //
 //	`key`: la clave a remover del diccionario.
-//
-// Retorna:
-//
-//	`true` si la clave fue removida exitosamente; `false` si la clave no existe.
-func (d *Dictionary[K, V]) Remove(key K) bool {
-	_, exists := d.dict[key]
-	if exists {
-		delete(d.dict, key)
-	}
-	return exists
+func (d *Dictionary[K, V]) Remove(key K) {
+	delete(d.dict, key)
 }
 
 // Size devuelve el tamaño del diccionario.
