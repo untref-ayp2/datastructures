@@ -72,7 +72,7 @@ func (d *Dictionary[K, V]) Contains(key K) bool {
 //
 // Retorna:
 //
-//	El valor asociado a la clave especificada o el nil type del tipo V si la clave no existe.
+//	El valor asociado a la clave especificada  y nil como error, o el nil type del tipo V y un error si la clave no existe.
 func (d *Dictionary[K, V]) Get(key K) (V, error) {
 	value, exists := d.dict[key]
 	if !exists {
@@ -107,7 +107,8 @@ func (d *Dictionary[K, V]) Size() int {
 	return len(d.dict)
 }
 
-// Keys devuelve todas las claves del diccionario.
+// Keys devuelve todas las claves del diccionario. Por la naturaleza de los map de Go,
+// las claves no se devuelven en un orden específico. No puede contener duplicados.
 //
 // Uso:
 //
