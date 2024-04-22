@@ -37,15 +37,22 @@ func TestPutReplace(t *testing.T) {
 	dict.Put("Leo", 38)
 
 	assert.Equal(t, 1, dict.Size())
-	assert.Equal(t, 38, dict.Get("Leo"))
+
+	value, _ := dict.Get("Leo")
+	assert.Equal(t, 38, value)
 }
 
 func TestGet(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Lucas", 35)
 
-	assert.Equal(t, 35, dict.Get("Lucas"))
-	assert.Equal(t, 0, dict.Get("Fede"))
+	value, err := dict.Get("Lucas")
+	assert.Equal(t, 35, value)
+	assert.NoError(t, err)
+
+	value, err = dict.Get("Fede")
+	assert.Equal(t, 0, value)
+	assert.EqualError(t, err, "clave inexistente")
 }
 
 func TestRemove(t *testing.T) {

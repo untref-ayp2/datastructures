@@ -3,7 +3,10 @@
 // Expone la estructura Dictionary y sus métodos para manipular un diccionario
 package dictionary
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 // Dictionary implementa un diccionario genérico basado en un map de Go.
 // Las claves deben ser de un tipo comparable y los valores pueden ser de cualquier tipo.
@@ -59,7 +62,7 @@ func (d *Dictionary[K, V]) Contains(key K) bool {
 //
 // Uso:
 //
-//	if value, exists := d.Get(10); exists {
+//	if value, err := d.Get(10); err != nil {
 //		fmt.Println("Valor asociado a la clave 10:", value)
 //	}
 //
@@ -70,31 +73,25 @@ func (d *Dictionary[K, V]) Contains(key K) bool {
 // Retorna:
 //
 //	El valor asociado a la clave especificada o el nil type del tipo V si la clave no existe.
-func (d *Dictionary[K, V]) Get(key K) V {
-	return d.dict[key]
+func (d *Dictionary[K, V]) Get(key K) (V, error) {
+	value, exists := d.dict[key]
+	if !exists {
+		return value, errors.New("clave inexistente")
+	}
+	return value, nil
 }
 
 // Remove remueve el par asociado a la `key` especificada del diccionario.
 //
 // Uso:
 //
-//	if d.Remove(10) {
-//		fmt.Println("Clave 10 removida.")
-//	}
+//	d.Remove(10)
 //
 // Parámetros:
 //
 //	`key`: la clave a remover del diccionario.
-//
-// Retorna:
-//
-//	`true` si la clave fue removida exitosamente; `false` si la clave no existe.
-func (d *Dictionary[K, V]) Remove(key K) bool {
-	_, exists := d.dict[key]
-	if exists {
-		delete(d.dict, key)
-	}
-	return exists
+func (d *Dictionary[K, V]) Remove(key K) {
+	delete(d.dict, key)
 }
 
 // Size devuelve el tamaño del diccionario.
