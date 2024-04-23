@@ -48,3 +48,9 @@ test:
 test/cover:
 	go test -v -race -buildvcs -coverprofile=/tmp/coverage.out ./...
 	go tool cover -html=/tmp/coverage.out
+
+## docs: build and serve the docs on a local web server
+.PHONY: docs
+docs:
+	go install golang.org/x/pkgsite/cmd/pkgsite@latest
+	pkgsite
