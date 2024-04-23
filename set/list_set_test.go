@@ -18,15 +18,16 @@ func TestAdd(t *testing.T) {
 
 	set.Add(1)
 	assert.Equal(t, 1, set.Size())
-
-	set.Add(2)
-	assert.Equal(t, 2, set.Size())
-
-	set.Add(3, 4)
-	assert.Equal(t, 4, set.Size())
 }
 
-func TestAddExistent(t *testing.T) {
+func TestAddMultiple(t *testing.T) {
+	set := NewListSet[int]()
+
+	set.Add(1, 2, 3)
+	assert.Equal(t, 3, set.Size())
+}
+
+func TestAddExistenteNoRepite(t *testing.T) {
 	set := NewListSet[int]()
 
 	set.Add(1)
@@ -87,4 +88,14 @@ func TestValuesOnANonEmptySet(t *testing.T) {
 
 	assert.Equal(t, 2, len(values))
 	assert.ElementsMatch(t, []int{1, 2}, values)
+}
+
+func TestStringEnSetVacio(t *testing.T) {
+	set := NewListSet[int]()
+	assert.Equal(t, "Set: {}", set.String())
+}
+
+func TestStringEnSetNoVacio(t *testing.T) {
+	set := NewListSet(1, 2)
+	assert.Regexp(t, `Set: \{[12], [12]\}`, set.String())
 }
