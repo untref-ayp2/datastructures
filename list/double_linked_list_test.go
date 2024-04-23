@@ -120,6 +120,81 @@ func TestDoubleLinkedListRemove(t *testing.T) {
 	assert.Nil(t, list.Tail())
 }
 
+func TestDoubleLinkedListRemoveLastElement(t *testing.T) {
+	list := NewDoubleLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+
+	list.Remove(2)
+	assert.Equal(t, 1, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 1, list.Tail().Data())
+}
+
+func TestDoubleLinkedListRemoveFirst(t *testing.T) {
+	list := NewDoubleLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	list.RemoveFirst()
+	assert.Equal(t, 2, list.Size())
+	assert.Equal(t, 2, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+
+	list.RemoveFirst()
+	assert.Equal(t, 1, list.Size())
+	assert.Equal(t, 3, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+
+	list.RemoveFirst()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
+func TestDoubleLinkedListRemoveLast(t *testing.T) {
+	list := NewDoubleLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	list.RemoveLast()
+	assert.Equal(t, 2, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 2, list.Tail().Data())
+
+	list.RemoveLast()
+	assert.Equal(t, 1, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 1, list.Tail().Data())
+
+	list.RemoveLast()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
+func TestDoubleLinkedListAllRemovesOnEmptyList(t *testing.T) {
+	list := NewDoubleLinkedList[int]()
+
+	list.RemoveFirst()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+
+	list.RemoveLast()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+
+	list.Remove(1)
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
 func TestDoubleLinkedListFind(t *testing.T) {
 	list := NewDoubleLinkedList[int]()
 
@@ -132,4 +207,20 @@ func TestDoubleLinkedListFind(t *testing.T) {
 
 	nodo = list.Find(4)
 	assert.Nil(t, nodo)
+}
+
+func TestDoubleLinkedListStringOnEmpty(t *testing.T) {
+	list := NewDoubleLinkedList[int]()
+
+	assert.Equal(t, "DoubleLinkedList: {}", list.String())
+}
+
+func TestDoubleLinkedListString(t *testing.T) {
+	list := NewDoubleLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	assert.Equal(t, "DoubleLinkedList: {\n  1\n  2\n  3\n}", list.String())
 }
