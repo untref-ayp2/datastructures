@@ -107,16 +107,21 @@ func TestKeys(t *testing.T) {
 	assert.ElementsMatch(t, []int{1, 5, 3}, dict.Keys())
 }
 
+func TestStringOnEmptyDictionary(t *testing.T) {
+	dict := NewDictionary[int, int]()
+
+	assert.Equal(t, "Dictionary: {}", dict.String())
+}
+
 func TestDictionaryString(t *testing.T) {
 	dict := NewDictionary[int, int]()
 	dict.Put(1, 2)
 	dict.Put(3, 4)
 
-	assert.Regexp(t, "Dictionary: {\n  [13]: [24]\n  [13]: [24]\n}", dict.String())
-}
+	possibleRepresentations := []string{
+		"Dictionary: {\n  1: 2\n  3: 4\n}",
+		"Dictionary: {\n  3: 4\n  1: 2\n}",
+	}
 
-func TestStringOnEmptyDictionary(t *testing.T) {
-	dict := NewDictionary[int, int]()
-
-	assert.Equal(t, "Dictionary: {}", dict.String())
+	assert.Contains(t, possibleRepresentations, dict.String())
 }

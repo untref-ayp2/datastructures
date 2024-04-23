@@ -97,5 +97,10 @@ func TestStringEnSetVacio(t *testing.T) {
 
 func TestStringEnSetNoVacio(t *testing.T) {
 	set := NewListSet(1, 2)
-	assert.Regexp(t, `Set: \{(1, 2|2, 1)\}`, set.String())
+	possibleRepresentations := []string{
+		"Set: {1, 2}",
+		"Set: {2, 1}",
+	}
+
+	assert.Contains(t, possibleRepresentations, set.String())
 }
