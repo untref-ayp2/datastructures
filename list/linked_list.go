@@ -230,8 +230,15 @@ func (l *LinkedList[T]) String() string {
 	}
 
 	result := "LinkedList: {\n"
-	for current := l.head; current != nil; current = current.Next() {
+
+	current := l.Head()
+	for {
 		result += fmt.Sprintf("  %v\n", current.Data())
+		if !current.HasNext() {
+			break
+		}
+		current = current.Next()
 	}
+
 	return result + "}"
 }
