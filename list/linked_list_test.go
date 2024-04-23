@@ -14,13 +14,18 @@ func TestNewLinkedList(t *testing.T) {
 	assert.Nil(t, list.Tail())
 }
 
-func TestLinkedListPrepend(t *testing.T) {
+func TestLinkedListPrependOnEmptyList(t *testing.T) {
 	list := NewLinkedList[string]()
 
 	list.Prepend("1")
 	assert.Equal(t, 1, list.Size())
 	assert.Equal(t, "1", list.Head().Data())
 	assert.Equal(t, "1", list.Tail().Data())
+}
+
+func TestLinkedListPrependOnNonEmptyList(t *testing.T) {
+	list := NewLinkedList[string]()
+	list.Append("1")
 
 	list.Prepend("2")
 	assert.Equal(t, 2, list.Size())
@@ -28,13 +33,18 @@ func TestLinkedListPrepend(t *testing.T) {
 	assert.Equal(t, "1", list.Tail().Data())
 }
 
-func TestLinkedListAppend(t *testing.T) {
+func TestLinkedListAppendOnEmptyList(t *testing.T) {
 	list := NewLinkedList[string]()
 
 	list.Append("1")
 	assert.Equal(t, 1, list.Size())
 	assert.Equal(t, "1", list.Head().Data())
 	assert.Equal(t, "1", list.Tail().Data())
+}
+
+func TestLinkedListAppendOnNonEmptyList(t *testing.T) {
+	list := NewLinkedList[string]()
+	list.Append("1")
 
 	list.Append("2")
 	assert.Equal(t, 2, list.Size())
@@ -98,12 +108,73 @@ func TestLinkedListTail(t *testing.T) {
 	assert.Equal(t, 2, list.Tail().Data())
 }
 
+func TestLinkedListFind(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+	nodo := list.Find(2)
+	assert.NotNil(t, nodo)
+	assert.Equal(t, 2, nodo.Data())
+
+	nodo = list.Find(4)
+	assert.Nil(t, nodo)
+}
+
+func TestLinkedListRemoveFirst(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	list.RemoveFirst()
+	assert.Equal(t, 2, list.Size())
+	assert.Equal(t, 2, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+
+	list.RemoveFirst()
+	assert.Equal(t, 1, list.Size())
+	assert.Equal(t, 3, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+
+	list.RemoveFirst()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
+func TestLinkedListRemoveLast(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	list.RemoveLast()
+	assert.Equal(t, 2, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 2, list.Tail().Data())
+
+	list.RemoveLast()
+	assert.Equal(t, 1, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 1, list.Tail().Data())
+
+	list.RemoveLast()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
 func TestLinkedListRemove(t *testing.T) {
 	list := NewLinkedList[int]()
 
 	list.Append(1)
 	list.Append(2)
 	list.Append(3)
+
 	list.Remove(2)
 	assert.Equal(t, 2, list.Size())
 	assert.Equal(t, 1, list.Head().Data())
@@ -120,16 +191,59 @@ func TestLinkedListRemove(t *testing.T) {
 	assert.Nil(t, list.Tail())
 }
 
-func TestLinkedListFind(t *testing.T) {
+func TestLinkedListRemoveOnLastElement(t *testing.T) {
 	list := NewLinkedList[int]()
 
 	list.Append(1)
 	list.Append(2)
 	list.Append(3)
-	nodo := list.Find(2)
-	assert.NotNil(t, nodo)
-	assert.Equal(t, 2, nodo.Data())
+	list.Append(4)
 
-	nodo = list.Find(4)
-	assert.Nil(t, nodo)
+	list.Remove(4)
+	assert.Equal(t, 3, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+}
+
+func TestLinkedListRemoveNotExists(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	list.Remove(4)
+	assert.Equal(t, 3, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+}
+
+func TestLinkedListRemoveFirstOnEmpty(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	list.RemoveFirst()
+	assert.Equal(t, 0, list.Size())
+}
+
+func TestLinkedListRemoveLastOnEmpty(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	list.RemoveLast()
+	assert.Equal(t, 0, list.Size())
+}
+
+func TestLinkedListStringOnEmpty(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	assert.Equal(t, "LinkedList: {}", list.String())
+}
+
+func TestLinkedListString(t *testing.T) {
+	list := NewLinkedList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	assert.Equal(t, "LinkedList: {\n  1\n  2\n  3\n}", list.String())
 }

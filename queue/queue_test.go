@@ -6,14 +6,25 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestQueue(t *testing.T) {
+func TestNewQueue(t *testing.T) {
+	q := New[int]()
+
+	assert.NotNil(t, q)
+	assert.True(t, q.IsEmpty())
+}
+
+func TestQueueEnqueue(t *testing.T) {
+	q := New[int]()
+
+	q.Enqueue(1)
+	assert.False(t, q.IsEmpty())
+}
+
+func TestQueueDequeue(t *testing.T) {
 	q := New[int]()
 
 	q.Enqueue(1)
 	q.Enqueue(2)
-	q.Enqueue(3)
-
-	assert.False(t, q.IsEmpty())
 
 	v, _ := q.Dequeue()
 	assert.Equal(t, 1, v)
@@ -21,26 +32,24 @@ func TestQueue(t *testing.T) {
 	v, _ = q.Dequeue()
 	assert.Equal(t, 2, v)
 
-	v, _ = q.Dequeue()
-	assert.Equal(t, 3, v)
-
-	_, err := q.Dequeue()
-	assert.EqualError(t, err, "cola vacía")
+	assert.True(t, q.IsEmpty())
 }
 
-func TestEmptyQueue(t *testing.T) {
+func TestQueueDequeueOnEmptyQueue(t *testing.T) {
 	q := New[int]()
 
-	assert.True(t, q.IsEmpty())
-
 	_, err := q.Dequeue()
-	assert.EqualError(t, err, "cola vacía")
-
-	_, err = q.Front()
 	assert.EqualError(t, err, "cola vacía")
 }
 
-func TestFront(t *testing.T) {
+func TestQueueFrontOnEmptyQueue(t *testing.T) {
+	q := New[int]()
+
+	_, err := q.Front()
+	assert.EqualError(t, err, "cola vacía")
+}
+
+func TestQueueFront(t *testing.T) {
 	q := New[int]()
 
 	q.Enqueue(1)

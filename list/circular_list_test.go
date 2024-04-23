@@ -120,6 +120,71 @@ func TestCircularListRemove(t *testing.T) {
 	assert.Nil(t, list.Tail())
 }
 
+func TestCircularListRemoveLast(t *testing.T) {
+	list := NewCircularList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	list.RemoveLast()
+	assert.Equal(t, 2, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 2, list.Tail().Data())
+
+	list.RemoveLast()
+	assert.Equal(t, 1, list.Size())
+	assert.Equal(t, 1, list.Head().Data())
+	assert.Equal(t, 1, list.Tail().Data())
+
+	list.RemoveLast()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
+func TestCircularListRemoveFirst(t *testing.T) {
+	list := NewCircularList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	list.RemoveFirst()
+	assert.Equal(t, 2, list.Size())
+	assert.Equal(t, 2, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+
+	list.RemoveFirst()
+	assert.Equal(t, 1, list.Size())
+	assert.Equal(t, 3, list.Head().Data())
+	assert.Equal(t, 3, list.Tail().Data())
+
+	list.RemoveFirst()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
+func TestCircularListAllRemoveOnEmptyList(t *testing.T) {
+	list := NewCircularList[int]()
+
+	list.Remove(1)
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+
+	list.RemoveFirst()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+
+	list.RemoveLast()
+	assert.Equal(t, 0, list.Size())
+	assert.Nil(t, list.Head())
+	assert.Nil(t, list.Tail())
+}
+
 func TestCircularListFind(t *testing.T) {
 	list := NewCircularList[int]()
 
@@ -132,4 +197,27 @@ func TestCircularListFind(t *testing.T) {
 
 	nodo = list.Find(4)
 	assert.Nil(t, nodo)
+}
+
+func TestCircularListFindOnEmptyList(t *testing.T) {
+	list := NewCircularList[int]()
+
+	nodo := list.Find(1)
+	assert.Nil(t, nodo)
+}
+
+func TestCircularListStringOnEmpty(t *testing.T) {
+	list := NewCircularList[int]()
+
+	assert.Equal(t, "CircularList: {}", list.String())
+}
+
+func TestCircularListString(t *testing.T) {
+	list := NewCircularList[int]()
+
+	list.Append(1)
+	list.Append(2)
+	list.Append(3)
+
+	assert.Equal(t, "CircularList: {\n  1\n  2\n  3\n}", list.String())
 }

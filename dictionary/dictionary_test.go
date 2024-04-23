@@ -13,7 +13,7 @@ func TestNewDictionary(t *testing.T) {
 	assert.Equal(t, 0, dict.Size())
 }
 
-func TestContains(t *testing.T) {
+func TestDictionaryContains(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
 	dict.Put("Lucas", 38)
@@ -23,7 +23,7 @@ func TestContains(t *testing.T) {
 	assert.False(t, dict.Contains("Fede"))
 }
 
-func TestPut(t *testing.T) {
+func TestDictionaryPut(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
 	dict.Put("Lucas", 38)
@@ -31,7 +31,7 @@ func TestPut(t *testing.T) {
 	assert.Equal(t, 2, dict.Size())
 }
 
-func TestPutReplace(t *testing.T) {
+func TestDictionaryPutReplace(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
 	dict.Put("Leo", 38)
@@ -42,7 +42,7 @@ func TestPutReplace(t *testing.T) {
 	assert.Equal(t, 38, value)
 }
 
-func TestGet(t *testing.T) {
+func TestDictionaryGet(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Lucas", 35)
 
@@ -55,7 +55,7 @@ func TestGet(t *testing.T) {
 	assert.EqualError(t, err, "clave inexistente")
 }
 
-func TestRemove(t *testing.T) {
+func TestDictionaryRemove(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
 	dict.Put("Lucas", 38)
@@ -69,7 +69,7 @@ func TestRemove(t *testing.T) {
 	assert.False(t, dict.Contains("Leo"))
 }
 
-func TestRemoveNotExists(t *testing.T) {
+func TestDictionaryRemoveNotExists(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
 	dict.Put("Lucas", 38)
@@ -81,7 +81,7 @@ func TestRemoveNotExists(t *testing.T) {
 	assert.Equal(t, 2, dict.Size())
 }
 
-func TestSize(t *testing.T) {
+func TestDictionarySize(t *testing.T) {
 	dict := NewDictionary[string, int]()
 	dict.Put("Leo", 55)
 	dict.Put("Lucas", 38)
@@ -89,7 +89,7 @@ func TestSize(t *testing.T) {
 	assert.Equal(t, 2, dict.Size())
 }
 
-func TestValues(t *testing.T) {
+func TestDictionaryValues(t *testing.T) {
 	dic := NewDictionary[int, int]()
 	dic.Put(1, 2)
 	dic.Put(3, 4)
@@ -98,7 +98,7 @@ func TestValues(t *testing.T) {
 	assert.ElementsMatch(t, []int{6, 4, 2}, dic.Values())
 }
 
-func TestKeys(t *testing.T) {
+func TestDictionaryKeys(t *testing.T) {
 	dict := NewDictionary[int, int]()
 	dict.Put(1, 2)
 	dict.Put(3, 4)
@@ -107,17 +107,21 @@ func TestKeys(t *testing.T) {
 	assert.ElementsMatch(t, []int{1, 5, 3}, dict.Keys())
 }
 
-func TestString(t *testing.T) {
+func TestDictionaryStringOnEmptyDictionary(t *testing.T) {
+	dict := NewDictionary[int, int]()
+
+	assert.Equal(t, "Dictionary: {}", dict.String())
+}
+
+func TestDictionaryString(t *testing.T) {
 	dict := NewDictionary[int, int]()
 	dict.Put(1, 2)
 	dict.Put(3, 4)
 
-	assert.True(t, dict.String() == "Dictionary: {\n  1: 2\n  3: 4\n}" ||
-		dict.String() == "Dictionary: {\n  3: 4\n  1: 2\n}")
-}
+	possibleRepresentations := []string{
+		"Dictionary: {\n  1: 2\n  3: 4\n}",
+		"Dictionary: {\n  3: 4\n  1: 2\n}",
+	}
 
-func TestStringOnEmptyDictionary(t *testing.T) {
-	dict := NewDictionary[int, int]()
-
-	assert.Equal(t, "Dictionary: {}", dict.String())
+	assert.Contains(t, possibleRepresentations, dict.String())
 }
