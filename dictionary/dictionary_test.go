@@ -107,7 +107,7 @@ func TestKeys(t *testing.T) {
 	assert.ElementsMatch(t, []int{1, 5, 3}, dict.Keys())
 }
 
-func TestString(t *testing.T) {
+func TestDictionaryString(t *testing.T) {
 	dict := NewDictionary[int, int]()
 	dict.Put(1, 2)
 	dict.Put(3, 4)
