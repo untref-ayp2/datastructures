@@ -6,19 +6,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNew(t *testing.T) {
+func TestNewStack(t *testing.T) {
 	s := New[int]()
 	assert.NotNil(t, s)
 }
 
-func TestPush(t *testing.T) {
+func TestStackPush(t *testing.T) {
 	s := New[int]()
 
 	s.Push(1)
 	assert.False(t, s.IsEmpty())
 }
 
-func TestTop(t *testing.T) {
+func TestStackTop(t *testing.T) {
 	s := New[int]()
 
 	s.Push(1)
@@ -27,14 +27,14 @@ func TestTop(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestTopWhenEmpty(t *testing.T) {
+func TestStackTopWhenEmpty(t *testing.T) {
 	s := New[int]()
 
 	_, err := s.Top()
 	assert.EqualError(t, err, "pila vacía")
 }
 
-func TestPop(t *testing.T) {
+func TestStackPop(t *testing.T) {
 	s := New[int]()
 
 	s.Push(1)
@@ -44,14 +44,14 @@ func TestPop(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestPopWhenEmpty(t *testing.T) {
+func TestStackPopWhenEmpty(t *testing.T) {
 	s := New[int]()
 
 	_, err := s.Pop()
 	assert.EqualError(t, err, "pila vacía")
 }
 
-func TestIsEmpty(t *testing.T) {
+func TestStackIsEmpty(t *testing.T) {
 	s := New[int]()
 	assert.True(t, s.IsEmpty())
 

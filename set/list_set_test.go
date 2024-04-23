@@ -6,28 +6,28 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewSet(t *testing.T) {
+func TestNewListSet(t *testing.T) {
 	set := NewListSet[int]()
 
 	assert.NotNil(t, set)
 	assert.Equal(t, 0, set.Size())
 }
 
-func TestAdd(t *testing.T) {
+func TestListSetAdd(t *testing.T) {
 	set := NewListSet[int]()
 
 	set.Add(1)
 	assert.Equal(t, 1, set.Size())
 }
 
-func TestAddMultiple(t *testing.T) {
+func TestListSetAddMultiple(t *testing.T) {
 	set := NewListSet[int]()
 
 	set.Add(1, 2, 3)
 	assert.Equal(t, 3, set.Size())
 }
 
-func TestAddExistenteNoRepite(t *testing.T) {
+func TestListSetAddExistenteNoRepite(t *testing.T) {
 	set := NewListSet[int]()
 
 	set.Add(1)
@@ -35,7 +35,7 @@ func TestAddExistenteNoRepite(t *testing.T) {
 	assert.Equal(t, 1, set.Size())
 }
 
-func TestContains(t *testing.T) {
+func TestListSetContains(t *testing.T) {
 	set := NewListSet[int]()
 	set.Add(1)
 
@@ -43,7 +43,7 @@ func TestContains(t *testing.T) {
 	assert.False(t, set.Contains(2))
 }
 
-func TestRemove(t *testing.T) {
+func TestListSetRemove(t *testing.T) {
 	set := NewListSet[int]()
 	set.Add(1)
 	set.Add(2)
@@ -55,7 +55,7 @@ func TestRemove(t *testing.T) {
 	assert.Equal(t, 1, set.Size())
 }
 
-func TestRemoveNonExistent(t *testing.T) {
+func TestListSetRemoveNonExistent(t *testing.T) {
 	set := NewListSet[int]()
 	set.Add(1)
 	assert.Equal(t, 1, set.Size())
@@ -64,7 +64,7 @@ func TestRemoveNonExistent(t *testing.T) {
 	assert.Equal(t, 1, set.Size())
 }
 
-func TestSize(t *testing.T) {
+func TestListSetSize(t *testing.T) {
 	set := NewListSet[int]()
 	assert.Equal(t, 0, set.Size())
 
@@ -75,14 +75,14 @@ func TestSize(t *testing.T) {
 	assert.Equal(t, 2, set.Size())
 }
 
-func TestValuesOnAnEmptySet(t *testing.T) {
+func TestListSetValuesOnAnEmptySet(t *testing.T) {
 	set := NewListSet[int]()
 	values := set.Values()
 
 	assert.Equal(t, 0, len(values))
 }
 
-func TestValuesOnANonEmptySet(t *testing.T) {
+func TestListSetValuesOnANonEmptySet(t *testing.T) {
 	set := NewListSet(1, 2)
 	values := set.Values()
 
@@ -90,12 +90,12 @@ func TestValuesOnANonEmptySet(t *testing.T) {
 	assert.ElementsMatch(t, []int{1, 2}, values)
 }
 
-func TestStringEnSetVacio(t *testing.T) {
+func TestListSetStringEnSetVacio(t *testing.T) {
 	set := NewListSet[int]()
 	assert.Equal(t, "Set: {}", set.String())
 }
 
-func TestStringEnSetNoVacio(t *testing.T) {
+func TestListSetStringEnSetNoVacio(t *testing.T) {
 	set := NewListSet(1, 2)
 	possibleRepresentations := []string{
 		"Set: {1, 2}",

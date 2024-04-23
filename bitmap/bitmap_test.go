@@ -6,25 +6,25 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNuevoBitMapTodoEnCero(t *testing.T) {
+func TestBitMapNuevoTodoEnCero(t *testing.T) {
 	m := NewBitMap()
 	assert.Equal(t, uint32(0), m.GetMap())
 }
 
-func TestEncenderUnBit(t *testing.T) {
+func TestBitMapEncenderUnBit(t *testing.T) {
 	m := NewBitMap()
 	m.On(1)
 	isOn, _ := m.IsOn(1)
 	assert.True(t, isOn)
 }
 
-func TestEncenderUnBitEnPosicionNoValida(t *testing.T) {
+func TestBitMapEncenderUnBitEnPosicionNoValida(t *testing.T) {
 	m := NewBitMap()
 	err := m.On(32)
 	assert.EqualError(t, err, "posición no válida")
 }
 
-func TestApagarUnBit(t *testing.T) {
+func TestBitMapApagarUnBit(t *testing.T) {
 	m := NewBitMap()
 	m.On(1)
 	m.Off(1)
@@ -32,13 +32,13 @@ func TestApagarUnBit(t *testing.T) {
 	assert.False(t, isOn)
 }
 
-func TestApagarUnBitEnPosicionNoValida(t *testing.T) {
+func TestBitMapApagarUnBitEnPosicionNoValida(t *testing.T) {
 	m := NewBitMap()
 	err := m.Off(32)
 	assert.EqualError(t, err, "posición no válida")
 }
 
-func TestEncenderTodosLosBits(t *testing.T) {
+func TestBitMapEncenderTodosLosBits(t *testing.T) {
 	m := NewBitMap()
 	for i := uint8(0); i < 32; i++ {
 		m.On(i)
@@ -48,7 +48,7 @@ func TestEncenderTodosLosBits(t *testing.T) {
 
 }
 
-func TestApagarTodosLosBits(t *testing.T) {
+func TestBitMapApagarTodosLosBits(t *testing.T) {
 	m := NewBitMap()
 	for i := uint8(0); i < 32; i++ {
 		m.On(i)
@@ -59,20 +59,20 @@ func TestApagarTodosLosBits(t *testing.T) {
 	assert.Equal(t, uint32(0), m.GetMap())
 }
 
-func TestEstadoDeUnBit(t *testing.T) {
+func TestBitMapEstadoDeUnBit(t *testing.T) {
 	m := NewBitMap()
 	m.On(1)
 	isOn, _ := m.IsOn(1)
 	assert.True(t, isOn)
 }
 
-func TestEstadoDeUnBitEnPosicionNoValida(t *testing.T) {
+func TestBitMapEstadoDeUnBitEnPosicionNoValida(t *testing.T) {
 	m := NewBitMap()
 	_, err := m.IsOn(32)
 	assert.EqualError(t, err, "posición no válida")
 }
 
-func TestEncenderVariasVecesUnMismoBitNoLoApaga(t *testing.T) {
+func TestBitMapEncenderVariasVecesUnMismoBitNoLoApaga(t *testing.T) {
 	m := NewBitMap()
 	m.On(1)
 	m.On(1)
@@ -80,7 +80,7 @@ func TestEncenderVariasVecesUnMismoBitNoLoApaga(t *testing.T) {
 	assert.True(t, isOn)
 }
 
-func TestGetMap(t *testing.T) {
+func TestBitMapGetMap(t *testing.T) {
 	m := NewBitMap()
 	m.On(1)
 	assert.Equal(t, uint32(2), m.GetMap())
