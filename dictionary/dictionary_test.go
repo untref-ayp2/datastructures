@@ -112,8 +112,7 @@ func TestString(t *testing.T) {
 	dict.Put(1, 2)
 	dict.Put(3, 4)
 
-	assert.True(t, dict.String() == "Dictionary: {\n  1: 2\n  3: 4\n}" ||
-		dict.String() == "Dictionary: {\n  3: 4\n  1: 2\n}")
+	assert.Regexp(t, "Dictionary: {\n  [13]: [24]\n  [13]: [24]\n}", dict.String())
 }
 
 func TestStringOnEmptyDictionary(t *testing.T) {
