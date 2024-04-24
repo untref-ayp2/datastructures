@@ -54,3 +54,9 @@ test/cover:
 docs:
 	go install golang.org/x/pkgsite/cmd/pkgsite@latest
 	pkgsite
+
+## lint: run linters
+.PHONY: lint
+lint:
+	# curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.57.2
+	golangci-lint run
