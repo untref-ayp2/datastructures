@@ -40,9 +40,9 @@ func (l *CircularList[T]) Head() *DoubleLinkedNode[T] {
 func (l *CircularList[T]) Tail() *DoubleLinkedNode[T] {
 	if l.size == 0 {
 		return nil
-	} else {
-		return l.head.Prev()
 	}
+
+	return l.head.Prev()
 }
 
 // Size devuelve el tamaño de la lista.
@@ -166,6 +166,7 @@ func (l *CircularList[T]) RemoveFirst() {
 	if l.size == 1 {
 		l.head = nil
 		l.size--
+
 		return
 	}
 
@@ -188,6 +189,7 @@ func (l *CircularList[T]) RemoveLast() {
 	if l.size == 1 {
 		l.head = nil
 		l.size--
+
 		return
 	}
 
@@ -212,6 +214,7 @@ func (l *CircularList[T]) Remove(data T) {
 
 	if node == l.head {
 		l.RemoveFirst()
+
 		return
 	}
 

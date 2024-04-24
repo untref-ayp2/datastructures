@@ -25,6 +25,7 @@ type ListSet[T comparable] struct {
 func NewListSet[T comparable](elements ...T) *ListSet[T] {
 	set := &ListSet[T]{list.NewLinkedList[T]()}
 	set.Add(elements...)
+
 	return set
 }
 
@@ -98,6 +99,7 @@ func (s *ListSet[T]) Values() []T {
 	for node := s.elements.Head(); node != nil; node = node.Next() {
 		values = append(values, node.Data())
 	}
+
 	return values
 }
 
@@ -116,8 +118,8 @@ func (s *ListSet[T]) String() string {
 			str += ", "
 		}
 		str += fmt.Sprintf("%v", v)
-
 	}
 	str += "}"
+
 	return str
 }

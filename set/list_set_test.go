@@ -79,14 +79,14 @@ func TestListSetValuesOnAnEmptySet(t *testing.T) {
 	set := NewListSet[int]()
 	values := set.Values()
 
-	assert.Equal(t, 0, len(values))
+	assert.Empty(t, values)
 }
 
 func TestListSetValuesOnANonEmptySet(t *testing.T) {
 	set := NewListSet(1, 2)
 	values := set.Values()
 
-	assert.Equal(t, 2, len(values))
+	assert.Len(t, values, 2)
 	assert.ElementsMatch(t, []int{1, 2}, values)
 }
 

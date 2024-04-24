@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestNewDictionary(t *testing.T) {
@@ -48,7 +49,7 @@ func TestDictionaryGet(t *testing.T) {
 
 	value, err := dict.Get("Lucas")
 	assert.Equal(t, 35, value)
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	value, err = dict.Get("Fede")
 	assert.Equal(t, 0, value)

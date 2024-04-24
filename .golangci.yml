@@ -8,4 +8,16 @@ linters:
   # Disable specific linter
   # https://golangci-lint.run/usage/linters/#disabled-by-default
   disable:
+    - depguard
+    - dupl
+    - errcheck
+    - exhaustruct
+    - forbidigo
+    - goerr113
+    - gomnd
+    - ireturn
     - misspell
+    - paralleltest
+    - testpackage
+    - varnamelen
+    - wsl

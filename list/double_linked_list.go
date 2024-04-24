@@ -134,6 +134,7 @@ func (l *DoubleLinkedList[T]) Find(data T) *DoubleLinkedNode[T] {
 			return current
 		}
 	}
+
 	return nil
 }
 
@@ -171,6 +172,7 @@ func (l *DoubleLinkedList[T]) RemoveLast() {
 		l.head = nil
 		l.tail = nil
 		l.size = 0
+
 		return
 	}
 
@@ -193,11 +195,13 @@ func (l *DoubleLinkedList[T]) Remove(data T) {
 
 	if node == l.head {
 		l.RemoveFirst()
+
 		return
 	}
 
 	if node == l.tail {
 		l.RemoveLast()
+
 		return
 	}
 

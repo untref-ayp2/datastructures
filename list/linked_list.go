@@ -136,6 +136,7 @@ func (l *LinkedList[T]) Find(data T) *LinkedNode[T] {
 			return current
 		}
 	}
+
 	return nil
 }
 
@@ -199,6 +200,7 @@ func (l *LinkedList[T]) Remove(data T) {
 
 	if node == l.head {
 		l.RemoveFirst()
+
 		return
 	}
 

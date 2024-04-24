@@ -35,6 +35,7 @@ func (bm *BitMap) On(pos uint8) error {
 	}
 
 	bm.bits |= 0x1 << pos
+
 	return nil
 }
 
@@ -55,6 +56,7 @@ func (bm *BitMap) Off(pos uint8) error {
 	}
 
 	bm.bits &= ^(0x1 << pos)
+
 	return nil
 }
 

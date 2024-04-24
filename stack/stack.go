@@ -45,6 +45,7 @@ func (s *Stack[T]) Pop() (T, error) {
 	}
 	x = s.data[len(s.data)-1]
 	s.data = s.data[:len(s.data)-1]
+
 	return x, nil
 }
 
@@ -64,6 +65,7 @@ func (s *Stack[T]) Top() (T, error) {
 		return x, errors.New("pila vacía")
 	}
 	x = s.data[len(s.data)-1]
+
 	return x, nil
 }
 

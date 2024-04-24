@@ -1,5 +1,4 @@
-// Package dictionary proporciona una implementación de un diccionario genérico
-// basado en un map de Go.
+// Package dictionary proporciona una implementación de un diccionario genérico basado en un map de Go.
 // Expone la estructura Dictionary y sus métodos para manipular un diccionario
 package dictionary
 
@@ -55,6 +54,7 @@ func (d *Dictionary[K, V]) Put(key K, value V) {
 //	`true` si la clave existe en el diccionario; `false` en caso contrario.
 func (d *Dictionary[K, V]) Contains(key K) bool {
 	_, exists := d.dict[key]
+
 	return exists
 }
 
@@ -72,12 +72,14 @@ func (d *Dictionary[K, V]) Contains(key K) bool {
 //
 // Retorna:
 //
-//	El valor asociado a la clave especificada  y nil como error, o el nil type del tipo V y un error si la clave no existe.
+//	El valor asociado a la clave especificada  y nil como error, o el nil type del tipo V
+//	y un error si la clave no existe.
 func (d *Dictionary[K, V]) Get(key K) (V, error) {
 	value, exists := d.dict[key]
 	if !exists {
 		return value, errors.New("clave inexistente")
 	}
+
 	return value, nil
 }
 
@@ -122,6 +124,7 @@ func (d *Dictionary[K, V]) Keys() []K {
 	for key := range d.dict {
 		dictKeys = append(dictKeys, key)
 	}
+
 	return dictKeys
 }
 
@@ -140,6 +143,7 @@ func (d *Dictionary[K, V]) Values() []V {
 	for _, value := range d.dict {
 		dictValues = append(dictValues, value)
 	}
+
 	return dictValues
 }
 
@@ -162,5 +166,6 @@ func (d *Dictionary[K, V]) String() string {
 		str += fmt.Sprintf("  %v: %v\n", key, value)
 	}
 	str += "}"
+
 	return str
 }

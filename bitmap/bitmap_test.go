@@ -45,7 +45,6 @@ func TestBitMapEncenderTodosLosBits(t *testing.T) {
 	}
 	var max uint32 = 0xffffffff
 	assert.Equal(t, max, m.GetMap())
-
 }
 
 func TestBitMapApagarTodosLosBits(t *testing.T) {

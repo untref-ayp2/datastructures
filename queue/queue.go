@@ -46,6 +46,7 @@ func (q *Queue[T]) Dequeue() (T, error) {
 	}
 	head = q.data[0]
 	q.data = q.data[1:]
+
 	return head, nil
 }
 
@@ -65,6 +66,7 @@ func (q *Queue[T]) Front() (T, error) {
 		return head, errors.New("cola vacía")
 	}
 	head = q.data[0]
+
 	return head, nil
 }
 
