@@ -28,10 +28,10 @@ tidy:
 ## audit: run quality control checks
 .PHONY: audit
 audit:
-	@go mod verify
-	@go vet ./...
-	@go run honnef.co/go/tools/cmd/staticcheck@latest -checks=all,-ST1000,-U1000 ./...
-	@go test -race -buildvcs -vet=off ./...
+	go mod verify
+	go vet ./...
+	go run honnef.co/go/tools/cmd/staticcheck@latest -checks=all,-ST1000,-U1000 ./...
+	go test -race -buildvcs -vet=off ./...
 
 
 # ==================================================================================== #
@@ -52,8 +52,7 @@ test/cover:
 ## docs: build and serve the docs on a local web server
 .PHONY: docs
 docs:
-	go install golang.org/x/pkgsite/cmd/pkgsite@latest
-	pkgsite
+	go run golang.org/x/pkgsite/cmd/pkgsite@latest
 
 ## lint: run linters
 .PHONY: lint
