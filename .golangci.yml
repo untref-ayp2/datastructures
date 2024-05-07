@@ -20,8 +20,12 @@ linters:
     - intrange
     - ireturn
     - misspell
-    - mnd
     - paralleltest
     - testpackage
     - varnamelen
     - wsl
+linters-settings:
+  mnd:
+    ignored-numbers:
+      - '0b0'
+      - '0b1'

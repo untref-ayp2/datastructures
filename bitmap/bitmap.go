@@ -4,6 +4,11 @@ package bitmap
 
 import "errors"
 
+const (
+	// BitmapSize define el tamaño del mapa de bits.
+	BitmapSize uint8 = 32
+)
+
 // BitMap implementa un mapa de bits sobre un entero de 32 bits.
 type BitMap struct {
 	bits uint32
@@ -15,7 +20,7 @@ type BitMap struct {
 //
 //	bm := bitmap.NewBitMap() // Crea un nuevo mapa de bits.
 func NewBitMap() *BitMap {
-	return &BitMap{bits: 0x0}
+	return &BitMap{bits: 0b0}
 }
 
 // On enciende el bit de la posición indicada.
@@ -34,7 +39,7 @@ func (bm *BitMap) On(pos uint8) error {
 		return errors.New("posición no válida")
 	}
 
-	bm.bits |= 0x1 << pos
+	bm.bits |= 0b1 << pos
 
 	return nil
 }
@@ -55,7 +60,7 @@ func (bm *BitMap) Off(pos uint8) error {
 		return errors.New("posición no válida")
 	}
 
-	bm.bits &= ^(0x1 << pos)
+	bm.bits &= ^(0b1 << pos)
 
 	return nil
 }
@@ -76,7 +81,7 @@ func (bm *BitMap) IsOn(pos uint8) (bool, error) {
 		return false, errors.New("posición no válida")
 	}
 
-	return bm.bits&(1<<pos) != 0x0, nil
+	return bm.bits&(1<<pos) != 0b0, nil
 }
 
 // GetMap obtiene la representación interna del mapa de bits
@@ -102,5 +107,5 @@ func (bm *BitMap) GetMap() uint32 {
 // Retorna:
 //   - `true` si la posición está fuera de rango; `false` en caso contrario.
 func isOutOfRange(pos uint8) bool {
-	return 32 <= pos
+	return pos >= BitmapSize
 }
