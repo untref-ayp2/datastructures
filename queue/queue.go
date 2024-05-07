@@ -9,12 +9,12 @@ type Queue[T any] struct {
 	data []T
 }
 
-// New crea una nueva cola vacía. O(1)
+// NewQueue crea una nueva cola vacía. O(1)
 //
 // Uso:
 //
 //	q := queue.New[int]() // Crea una nueva cola de enteros.
-func New[T any]() *Queue[T] {
+func NewQueue[T any]() *Queue[T] {
 	return &Queue[T]{}
 }
 

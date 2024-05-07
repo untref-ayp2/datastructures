@@ -10,12 +10,12 @@ type Stack[T any] struct {
 	data []T
 }
 
-// New crea una nueva pila vacía.
+// NewStack crea una nueva pila vacía.
 //
 // Uso:
 //
 //	s := stack.New[int]() // Crea una pila de enteros.
-func New[T any]() *Stack[T] {
+func NewStack[T any]() *Stack[T] {
 	return &Stack[T]{}
 }
 

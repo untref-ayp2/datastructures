@@ -7,21 +7,21 @@ import (
 )
 
 func TestNewQueue(t *testing.T) {
-	q := New[int]()
+	q := NewQueue[int]()
 
 	assert.NotNil(t, q)
 	assert.True(t, q.IsEmpty())
 }
 
 func TestQueueEnqueue(t *testing.T) {
-	q := New[int]()
+	q := NewQueue[int]()
 
 	q.Enqueue(1)
 	assert.False(t, q.IsEmpty())
 }
 
 func TestQueueDequeue(t *testing.T) {
-	q := New[int]()
+	q := NewQueue[int]()
 
 	q.Enqueue(1)
 	q.Enqueue(2)
@@ -36,21 +36,21 @@ func TestQueueDequeue(t *testing.T) {
 }
 
 func TestQueueDequeueOnEmptyQueue(t *testing.T) {
-	q := New[int]()
+	q := NewQueue[int]()
 
 	_, err := q.Dequeue()
 	assert.EqualError(t, err, "cola vacía")
 }
 
 func TestQueueFrontOnEmptyQueue(t *testing.T) {
-	q := New[int]()
+	q := NewQueue[int]()
 
 	_, err := q.Front()
 	assert.EqualError(t, err, "cola vacía")
 }
 
 func TestQueueFront(t *testing.T) {
-	q := New[int]()
+	q := NewQueue[int]()
 
 	q.Enqueue(1)
 	q.Enqueue(2)
