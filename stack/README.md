@@ -13,13 +13,11 @@ Una implementación simple y parametrizada de una estructura de datos tipo pila 
 
 ## Instalación
 
-Para utilizar esta pila en tu proyecto Go, simplemente debe importarse el paquete `github.com/untref-ayp2/data-structures/stack`
+Para utilizar esta estructura de datos en tu proyecto Go, simplemente debe importarse el paquete `github.com/untref-ayp2/data-structures/stack`
 
 ```shell
 go get github.com/untref-ayp2/data-structures/stack
 ```
 
 ## Ejemplos de uso
-Se proporcionan algunos ejemplos de uso en el repositorio de snippets de la cátedra:
-- [Uso de una pila](https://github.com/untref-ayp2/snippets/blob/master/stack/main.go)
-- [Invertir una cadena de texto](https://github.com/untref-ayp2/snippets/blob/master/stack/invertir_cadena/main.go)
+Se proporcionan algunos ejemplos de uso en el [repositorio de snippets de la cátedra](https://github.com/untref-ayp2/snippets)
