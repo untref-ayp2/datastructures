@@ -21,5 +21,4 @@ go get github.com/untref-ayp2/data-structures/dictionary
 ```
 
 ## Ejemplos de uso
-Se proporcionan algunos ejemplos de uso en el repositorio de snippets de la cátedra:
-- [Uso de un diccionario](https://github.com/untref-ayp2/snippets/blob/master/dictionary/main.go)
+Se proporcionan algunos ejemplos de uso en el [repositorio de snippets de la cátedra](https://github.com/untref-ayp2/snippets)
