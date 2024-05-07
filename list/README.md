@@ -24,32 +24,13 @@ En el archivo [`circular_list.go`](./circular_list.go) se encuentra una
 implementación de una lista enlazada circular, donde el último nodo apunta al
 primer nodo.
 
-En [demo](./demo/main.go) se encuentra un ejemplo de uso de cada una de las
-listas enlazadas.
+## Instalación
 
-## Ejemplo de uso
+Para utilizar estas estructuras de datos en tu proyecto Go, simplemente debe importarse el paquete `github.com/untref-ayp2/data-structures/list`
 
-Para recorrer una lista enlazada se puede hacer uso de un bucle `for` o de un
-bucle `while` que recorra los nodos de la lista. A continuación se muestra un
-ejemplo de cómo recorrer una lista enlazada simple:
-
-```go
-package main
-
-import (
-    "fmt"
-
-    "github.com/untref-ayp2/data-structures/list"
-)
-
-func main() {
-    list := NewLinkedList()
-    list.Append(1)
-    list.Append(2)
-    list.Append(3)
-
-    for node := list.Head(); node != nil; node = node.Next {
-        fmt.Println(node.Data())
-    }
-}
+```shell
+go get github.com/untref-ayp2/data-structures/list
 ```
+
+## Ejemplos de uso
+Se proporcionan algunos ejemplos de uso en el [repositorio de snippets de la cátedra](https://github.com/untref-ayp2/snippets)
