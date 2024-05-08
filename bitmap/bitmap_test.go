@@ -52,8 +52,8 @@ func TestBitMapApagarTodosLosBits(t *testing.T) {
 	for i := uint8(0); i < 32; i++ {
 		m.On(i)
 	}
-	for i := uint8(0); i < 32; i++ {
-		m.Off(i)
+	for j := uint8(0); j < 32; j++ {
+		m.Off(j)
 	}
 	assert.Equal(t, uint32(0), m.GetMap())
 }
