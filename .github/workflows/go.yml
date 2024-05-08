@@ -19,6 +19,9 @@ jobs:
 
       - name: Build
         run: go build -v ./...
+              
+      - name: Golangci-lint
+        uses: golangci/golangci-lint-action@v6.0.0
 
       - name: Test
         run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
