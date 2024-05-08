@@ -20,6 +20,9 @@ jobs:
       - name: Build
         run: go build -v ./...
 
+      - name: Lint
+        run: go run github.com/golangci/golangci-lint/cmd/golangci-lint@latest run
+
       - name: Test
         run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
       
