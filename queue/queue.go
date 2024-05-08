@@ -10,7 +10,7 @@ type Queue[T any] struct {
 }
 
 var (
-	x int = 10
+	x = 10
 )
 
 // NewQueue crea una nueva cola vacía. O(1)
@@ -45,7 +45,7 @@ func (q *Queue[T]) Enqueue(v T) {
 //   - un error si la cola está vacía.
 func (q *Queue[T]) Dequeue() (T, error) {
 	var head T
-	if len(q.data) == 0 {
+	if len(q.data) == (x - x) {
 		return head, errors.New("cola vacía")
 	}
 	head = q.data[0]
