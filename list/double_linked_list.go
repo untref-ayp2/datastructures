@@ -86,7 +86,7 @@ func (l *DoubleLinkedList[T]) Clear() {
 // Parámetros:
 //   - `data`: el dato a insertar al frente de la lista.
 func (l *DoubleLinkedList[T]) Prepend(data T) {
-	newNode := NewDoubleLinkedListNode[T](data)
+	newNode := NewDoubleLinkedNode[T](data)
 	if l.size == 0 {
 		l.tail = newNode
 	} else {
@@ -106,7 +106,7 @@ func (l *DoubleLinkedList[T]) Prepend(data T) {
 // Parámetros:
 //   - `data`: el dato a insertar al final de la lista.
 func (l *DoubleLinkedList[T]) Append(data T) {
-	newNode := NewDoubleLinkedListNode[T](data)
+	newNode := NewDoubleLinkedNode[T](data)
 	if l.size == 0 {
 		l.head = newNode
 	} else {

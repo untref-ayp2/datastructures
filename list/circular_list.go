@@ -88,7 +88,7 @@ func (l *CircularList[T]) Clear() {
 // Parámetros:
 //   - `data`: el valor a agregar al principio de la lista.
 func (l *CircularList[T]) Prepend(data T) {
-	node := NewDoubleLinkedListNode(data)
+	node := NewDoubleLinkedNode(data)
 	if l.size == 0 {
 		l.head = node
 		l.head.SetNext(l.head)
@@ -112,7 +112,7 @@ func (l *CircularList[T]) Prepend(data T) {
 // Parámetros:
 //   - `data`: el valor a agregar al final de la lista.
 func (l *CircularList[T]) Append(data T) {
-	node := NewDoubleLinkedListNode(data)
+	node := NewDoubleLinkedNode(data)
 	if l.size == 0 {
 		l.head = node
 		l.head.SetNext(l.head)

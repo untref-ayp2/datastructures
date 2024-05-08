@@ -7,8 +7,8 @@ type DoubleLinkedNode[T comparable] struct {
 	prev *DoubleLinkedNode[T]
 }
 
-// NewDoubleLinkedListNode crea un nuevo nodo de lista enlazada doble con el dato especificado.
-func NewDoubleLinkedListNode[T comparable](data T) *DoubleLinkedNode[T] {
+// NewDoubleLinkedNode crea un nuevo nodo de lista enlazada doble con el dato especificado.
+func NewDoubleLinkedNode[T comparable](data T) *DoubleLinkedNode[T] {
 	return &DoubleLinkedNode[T]{data: data}
 }
 
