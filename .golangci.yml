@@ -22,7 +22,6 @@ linters:
     - structcheck
     - testpackage
     - varnamelen
-    - wsl
 linters-settings:
   mnd:
     ignored-numbers:
