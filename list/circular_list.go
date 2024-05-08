@@ -233,19 +233,21 @@ func (l *CircularList[T]) Remove(data T) {
 //   - una representación en cadena de la lista.
 func (l *CircularList[T]) String() string {
 	if l.IsEmpty() {
-		return "CircularList: {}"
+		return "CircularList: ⇢ [] ⇠"
 	}
 
-	result := "CircularList: {\n"
+	result := "CircularList: ⇢ "
 
 	current := l.Head()
 	for {
-		result += fmt.Sprintf("  %v\n", current.Data())
+		result += fmt.Sprintf("[%v]", current.Data())
 		if current == l.Tail() {
 			break
 		}
+		result += " ↔ "
 		current = current.Next()
 	}
+	result += " ⇠"
 
-	return result + "}"
+	return result
 }

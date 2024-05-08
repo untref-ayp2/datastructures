@@ -235,7 +235,7 @@ func TestLinkedListRemoveLastOnEmpty(t *testing.T) {
 func TestLinkedListStringOnEmpty(t *testing.T) {
 	list := NewLinkedList[int]()
 
-	assert.Equal(t, "LinkedList: {}", list.String())
+	assert.Equal(t, "LinkedList: []", list.String())
 }
 
 func TestLinkedListString(t *testing.T) {
@@ -245,5 +245,5 @@ func TestLinkedListString(t *testing.T) {
 	list.Append(2)
 	list.Append(3)
 
-	assert.Equal(t, "LinkedList: {\n  1\n  2\n  3\n}", list.String())
+	assert.Equal(t, "LinkedList: [1] → [2] → [3]", list.String())
 }

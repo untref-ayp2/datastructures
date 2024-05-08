@@ -209,7 +209,7 @@ func TestCircularListFindOnEmptyList(t *testing.T) {
 func TestCircularListStringOnEmpty(t *testing.T) {
 	list := NewCircularList[int]()
 
-	assert.Equal(t, "CircularList: {}", list.String())
+	assert.Equal(t, "CircularList: ⇢ [] ⇠", list.String())
 }
 
 func TestCircularListString(t *testing.T) {
@@ -219,5 +219,5 @@ func TestCircularListString(t *testing.T) {
 	list.Append(2)
 	list.Append(3)
 
-	assert.Equal(t, "CircularList: {\n  1\n  2\n  3\n}", list.String())
+	assert.Equal(t, "CircularList: ⇢ [1] ↔ [2] ↔ [3] ⇠", list.String())
 }

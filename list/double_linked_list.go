@@ -220,19 +220,20 @@ func (l *DoubleLinkedList[T]) Remove(data T) {
 //   - una representación en cadena de la lista.
 func (l *DoubleLinkedList[T]) String() string {
 	if l.IsEmpty() {
-		return "DoubleLinkedList: {}"
+		return "DoubleLinkedList: []"
 	}
 
-	result := "DoubleLinkedList: {\n"
+	result := "DoubleLinkedList: "
 
 	current := l.Head()
 	for {
-		result += fmt.Sprintf("  %v\n", current.Data())
+		result += fmt.Sprintf("[%v]", current.Data())
 		if !current.HasNext() {
 			break
 		}
+		result += " ↔ "
 		current = current.Next()
 	}
 
-	return result + "}"
+	return result
 }

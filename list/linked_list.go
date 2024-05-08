@@ -228,19 +228,20 @@ func (l *LinkedList[T]) Remove(data T) {
 //   - una representación en cadena de la lista.
 func (l *LinkedList[T]) String() string {
 	if l.IsEmpty() {
-		return "LinkedList: {}"
+		return "LinkedList: []"
 	}
 
-	result := "LinkedList: {\n"
+	result := "LinkedList: "
 
 	current := l.Head()
 	for {
-		result += fmt.Sprintf("  %v\n", current.Data())
+		result += fmt.Sprintf("[%v]", current.Data())
 		if !current.HasNext() {
 			break
 		}
+		result += " → "
 		current = current.Next()
 	}
 
-	return result + "}"
+	return result
 }

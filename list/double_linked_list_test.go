@@ -212,7 +212,7 @@ func TestDoubleLinkedListFind(t *testing.T) {
 func TestDoubleLinkedListStringOnEmpty(t *testing.T) {
 	list := NewDoubleLinkedList[int]()
 
-	assert.Equal(t, "DoubleLinkedList: {}", list.String())
+	assert.Equal(t, "DoubleLinkedList: []", list.String())
 }
 
 func TestDoubleLinkedListString(t *testing.T) {
@@ -222,5 +222,5 @@ func TestDoubleLinkedListString(t *testing.T) {
 	list.Append(2)
 	list.Append(3)
 
-	assert.Equal(t, "DoubleLinkedList: {\n  1\n  2\n  3\n}", list.String())
+	assert.Equal(t, "DoubleLinkedList: [1] ↔ [2] ↔ [3]", list.String())
 }
