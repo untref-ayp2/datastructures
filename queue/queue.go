@@ -9,6 +9,10 @@ type Queue[T any] struct {
 	data []T
 }
 
+var (
+	x int = 10
+)
+
 // NewQueue crea una nueva cola vacía. O(1)
 //
 // Uso:
