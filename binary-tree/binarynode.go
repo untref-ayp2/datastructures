@@ -1,9 +1,7 @@
 package binarytree
 
 import (
-	"fmt"
 	"math"
-	"strings"
 
 	"github.com/untref-ayp2/data-structures/types"
 )
@@ -37,90 +35,9 @@ func NewBinaryNode[T types.Ordered](
 	return &BinaryNode[T]{left: left, right: right, data: data}
 }
 
+// Retorna el dato guardado en el nodo de tipo T
 func (n *BinaryNode[T]) GetData() T {
 	return n.data
-}
-
-// Print //////////////////////////////////////////////////////////
-
-// Muestra por consola su recorrido en Pre-Order.
-func (n *BinaryNode[T]) PrintPreOrder() {
-	fmt.Println(n.data)
-	if n.left != nil {
-		n.left.PrintPreOrder()
-	}
-	if n.right != nil {
-		n.right.PrintPreOrder()
-	}
-}
-
-// Muestra por consola su recorrido en In-Order.
-func (n *BinaryNode[T]) PrintInOrder() {
-	if n.left != nil {
-		n.left.PrintInOrder()
-	}
-	fmt.Println(n.data)
-	if n.right != nil {
-		n.right.PrintInOrder()
-	}
-}
-
-// Muestra por consola su recorrido en Post-Order.
-func (n *BinaryNode[T]) PrintPostOrder() {
-	if n.left != nil {
-		n.left.PrintPostOrder()
-	}
-	if n.right != nil {
-		n.right.PrintPostOrder()
-	}
-	fmt.Println(n.data)
-}
-
-// Fin print ////////////////////////////////////////////////
-
-// String //////////////////////////////////////////////////
-
-// Retorna un string con el recorrido en Pre-Order
-func (n *BinaryNode[T]) StringPreOrder() string {
-	sb := strings.Builder{}
-	n.stringPreOrder(&sb)
-	return sb.String()
-}
-
-// funcion recursiva que concatena en un String Builder el recorrido en Pre-Order
-// desde el nodo.
-// Parámetros: un puntero a un objeto StringsBuilder
-// Retorna: un string
-func (n *BinaryNode[T]) stringPreOrder(sb *strings.Builder) {
-	sb.WriteString(fmt.Sprintf("%v", n.data))
-	if n.left != nil {
-		n.left.stringPreOrder(sb)
-	}
-	if n.right != nil {
-		n.right.stringPreOrder(sb)
-	}
-}
-
-// Retorna un string con el recorrido en In-Order
-func (n *BinaryNode[T]) StringInOrder() string {
-	sb := strings.Builder{}
-	n.stringInOrder(&sb)
-	return sb.String()
-	// return fmt.Sprint(n.GetInOrder())
-}
-
-// funcion recursiva que concatena en un String Builder el recorrido en In-Order
-// desde el nodo.
-// Parámetros: un puntero a un objeto StringsBuilder
-// Retorna: un string
-func (n *BinaryNode[T]) stringInOrder(sb *strings.Builder) {
-	if n.left != nil {
-		n.left.stringInOrder(sb)
-	}
-	sb.WriteString(fmt.Sprintf("%v", n.data))
-	if n.right != nil {
-		n.right.stringInOrder(sb)
-	}
 }
 
 // Retorna un slice de tipo T con los elementos del arbol en In-Order
@@ -181,27 +98,6 @@ func (n *BinaryNode[T]) getPostOrder(s *[]T) {
 		n.right.getPostOrder(s)
 	}
 	*s = append(*s, n.data)
-}
-
-// Retorna un string con el recorrido en Post-Order
-func (n *BinaryNode[T]) StringPostOrder() string {
-	sb := strings.Builder{}
-	n.stringPostOrder(&sb)
-	return sb.String()
-}
-
-// funcion recursiva que concatena en un String Builder el recorrido en Post-Order
-// desde el nodo.
-// Parámetros: un puntero a un objeto StringsBuilder
-// Retorna: un string
-func (n *BinaryNode[T]) stringPostOrder(sb *strings.Builder) {
-	if n.left != nil {
-		n.left.stringPostOrder(sb)
-	}
-	if n.right != nil {
-		n.right.stringPostOrder(sb)
-	}
-	sb.WriteString(fmt.Sprintf("%v", n.data))
 }
 
 // Retorna la cantidad de nodos hacia abajo.
