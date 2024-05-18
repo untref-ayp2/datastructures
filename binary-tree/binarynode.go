@@ -41,6 +41,8 @@ func (n *BinaryNode[T]) GetData() T {
 	return n.data
 }
 
+// Print //////////////////////////////////////////////////////////
+
 // Muestra por consola su recorrido en Pre-Order.
 func (n *BinaryNode[T]) PrintPreOrder() {
 	fmt.Println(n.data)
@@ -51,6 +53,32 @@ func (n *BinaryNode[T]) PrintPreOrder() {
 		n.right.PrintPreOrder()
 	}
 }
+
+// Muestra por consola su recorrido en In-Order.
+func (n *BinaryNode[T]) PrintInOrder() {
+	if n.left != nil {
+		n.left.PrintInOrder()
+	}
+	fmt.Println(n.data)
+	if n.right != nil {
+		n.right.PrintInOrder()
+	}
+}
+
+// Muestra por consola su recorrido en Post-Order.
+func (n *BinaryNode[T]) PrintPostOrder() {
+	if n.left != nil {
+		n.left.PrintPostOrder()
+	}
+	if n.right != nil {
+		n.right.PrintPostOrder()
+	}
+	fmt.Println(n.data)
+}
+
+// Fin print ////////////////////////////////////////////////
+
+// String //////////////////////////////////////////////////
 
 // Retorna un string con el recorrido en Pre-Order
 func (n *BinaryNode[T]) StringPreOrder() string {
@@ -73,22 +101,12 @@ func (n *BinaryNode[T]) stringPreOrder(sb *strings.Builder) {
 	}
 }
 
-// Muestra por consola su recorrido en In-Order.
-func (n *BinaryNode[T]) PrintInOrder() {
-	if n.left != nil {
-		n.left.PrintInOrder()
-	}
-	fmt.Println(n.data)
-	if n.right != nil {
-		n.right.PrintInOrder()
-	}
-}
-
 // Retorna un string con el recorrido en In-Order
 func (n *BinaryNode[T]) StringInOrder() string {
 	sb := strings.Builder{}
 	n.stringInOrder(&sb)
 	return sb.String()
+	// return fmt.Sprint(n.GetInOrder())
 }
 
 // funcion recursiva que concatena en un String Builder el recorrido en In-Order
@@ -105,15 +123,64 @@ func (n *BinaryNode[T]) stringInOrder(sb *strings.Builder) {
 	}
 }
 
-// Muestra por consola su recorrido en Post-Order.
-func (n *BinaryNode[T]) PrintPostOrder() {
+// Retorna un slice de tipo T con los elementos del arbol en In-Order
+func (n *BinaryNode[T]) GetInOrder() []T {
+	s := make([]T, 0, n.Size())
+	n.getInOrder(&s)
+	return s
+}
+
+// funcion recursiva que agrega en el slice que recibe como parámetro
+// los elementos del arbol en In-Order
+// Parámetros: un puntero a un slice de tipo T
+func (n *BinaryNode[T]) getInOrder(s *[]T) {
 	if n.left != nil {
-		n.left.PrintPostOrder()
+		n.left.getInOrder(s)
+	}
+	*s = append(*s, n.data)
+	if n.right != nil {
+		n.right.getInOrder(s)
+	}
+}
+
+// Retorna un slice de tipo T con los elementos del arbol en Pre-Order
+func (n *BinaryNode[T]) GetPreOrder() []T {
+	s := make([]T, 0, n.Size())
+	n.getPreOrder(&s)
+	return s
+}
+
+// funcion recursiva que agrega en el slice que recibe como parámetro
+// los elementos del arbol en Pre-Order
+// Parámetros: un puntero a un slice de tipo T
+func (n *BinaryNode[T]) getPreOrder(s *[]T) {
+	*s = append(*s, n.data)
+	if n.left != nil {
+		n.left.getPreOrder(s)
 	}
 	if n.right != nil {
-		n.right.PrintPostOrder()
+		n.right.getPreOrder(s)
 	}
-	fmt.Println(n.data)
+}
+
+// Retorna un slice de tipo T con los elementos del arbol en Post-Order
+func (n *BinaryNode[T]) GetPostOrder() []T {
+	s := make([]T, 0, n.Size())
+	n.getPostOrder(&s)
+	return s
+}
+
+// funcion recursiva que agrega en el slice que recibe como parámetro
+// los elementos del arbol en Post-Order
+// Parámetros: un puntero a un slice de tipo T
+func (n *BinaryNode[T]) getPostOrder(s *[]T) {
+	if n.left != nil {
+		n.left.getPostOrder(s)
+	}
+	if n.right != nil {
+		n.right.getPostOrder(s)
+	}
+	*s = append(*s, n.data)
 }
 
 // Retorna un string con el recorrido en Post-Order

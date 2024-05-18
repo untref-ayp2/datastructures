@@ -20,12 +20,36 @@ func TestRecorridosDiapo(t *testing.T) {
 	mult.InsertRight(d)
 	mas.InsertLeft(a)
 	mas.InsertRight(mult)
+	raiz := mas
 	// Recorrido en Pre-Order
-	assert.Equal(t, "+a*-bcd", mas.StringPreOrder())
+	assert.Equal(t, []string{"+", "a", "*", "-", "b", "c", "d"}, raiz.GetPreOrder())
 	// Recorrido en In-Order
-	assert.Equal(t, "a+b-c*d", mas.StringInOrder())
+	assert.Equal(t, []string{"a", "+", "b", "-", "c", "*", "d"}, raiz.GetInOrder())
 	// Recorrido en Post-Order
-	assert.Equal(t, "abc-d*+", mas.StringPostOrder())
+	assert.Equal(t, []string{"a", "b", "c", "-", "d", "*", "+"}, raiz.GetPostOrder())
+}
+
+func TestRecorridosArbolVacio(t *testing.T) {
+	raiz := NewBinaryTree("algo")
+	raiz.Empty()
+	// Recorrido en Pre-Order
+	vacio := []string{}
+	assert.Equal(t, vacio, raiz.GetPreOrder())
+	// Recorrido en In-Order
+	assert.Equal(t, vacio, raiz.GetInOrder())
+	// Recorrido en Post-Order
+	assert.Equal(t, vacio, raiz.GetPostOrder())
+}
+
+func TestRecorridosUnSoloNodo(t *testing.T) {
+	raiz := NewBinaryTree(123)
+	// Recorrido en Pre-Order
+	unoSolo := []int{123}
+	assert.Equal(t, unoSolo, raiz.GetPreOrder())
+	// Recorrido en In-Order
+	assert.Equal(t, unoSolo, raiz.GetInOrder())
+	// Recorrido en Post-Order
+	assert.Equal(t, unoSolo, raiz.GetPostOrder())
 }
 
 func TestSizeHeightEmptyDiapo(t *testing.T) {

@@ -43,55 +43,30 @@ func (t *BinaryTree[T]) InsertRight(bt *BinaryTree[T]) {
 	}
 }
 
-// Muestra el recorrido en Pre-Order de todo el arbol.
-// La responsabilidad la delega en en nodo raiz, que sabe mostrar su recorrido en Pre-Order.
-func (t *BinaryTree[T]) PrintPreOrder() {
-	if t.root != nil {
-		t.root.PrintPreOrder()
-	}
-}
-
-// Retorna un string que representa el recorrido en Pre-Order de todo el arbol.
-// La responsabilidad la delega en en nodo raiz, que sabe obtener su recorrido en Pre-Order.
-func (t *BinaryTree[T]) StringPreOrder() string {
-	if t.root != nil {
-		return t.root.StringPreOrder()
-	}
-	return ""
-}
-
-// Muestra el recorrido en In-Order de todo el arbol.
-// La responsabilidad la delega en en nodo raiz, que sabe mostrar su recorrido en In-Order.
-func (t *BinaryTree[T]) PrintInOrder() {
-	if t.root != nil {
-		t.root.PrintInOrder()
-	}
-}
-
-// Retorna un string que representa el recorrido en In-Order de todo el arbol.
-// La responsabilidad la delega en en nodo raiz, que sabe obtener su recorrido en In-Order.
-func (t *BinaryTree[T]) StringInOrder() string {
-	if t.root != nil {
-		return t.root.StringInOrder()
-	}
-	return ""
-}
-
-// Muestra el recorrido en Post-Order de todo el arbol.
-// La responsabilidad la delega en en nodo raiz, que sabe mostrar su recorrido en Post-Order.
-func (t *BinaryTree[T]) PrintPostOrder() {
-	if t.root != nil {
-		t.root.PrintPostOrder()
-	}
-}
-
 // Retorna un string que representa el recorrido en Post-Order de todo el arbol.
 // La responsabilidad la delega en en nodo raiz, que sabe obtener su recorrido en Post-Order.
-func (t *BinaryTree[T]) StringPostOrder() string {
+func (t *BinaryTree[T]) GetPostOrder() []T {
+	s := []T{}
 	if t.root != nil {
-		return t.root.StringPostOrder()
+		s = t.root.GetPostOrder()
 	}
-	return ""
+	return s
+}
+
+func (t *BinaryTree[T]) GetPreOrder() []T {
+	s := []T{}
+	if t.root != nil {
+		s = t.root.GetPreOrder()
+	}
+	return s
+}
+
+func (t *BinaryTree[T]) GetInOrder() []T {
+	s := []T{}
+	if t.root != nil {
+		s = t.root.GetInOrder()
+	}
+	return s
 }
 
 // Limpia el árbol poniendo la raiz en nil
