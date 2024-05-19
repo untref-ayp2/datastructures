@@ -69,6 +69,33 @@ func (t *BinaryTree[T]) GetInOrder() []T {
 	return s
 }
 
+// Retorna un string que representa el recorrido en Pre-Order de todo el arbol.
+// La responsabilidad la delega en en nodo raiz, que sabe obtener su recorrido en Pre-Order.
+func (t *BinaryTree[T]) StringPreOrder() string {
+	if t.root != nil {
+		return t.root.StringPreOrder()
+	}
+	return ""
+}
+
+// Retorna un string que representa el recorrido en In-Order de todo el arbol.
+// La responsabilidad la delega en en nodo raiz, que sabe obtener su recorrido en In-Order.
+func (t *BinaryTree[T]) StringInOrder() string {
+	if t.root != nil {
+		return t.root.StringInOrder()
+	}
+	return ""
+}
+
+// Retorna un string que representa el recorrido en Post-Order de todo el arbol.
+// La responsabilidad la delega en en nodo raiz, que sabe obtener su recorrido en Post-Order.
+func (t *BinaryTree[T]) StringPostOrder() string {
+	if t.root != nil {
+		return t.root.StringPostOrder()
+	}
+	return ""
+}
+
 // Limpia el árbol poniendo la raiz en nil
 func (t *BinaryTree[T]) Empty() {
 	t.root = nil
