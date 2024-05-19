@@ -8,14 +8,14 @@ type BinaryTree[T types.Ordered] struct {
 	root *BinaryNode[T]
 }
 
-// NewBinaryTreee crea un nuevo BinaryTree a partir de un dato de tipo T.
+// NewBinaryTree crea un nuevo BinaryTree a partir de un dato de tipo T.
 //
 // Uso:
 //
 //	bt := binarytree.NewBinaryTree[int](data)
 //
 // Parámetros:
-// 'data' : el dato que guarda el nodo raiz de tipo T
+//   - 'data' : el dato que guarda el nodo raiz de tipo T
 //
 // Retorna un puntero a un nuevo BinaryTree.
 func NewBinaryTree[T types.Ordered](data T) *BinaryTree[T] {
@@ -24,7 +24,9 @@ func NewBinaryTree[T types.Ordered](data T) *BinaryTree[T] {
 }
 
 // Inserta del lado izquierdo de la raiz, el arbol que se pasa por parámetro
-// Parámetros: un puntero a un BinaryTree
+//
+// Parámetros:
+//   - `bt` un puntero a un BinaryTree
 func (t *BinaryTree[T]) InsertLeft(bt *BinaryTree[T]) {
 	if t.root == nil {
 		t.root = bt.root
@@ -111,7 +113,7 @@ func (t *BinaryTree[T]) Size() int {
 	if t.root != nil {
 		return t.root.Size()
 	} else {
-		return -1
+		return 0
 	}
 }
 
@@ -120,6 +122,6 @@ func (t *BinaryTree[T]) Height() int {
 	if t.root != nil {
 		return t.root.Height()
 	} else {
-		return 0
+		return -1
 	}
 }
