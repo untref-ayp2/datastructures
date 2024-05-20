@@ -32,6 +32,11 @@ func TestRecorridosDiapo(t *testing.T) {
 	assert.Equal(t, "abc-d*+", raiz.StringPostOrder())
 }
 
+func TestGetRoot(t *testing.T) {
+	raiz := NewBinaryTree("algo")
+	assert.Equal(t, "algo", raiz.GetRoot().GetData())
+}
+
 func TestRecorridosArbolVacio(t *testing.T) {
 	raiz := NewBinaryTree("algo")
 	raiz.Empty()

@@ -24,6 +24,19 @@ func NewBinaryTree[T types.Ordered](data T) *BinaryTree[T] {
 	return &BinaryTree[T]{root: node}
 }
 
+// Obtiene el nodo raíz del árbol.
+//
+// Uso:
+//
+//	bt := binarytree.NewBinaryTree[int](data)
+//	bt.GetRoot()
+//
+// Retorna:
+//   - un puntero al nodo raíz del árbol.
+func (t *BinaryTree[T]) GetRoot() *BinaryNode[T] {
+	return t.root
+}
+
 // Inserta del lado izquierdo de la raíz, el árbol que se pasa por parámetro
 //
 // Uso:

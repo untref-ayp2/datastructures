@@ -46,6 +46,22 @@ func (n *BinaryNode[T]) GetData() T {
 	return n.data
 }
 
+// Retorna el hijo izquierdo del nodo.
+//
+// Retorna:
+//   - un puntero al hijo izquierdo del nodo.
+func (n *BinaryNode[T]) GetLeft() *BinaryNode[T] {
+	return n.left
+}
+
+// Retorna el hijo derecho del nodo.
+//
+// Retorna:
+//   - un puntero al hijo derecho del nodo.
+func (n *BinaryNode[T]) GetRight() *BinaryNode[T] {
+	return n.right
+}
+
 // Retorna un los elementos del árbol en In-Order.
 //
 // Retorna:

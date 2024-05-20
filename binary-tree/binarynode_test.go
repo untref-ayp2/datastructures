@@ -58,3 +58,12 @@ func TestHeight(t *testing.T) {
 	raiz := nodo4
 	assert.Equal(t, 2, raiz.Height())
 }
+
+func TestChildren(t *testing.T) {
+	izq := NewBinaryNode(1, nil, nil)
+	der := NewBinaryNode(3, nil, nil)
+	raiz := NewBinaryNode(2, izq, der)
+
+	assert.Equal(t, izq, raiz.GetLeft())
+	assert.Equal(t, der, raiz.GetRight())
+}
