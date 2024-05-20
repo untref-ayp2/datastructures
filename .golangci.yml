@@ -15,14 +15,15 @@ linters:
     - exhaustruct
     - forbidigo
     - goerr113
-    - gomnd
-    - ireturn
     - misspell
     - paralleltest
     - structcheck
     - testpackage
     - varnamelen
     - wsl
+
+    # Disable noisy linters
+    - ireturn
 
     # Disable deprecated linters
     - deadcode
@@ -36,7 +37,14 @@ linters:
     - varcheck
 
 linters-settings:
+  gomnd:
+    ignored-numbers:
+      - '0b0'
+      - '0b1'
   mnd:
     ignored-numbers:
       - '0b0'
       - '0b1'
+issues:
+  max-issues-per-linter: 50
+  max-same-issues: 50

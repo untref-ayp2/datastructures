@@ -1,3 +1,4 @@
+// Package binarytree provee una implementación de árbol binario.
 package binarytree
 
 import "github.com/untref-ayp2/data-structures/types"
