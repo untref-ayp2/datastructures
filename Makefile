@@ -25,6 +25,11 @@ tidy:
 	go fmt ./...
 	go mod tidy -v -go=${GO_VERSION}
 
+## lint: run linters
+.PHONY: lint
+lint:
+	go run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.53 run
+
 ## audit: run quality control checks
 .PHONY: audit
 audit:
@@ -53,8 +58,3 @@ test/cover:
 .PHONY: docs
 docs:
 	go run golang.org/x/pkgsite/cmd/pkgsite@latest
-
-## lint: run linters
-.PHONY: lint
-lint:
-	go run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.53 run
