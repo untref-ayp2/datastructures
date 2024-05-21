@@ -8,7 +8,7 @@ import (
 
 func TestMinHeapCrearVacio(t *testing.T) {
 	m := NewMinHeap[int]()
-	assert.Equal(t, 0, m.Len())
+	assert.Equal(t, 0, m.Size())
 }
 
 func TestMinHeapRemoveMaxVacio(t *testing.T) {
@@ -51,7 +51,7 @@ func TestMinHeapCrearInsertarYExtraer(t *testing.T) {
 
 	// Verificaciones iniciales
 	m := NewMinHeap[int]()
-	assert.Equal(t, 0, m.Len())
+	assert.Equal(t, 0, m.Size())
 
 	// Verificaciones a medida que vamos insertando
 	for i := 0; i < len(secuenciaDeInsercion); i++ {

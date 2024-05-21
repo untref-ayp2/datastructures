@@ -14,7 +14,7 @@ func NewMaxHeap[T types.Ordered]() *MaxHeap[T] {
 	return &MaxHeap[T]{}
 }
 
-func (m *MaxHeap[T]) Len() int {
+func (m *MaxHeap[T]) Size() int {
 	return len(m.elements)
 }
 
@@ -36,12 +36,12 @@ func (m *MaxHeap[T]) upHeap(i int) {
 
 func (m *MaxHeap[T]) RemoveMax() (T, error) {
 	var element T
-	if m.Len() == 0 {
+	if m.Size() == 0 {
 		return element, errors.New("heap vacío")
 	}
 	element = m.elements[0]
-	m.elements[0] = m.elements[m.Len()-1]
-	m.elements = m.elements[:m.Len()-1]
+	m.elements[0] = m.elements[m.Size()-1]
+	m.elements = m.elements[:m.Size()-1]
 	m.downHeap(0)
 
 	return element, nil
@@ -51,11 +51,11 @@ func (m *MaxHeap[T]) downHeap(i int) {
 	for {
 		left := 2*i + 1
 		right := 2*i + 2
-		if left >= m.Len() {
+		if left >= m.Size() {
 			break
 		}
 		max := left
-		if right < m.Len() && m.elements[right] > m.elements[left] {
+		if right < m.Size() && m.elements[right] > m.elements[left] {
 			max = right
 		}
 		if m.elements[i] >= m.elements[max] {
