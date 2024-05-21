@@ -26,13 +26,13 @@ func TestMinHeapCrearInsertarYExtraer(t *testing.T) {
 		 44, 29, 58, 2, 98, 11, 65, 3, 68, 99
 
 		 El arbol resultante debería ser:
-		      		       [99]
-			       [98]            [65]
-		   [58]        [68]   [11]  [44]
-		 [2]  [3]   [29]
+		      		       [02]
+			       [03]            [11]
+		   [29]        [98]   [58]  [65]
+		[44]  [68]   [99]
 
 		 Como arreglo:
-		 [99, 98, 65, 58, 68, 11, 44, 2, 3, 29]
+		 [02, 03, 11, 29, 98, 58, 65, 44, 68, 99]
 	*/
 	secuenciaDeInsercion := []int{44, 29, 58, 2, 98, 11, 65, 3, 68, 99}
 
