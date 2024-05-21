@@ -1,5 +1,5 @@
-// Package binarytree provee una implementación de árbol binario.
-package binarytree
+// Package tree provee una implementación de árboles.
+package tree
 
 import "github.com/untref-ayp2/data-structures/types"
 
