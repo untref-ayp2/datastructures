@@ -19,20 +19,26 @@ func TestMinHeapRemoveMaxVacio(t *testing.T) {
 
 func TestMinHeapCrearInsertarYExtraer(t *testing.T) {
 	/*
-		 Gracias a visualgo.net/en/heap
-		 por la ayuda para preparar este caso de prueba.
+		Gracias a visualgo.net/en/heap
+		por la ayuda para preparar este caso de prueba.
 
-		 Insertando los siguientes elementos en orden:
-		 44, 29, 58, 2, 98, 11, 65, 3, 68, 99
+		Insertando los siguientes elementos en orden:
+		44, 29, 58, 2, 98, 11, 65, 3, 68, 99
 
-		 El arbol resultante debería ser:
-		      		       [02]
-			       [03]            [11]
-		   [29]        [98]   [58]  [65]
-		[44]  [68]   [99]
+		El arbol resultante debería ser:
+		[02]
+		├── [03]
+		│   ├── [29]
+		│   │   ├── [44]
+		│   │   └── [68]
+		│   └── [98]
+		│       └── [99]
+		└── [11]
+		    ├── [58]
+		    └── [65]
 
-		 Como arreglo:
-		 [02, 03, 11, 29, 98, 58, 65, 44, 68, 99]
+		Como arreglo:
+		[02, 03, 11, 29, 98, 58, 65, 44, 68, 99]
 	*/
 	secuenciaDeInsercion := []int{44, 29, 58, 2, 98, 11, 65, 3, 68, 99}
 
