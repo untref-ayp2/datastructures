@@ -40,6 +40,7 @@ linters-settings:
     ignored-numbers:
       - '0b0'
       - '0b1'
+      - 2
   mnd:
     ignored-numbers:
       - '0b0'
