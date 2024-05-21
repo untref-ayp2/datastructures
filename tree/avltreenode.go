@@ -51,9 +51,6 @@ func (n *AVLNode[T]) getBalance() int {
 }
 
 func (n *AVLNode[T]) updateHeight() {
-	if n == nil {
-		return
-	}
 	n.height = max(n.left.getHeight(), n.right.getHeight()) + 1
 }
 

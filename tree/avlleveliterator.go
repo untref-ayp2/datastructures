@@ -15,7 +15,9 @@ func NewAVLLevelIterator[T types.Ordered](root *AVLNode[T]) *AVLLevelIterator[T]
 	iterator := &AVLLevelIterator[T]{
 		queue: queue.NewQueue[AVLNode[T]](),
 	}
-	iterator.queue.Enqueue(*root)
+	if root != nil {
+		iterator.queue.Enqueue(*root)
+	}
 
 	return iterator
 }
