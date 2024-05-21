@@ -176,3 +176,20 @@ func TestBSTBorrarRaizConUnHijo(t *testing.T) {
 	assert.Nil(t, bstree.Search(4))
 	assert.Equal(t, 1, bstree.Size())
 }
+
+func TestBSTIterator(t *testing.T) {
+	bstree := NewBinarySearchTree[int]()
+	bstree.Insert(3)
+	bstree.Insert(4)
+	bstree.Insert(1)
+	bstree.Insert(2)
+	bstree.Insert(5)
+
+	it := bstree.Iterator()
+
+	assert.Equal(t, 1, it.Next())
+	assert.Equal(t, 2, it.Next())
+	assert.Equal(t, 3, it.Next())
+	assert.Equal(t, 4, it.Next())
+	assert.Equal(t, 5, it.Next())
+}
