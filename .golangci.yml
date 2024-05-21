@@ -36,6 +36,8 @@ linters:
     - varcheck
 
 linters-settings:
+  cyclop:
+    max-complexity: 15
   gomnd:
     ignored-numbers:
       - '0b0'
