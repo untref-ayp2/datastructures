@@ -68,40 +68,10 @@ func (n *AVLNode[T]) insert(value T) *AVLNode[T] {
 	default: // el elemento ya se encuentra en el árbol
 		return n
 	}
-	// Actualiza la altura del nodo
+	// Actualiza la altura del nodo, y si es necesario, aplica rotaciones
 	n.updateHeight()
-	// Calcula el balance del nodo
-	balance := n.getBalance() // Si el balance es mayor a 1, el árbol está desbalanceado
 
-	// Desbalanceado a la izquierda-izquierda  (rotación simple a derecha)
-	if balance > 1 && value < n.left.GetData() {
-		return n.rotateRight()
-	}
-
-	// Desbalanceado a la derecha-derecha (rotación simple a izquierda)
-	if balance < -1 && value > n.right.GetData() {
-		return n.rotateLeft()
-	}
-
-	// Desbalanceado a la izquierda derecha (rotación doble a derecha)
-	// La rotación doble se implementa primero rotando el hijo izquierdo a la izquierda
-	// y luego rotando el nodo actual a la derecha
-	if balance > 1 && value > n.left.GetData() {
-		n.left = n.left.rotateLeft()
-
-		return n.rotateRight()
-	}
-
-	// Desbalanceado a la derecha izquierda (rotación doble a izquierda)
-	// La rotación doble se implementa primero rotando el hijo derecho a la derecha
-	// y luego rotando el nodo actual a la izquierda
-	if balance < -1 && value < n.right.GetData() {
-		n.right = n.right.rotateRight()
-
-		return n.rotateLeft()
-	}
-
-	return n
+	return n.applyRotation()
 }
 
 func (n *AVLNode[T]) rotateRight() *AVLNode[T] {
@@ -157,32 +127,38 @@ func (n *AVLNode[T]) remove(value T) *AVLNode[T] {
 		n.right = n.right.remove(temp.data)
 	}
 
-	// Actualiza la altura del nodo
+	// Actualiza la altura del nodo, y si es necesario, aplica rotaciones
 	n.updateHeight()
-	// Calcula el balance del nodo
+
+	return n.applyRotation()
+}
+
+func (n *AVLNode[T]) applyRotation() *AVLNode[T] {
 	balance := n.getBalance()
 
-	// Si está desbalanceado, reestructura el árbol
-	// Desblanceado izquierda-izquierda (rotación simple a derecha)
-	if balance > 1 && n.left.getBalance() >= 0 {
+	// Si |balance| > 1, el árbol está desbalanceado
+	// Debemos aplicar rotaciones para balancearlo
+
+	// Desbalanceado a la izquierda -> rotación simple a derecha
+	if balance > 1 {
+		// Si además el hijo izquierdo está desbalanceado a la derecha,
+		// aplicamos una rotación a la izquierda resultando en un
+		// desbalanceo izquierda-derecha
+		if n.left.getBalance() < 0 {
+			n.left = n.left.rotateLeft()
+		}
+
 		return n.rotateRight()
 	}
 
-	// Desbalanceado izquierda derecha (rotación doble a derecha)
-	if balance > 1 && n.left.getBalance() < 0 {
-		n.left = n.left.rotateLeft()
-
-		return n.rotateRight()
-	}
-
-	// Desbalanceado derecha-derecha (rotación simple a izquierda)
-	if balance < -1 && n.right.getBalance() <= 0 {
-		return n.rotateLeft()
-	}
-
-	// Desbalanceado derecha izquierda (rotación doble a izquierda)
-	if balance < -1 && n.right.getBalance() > 0 {
-		n.right = n.right.rotateRight()
+	// Desbalanceado a la derecha -> rotación simple a izquierda
+	if balance < -1 {
+		// Si además el hijo derecho está desbalanceado a la izquierda,
+		// aplicamos una rotación a la derecha resultando en un
+		// desbalanceo derecha-izquierda
+		if n.right.getBalance() > 0 {
+			n.right = n.right.rotateRight()
+		}
 
 		return n.rotateLeft()
 	}
