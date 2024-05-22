@@ -64,3 +64,7 @@ func (avl *AVLTree[T]) Clear() {
 func (avl *AVLTree[T]) InOrder() string {
 	return avl.root.inOrder()
 }
+
+func (avl *AVLTree[T]) Iterator() types.Iterator[T] {
+	return NewAVLInOrderIterator[T](avl.root)
+}

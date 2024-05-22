@@ -31,7 +31,7 @@ func TestAVLInOrderIterator(t *testing.T) {
 	for _, expVal := range expected {
 		assert.True(t, iterator.HasNext())
 		val, _ := iterator.Next()
-		assert.Equal(t, expVal, val.GetData())
+		assert.Equal(t, expVal, val)
 	}
 	assert.False(t, iterator.HasNext())
 }

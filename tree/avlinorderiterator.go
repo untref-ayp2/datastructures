@@ -15,15 +15,15 @@ func NewAVLInOrderIterator[T types.Ordered](root *AVLNode[T]) *AVLInOrderIterato
 	iterator := &AVLInOrderIterator[T]{
 		stack: stack.NewStack[AVLNode[T]](),
 	}
-	iterator.apilarHijosIzquierdos(root)
+	iterator.stackLeftChildren(root)
 
 	return iterator
 }
 
-func (it *AVLInOrderIterator[T]) apilarHijosIzquierdos(nodo *AVLNode[T]) {
-	for nodo != nil {
-		it.stack.Push(*nodo)
-		nodo = nodo.getLeft()
+func (it *AVLInOrderIterator[T]) stackLeftChildren(node *AVLNode[T]) {
+	for node != nil {
+		it.stack.Push(*node)
+		node = node.getLeft()
 	}
 }
 
@@ -31,16 +31,15 @@ func (it *AVLInOrderIterator[T]) HasNext() bool {
 	return !it.stack.IsEmpty()
 }
 
-func (it *AVLInOrderIterator[T]) Next() (AVLNode[T], error) {
-	var dato T
-	nodo := newAVLNode[T](dato, nil, nil)
+func (it *AVLInOrderIterator[T]) Next() (T, error) {
+	var data T
 	if it.stack.IsEmpty() {
-		return *nodo, errors.New("no hay más elementos")
+		return data, errors.New("no hay más elementos")
 	}
 	next, _ := it.stack.Pop()
 	if next.getRight() != nil {
-		it.apilarHijosIzquierdos(next.getRight())
+		it.stackLeftChildren(next.getRight())
 	}
 
-	return next, nil
+	return next.data, nil
 }

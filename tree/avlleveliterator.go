@@ -26,11 +26,10 @@ func (it *AVLLevelIterator[T]) HasNext() bool {
 	return !it.queue.IsEmpty()
 }
 
-func (it *AVLLevelIterator[T]) Next() (AVLNode[T], error) {
-	var dato T
-	nodo := newAVLNode[T](dato, nil, nil)
+func (it *AVLLevelIterator[T]) Next() (T, error) {
+	var data T
 	if it.queue.IsEmpty() {
-		return *nodo, errors.New("no hay más elementos")
+		return data, errors.New("no hay más elementos")
 	}
 	next, _ := it.queue.Dequeue()
 	if next.getLeft() != nil {
@@ -40,5 +39,5 @@ func (it *AVLLevelIterator[T]) Next() (AVLNode[T], error) {
 		it.queue.Enqueue(*next.getRight())
 	}
 
-	return next, nil
+	return next.data, nil
 }

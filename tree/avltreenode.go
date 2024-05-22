@@ -211,15 +211,15 @@ func (n *AVLNode[T]) search(k T) bool {
 		return false
 	}
 
-	if n.data == k {
-		return true
+	if n.data > k {
+		return n.left.search(k)
 	}
 
 	if n.data < k {
 		return n.right.search(k)
 	}
 
-	return n.left.search(k)
+	return true
 }
 
 func (n *AVLNode[T]) inOrder() string {
