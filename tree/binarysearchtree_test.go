@@ -177,6 +177,28 @@ func TestBSTBorrarRaizConUnHijo(t *testing.T) {
 	assert.Equal(t, 1, bstree.Size())
 }
 
+func TestBSTClear(t *testing.T) {
+	bstree := NewBinarySearchTree[int]()
+	bstree.Insert(4)
+
+	assert.Equal(t, 1, bstree.Size())
+
+	bstree.Clear()
+
+	assert.Equal(t, 0, bstree.Size())
+	assert.Nil(t, bstree.GetRoot())
+}
+
+func TestBSTIsEmpty(t *testing.T) {
+	bstree := NewBinarySearchTree[int]()
+
+	assert.True(t, bstree.IsEmpty())
+
+	bstree.Insert(4)
+
+	assert.False(t, bstree.IsEmpty())
+}
+
 func TestBSTIteratorUnoPorUno(t *testing.T) {
 	bstree := NewBinarySearchTree[int]()
 	bstree.Insert(3)
@@ -187,27 +209,15 @@ func TestBSTIteratorUnoPorUno(t *testing.T) {
 
 	it := bstree.Iterator()
 
-	assert.Equal(t, 1, it.Next())
-	assert.Equal(t, 2, it.Next())
-	assert.Equal(t, 3, it.Next())
-	assert.Equal(t, 4, it.Next())
-	assert.Equal(t, 5, it.Next())
-}
+	expectedValues := []int{1, 2, 3, 4, 5}
 
-func TestBSTIteratorCompleto(t *testing.T) {
-	bstree := NewBinarySearchTree[int]()
-	bstree.Insert(3)
-	bstree.Insert(4)
-	bstree.Insert(1)
-	bstree.Insert(2)
-	bstree.Insert(5)
-
-	it := bstree.Iterator()
-
-	for i := 1; i <= 5; i++ {
+	for _, expected := range expectedValues {
 		assert.True(t, it.HasNext())
-		assert.NotNil(t, it.HasNext())
+		val, err := it.Next()
+		assert.Equal(t, expected, val)
+		assert.NoError(t, err)
 	}
+	assert.False(t, it.HasNext())
 }
 
 func TestBSTIteratorWhenEmpty(t *testing.T) {
@@ -216,5 +226,9 @@ func TestBSTIteratorWhenEmpty(t *testing.T) {
 	it := bstree.Iterator()
 
 	assert.False(t, it.HasNext())
-	assert.Zero(t, it.Next())
+
+	val, err := it.Next()
+
+	assert.Zero(t, val)
+	assert.Error(t, err)
 }

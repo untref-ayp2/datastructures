@@ -39,6 +39,11 @@ func TestSize(t *testing.T) {
 	assert.Equal(t, 5, raiz.Size())
 }
 
+func TestHeightOnEmptyTree(t *testing.T) {
+	nodo := NewBinaryNode(1, nil, nil)
+	assert.Equal(t, 0, nodo.Height())
+}
+
 func TestHeight(t *testing.T) {
 	nodo1 := NewBinaryNode(1, nil, nil)
 	nodo3 := NewBinaryNode(3, nil, nil)

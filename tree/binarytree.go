@@ -1,4 +1,4 @@
-// Package tree provee una implementación de árboles.
+// Package bt provee una implementación de árboles.
 package tree
 
 import "github.com/untref-ayp2/data-structures/types"
