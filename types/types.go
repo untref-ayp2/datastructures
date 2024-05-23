@@ -6,3 +6,8 @@ type Ordered interface {
 		~float32 | ~float64 |
 		~string
 }
+
+type Iterator[T any] interface {
+	HasNext() bool
+	Next() (T, error)
+}
