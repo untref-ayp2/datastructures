@@ -29,16 +29,6 @@ func TestInOrder(t *testing.T) {
 	assert.Equal(t, []int{1, 3, 2, 5, 4}, raiz.GetPostOrder())
 }
 
-func TestGetInOrder(t *testing.T) {
-	nodo1 := NewBinaryNode(1, nil, nil)
-	nodo3 := NewBinaryNode(3, nil, nil)
-	nodo2 := NewBinaryNode(2, nodo1, nodo3)
-	nodo5 := NewBinaryNode(5, nil, nil)
-	nodo4 := NewBinaryNode(4, nodo2, nodo5)
-	raiz := nodo4
-	assert.Equal(t, []int{1, 2, 3, 4, 5}, raiz.GetInOrder())
-}
-
 func TestSize(t *testing.T) {
 	nodo1 := NewBinaryNode(1, nil, nil)
 	nodo3 := NewBinaryNode(3, nil, nil)
