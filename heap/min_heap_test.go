@@ -13,7 +13,7 @@ func TestMinHeapCrearVacio(t *testing.T) {
 
 func TestMinHeapRemoveMaxVacio(t *testing.T) {
 	m := NewMinHeap[int]()
-	_, err := m.RemoveMin()
+	_, err := m.Remove()
 	assert.NotNil(t, err)
 }
 
@@ -78,7 +78,8 @@ func TestMinHeapCrearInsertarYExtraer(t *testing.T) {
 	}
 
 	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		m.RemoveMin()
+		_, err := m.Remove()
 		assert.Equal(t, ordenEsperadoDespuesDeEliminar[i], m.elements)
+		assert.NoError(t, err)
 	}
 }

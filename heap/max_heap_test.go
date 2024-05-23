@@ -13,7 +13,7 @@ func TestMaxHeapCrearVacio(t *testing.T) {
 
 func TestMaxHeapRemoveMaxVacio(t *testing.T) {
 	m := NewMaxHeap[int]()
-	_, err := m.RemoveMax()
+	_, err := m.Remove()
 	assert.NotNil(t, err)
 }
 
@@ -78,7 +78,8 @@ func TestMaxHeapCrearInsertarYExtraer(t *testing.T) {
 	}
 
 	for i := 0; i < len(secuenciaDeInsercion); i++ {
-		m.RemoveMax()
+		_, err := m.Remove()
 		assert.Equal(t, ordenEsperadoDespuesDeEliminar[i], m.elements)
+		assert.NoError(t, err)
 	}
 }
