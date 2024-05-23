@@ -56,6 +56,27 @@ func TestAVLTreeRemove(t *testing.T) {
 	assert.Equal(t, 1, avl.GetBalance())
 }
 
+func TestAVLTreeAllPossibleBalances(t *testing.T) {
+	avl := NewAVLTree[int]()
+	avl.Insert(1)
+	avl.Insert(2)
+
+	assert.Equal(t, -1, avl.GetBalance())
+
+	avl = NewAVLTree[int]()
+	avl.Insert(2)
+	avl.Insert(1)
+
+	assert.Equal(t, 1, avl.GetBalance())
+
+	avl = NewAVLTree[int]()
+	avl.Insert(2)
+	avl.Insert(1)
+	avl.Insert(3)
+
+	assert.Equal(t, 0, avl.GetBalance())
+}
+
 func TestAVLTreeSearchMinMax(t *testing.T) {
 	avl := NewAVLTree[int]()
 
