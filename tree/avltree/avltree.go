@@ -1,4 +1,4 @@
-package tree
+package avltree
 
 import (
 	"github.com/untref-ayp2/data-structures/types"

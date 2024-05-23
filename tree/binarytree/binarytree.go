@@ -1,5 +1,5 @@
 // Package bt provee una implementación de árboles.
-package tree
+package binarytree
 
 import "github.com/untref-ayp2/data-structures/types"
 
