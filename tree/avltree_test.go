@@ -10,7 +10,7 @@ func TestAVLTreeVacio(t *testing.T) {
 	avl := NewAVLTree[int]()
 
 	assert.True(t, avl.IsEmpty())
-	assert.Equal(t, 0, avl.GetHeight())
+	assert.Equal(t, -1, avl.GetHeight())
 	assert.Equal(t, 0, avl.GetBalance())
 }
 
@@ -26,7 +26,7 @@ func TestAVLTreeClear(t *testing.T) {
 	avl.Clear()
 
 	assert.True(t, avl.IsEmpty())
-	assert.Equal(t, 0, avl.GetHeight())
+	assert.Equal(t, -1, avl.GetHeight())
 	assert.Equal(t, 0, avl.GetBalance())
 }
 
@@ -38,7 +38,7 @@ func TestAVLTreeInsert(t *testing.T) {
 	avl.Insert(3)
 
 	assert.False(t, avl.IsEmpty())
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 	assert.Equal(t, 0, avl.GetBalance())
 }
 
@@ -52,7 +52,7 @@ func TestAVLTreeRemove(t *testing.T) {
 	avl.Remove(2)
 
 	assert.False(t, avl.IsEmpty())
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 	assert.Equal(t, 1, avl.GetBalance())
 }
 
@@ -127,7 +127,7 @@ func TestAVLTreeCreateReverseOrder(t *testing.T) {
 	avl.Insert(2)
 	avl.Insert(1)
 
-	assert.Equal(t, 3, avl.GetHeight())
+	assert.Equal(t, 2, avl.GetHeight())
 }
 
 func TestAVLTreeInsertRepeated(t *testing.T) {
@@ -139,7 +139,7 @@ func TestAVLTreeInsertRepeated(t *testing.T) {
 	avl.Insert(1)
 	avl.Insert(1)
 
-	assert.Equal(t, 1, avl.GetHeight())
+	assert.Equal(t, 0, avl.GetHeight())
 }
 
 func TestAVLTreeTodasLasRotaciones(t *testing.T) {
@@ -149,7 +149,7 @@ func TestAVLTreeTodasLasRotaciones(t *testing.T) {
 	avl.Insert(20)
 	avl.Insert(30)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 
 	// rotacion simple a derecha
 	avl = NewAVLTree[int]()
@@ -157,7 +157,7 @@ func TestAVLTreeTodasLasRotaciones(t *testing.T) {
 	avl.Insert(20)
 	avl.Insert(10)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 
 	// rotacion izquierda-derecha
 	avl = NewAVLTree[int]()
@@ -165,7 +165,7 @@ func TestAVLTreeTodasLasRotaciones(t *testing.T) {
 	avl.Insert(30)
 	avl.Insert(20)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 
 	// rotacion derecha-izquierda
 	avl = NewAVLTree[int]()
@@ -173,7 +173,7 @@ func TestAVLTreeTodasLasRotaciones(t *testing.T) {
 	avl.Insert(10)
 	avl.Insert(20)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 }
 
 func TestAVLTreeTodasLasRotacionesAlRemover(t *testing.T) {
@@ -185,7 +185,7 @@ func TestAVLTreeTodasLasRotacionesAlRemover(t *testing.T) {
 	avl.Insert(15)
 	avl.Remove(30)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 
 	// rotacion derecha-izquierda
 	avl = NewAVLTree[int]()
@@ -195,7 +195,7 @@ func TestAVLTreeTodasLasRotacionesAlRemover(t *testing.T) {
 	avl.Insert(25)
 	avl.Remove(10)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 
 	// rotacion izquierda-izquierda
 	avl = NewAVLTree[int]()
@@ -205,7 +205,7 @@ func TestAVLTreeTodasLasRotacionesAlRemover(t *testing.T) {
 	avl.Insert(5)
 	avl.Remove(30)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 
 	// rotacion derecha-izquierda
 	avl = NewAVLTree[int]()
@@ -215,7 +215,7 @@ func TestAVLTreeTodasLasRotacionesAlRemover(t *testing.T) {
 	avl.Insert(35)
 	avl.Remove(10)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 }
 
 func TestAVLTreeRemoverDatoSinHijoDerecho(t *testing.T) {
@@ -226,7 +226,7 @@ func TestAVLTreeRemoverDatoSinHijoDerecho(t *testing.T) {
 	avl.Insert(25)
 	avl.Remove(30)
 
-	assert.Equal(t, 2, avl.GetHeight())
+	assert.Equal(t, 1, avl.GetHeight())
 }
 
 func TestAVLTreeRemoverUltimoDato(t *testing.T) {
@@ -234,7 +234,7 @@ func TestAVLTreeRemoverUltimoDato(t *testing.T) {
 	avl.Insert(20)
 	avl.Remove(20)
 
-	assert.Equal(t, 0, avl.GetHeight())
+	assert.Equal(t, -1, avl.GetHeight())
 }
 
 func TestAVLTreeRemoverDatosInexistentesAIzquierdaYDerecha(t *testing.T) {
@@ -243,7 +243,7 @@ func TestAVLTreeRemoverDatosInexistentesAIzquierdaYDerecha(t *testing.T) {
 	avl.Remove(10)
 	avl.Remove(30)
 
-	assert.Equal(t, 1, avl.GetHeight())
+	assert.Equal(t, 0, avl.GetHeight())
 }
 
 func TestAVLTreeIterator(t *testing.T) {

@@ -15,7 +15,7 @@ type AVLNode[T types.Ordered] struct {
 }
 
 func newAVLNode[T types.Ordered](data T, left *AVLNode[T], right *AVLNode[T]) *AVLNode[T] {
-	return &AVLNode[T]{left: left, right: right, data: data, height: 1}
+	return &AVLNode[T]{left: left, right: right, data: data, height: 0}
 }
 
 func (n *AVLNode[T]) GetData() T {
@@ -36,7 +36,7 @@ func (n *AVLNode[T]) getRight() *AVLNode[T] {
 
 func (n *AVLNode[T]) getHeight() int {
 	if n == nil {
-		return 0
+		return -1
 	}
 
 	return n.height
