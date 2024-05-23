@@ -2,6 +2,7 @@ package avltree
 
 import (
 	"errors"
+
 	"github.com/untref-ayp2/data-structures/stack"
 	"github.com/untref-ayp2/data-structures/types"
 )

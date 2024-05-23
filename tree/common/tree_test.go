@@ -1,9 +1,10 @@
 package common
 
 import (
+	"testing"
+
 	"github.com/untref-ayp2/data-structures/tree/avltree"
 	"github.com/untref-ayp2/data-structures/tree/binarytree"
-	"testing"
 )
 
 // Verifica si BinarySearchTree implementa la interfaz Set.
