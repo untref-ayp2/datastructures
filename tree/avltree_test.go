@@ -245,3 +245,26 @@ func TestAVLTreeRemoverDatosInexistentesAIzquierdaYDerecha(t *testing.T) {
 
 	assert.Equal(t, 1, avl.GetHeight())
 }
+
+func TestAVLTreeIterator(t *testing.T) {
+	avl := NewAVLTree[int]()
+
+	avl.Insert(4)
+	avl.Insert(2)
+	avl.Insert(6)
+	avl.Insert(1)
+	avl.Insert(3)
+	avl.Insert(5)
+	avl.Insert(7)
+
+	iterator := avl.Iterator()
+
+	expected := []int{1, 2, 3, 4, 5, 6, 7}
+
+	for _, expVal := range expected {
+		assert.True(t, iterator.HasNext())
+		val, _ := iterator.Next()
+		assert.Equal(t, expVal, val)
+	}
+	assert.False(t, iterator.HasNext())
+}
