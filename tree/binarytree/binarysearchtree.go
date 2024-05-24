@@ -253,11 +253,7 @@ func (bst *BinarySearchTree[T]) Size() int {
 // Retorna:
 //   - la cantidad de nodos en el árbol local.
 func size[T types.Ordered](node *BinaryNode[T]) int {
-	if node == nil {
-		return 0
-	}
-
-	return 1 + size(node.left) + size(node.right)
+	return node.Size()
 }
 
 func (bst *BinarySearchTree[T]) IsEmpty() bool {

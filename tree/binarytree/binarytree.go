@@ -235,11 +235,7 @@ func (t *BinaryTree[T]) IsEmpty() bool {
 // Retorna:
 //   - la cantidad de nodos del árbol.
 func (t *BinaryTree[T]) Size() int {
-	if t.root != nil {
-		return t.root.Size()
-	}
-
-	return 0
+	return t.root.Size()
 }
 
 // Retorna la altura del árbol, o sea, la distancia desde la raíz al nodo más profundo.
@@ -252,9 +248,5 @@ func (t *BinaryTree[T]) Size() int {
 // Retorna:
 //   - la altura del árbol.
 func (t *BinaryTree[T]) Height() int {
-	if t.root != nil {
-		return t.root.Height()
-	}
-
-	return -1
+	return t.root.Height()
 }
