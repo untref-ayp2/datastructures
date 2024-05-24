@@ -207,8 +207,6 @@ func (t *BinaryTree[T]) StringInOrder() string {
 // Uso:
 //
 //	bt := binarytree.NewBinaryTree[int](data)
-//	bt.Empty()
-func (t *BinaryTree[T]) Empty() {
 //	bt.Clear()
 func (t *BinaryTree[T]) Clear() {
 	t.root = nil
