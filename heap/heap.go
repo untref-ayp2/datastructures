@@ -10,11 +10,11 @@ import (
 
 type Heap[T any] struct {
 	// contenedor de datos
-	elements  []T
-	//Función de comparación. Para un heap de mínimo,
-	// devuelve 1 si a < b, 0 si a == b, -1 si a > b
-	// Para un heap de máximo, devuelve 1 si a > b, 0 si a == b, -1 si a < b
-	comp func(a T, b T) int  
+	elements []T
+	// Función de comparación. Para un heap de mínimo,
+	// devuelve -1 si a < b, 0 si a == b, 1 si a > b
+	// Para un heap de máximo, devuelve 1 si a < b, 0 si a == b, -1 si a > b
+	compare func(a T, b T) int
 }
 
 // NewMinHeap crea un nuevo heap binario de mínimos.
@@ -26,7 +26,7 @@ type Heap[T any] struct {
 // Retorna:
 //   - un puntero a un heap binario de mínimos.
 func NewMinHeap[T types.Ordered]() *Heap[T] {
-	return &Heap[T]{comp: cmp.Compare[T], elements: make([]T, 0)}
+	return &Heap[T]{compare: cmp.Compare[T], elements: make([]T, 0)}
 }
 
 // NewMaxHeap crea un nuevo heap binario de máximos.
@@ -38,14 +38,15 @@ func NewMinHeap[T types.Ordered]() *Heap[T] {
 // Retorna:
 //   - un puntero a un heap binario de máximos.
 func NewMaxHeap[T types.Ordered]() *Heap[T] {
-	comp:= func(a T, b T) int {
+	comp := func(a T, b T) int {
 		return cmp.Compare[T](b, a)
 	}
-	return &Heap[T]{comp: comp, elements: make([]T, 0)}
+
+	return &Heap[T]{compare: comp, elements: make([]T, 0)}
 }
 
 func NewGenericHeap[T any](comp func(a T, b T) int) *Heap[T] {
-	return &Heap[T]{comp: comp, elements: make([]T, 0)}
+	return &Heap[T]{compare: comp, elements: make([]T, 0)}
 }
 
 // Size retorna la cantidad de elementos en el heap.
@@ -82,7 +83,7 @@ func (m *Heap[T]) Insert(element T) {
 func (m *Heap[T]) upHeap(i int) {
 	for i > 0 {
 		parent := (i - 1) / 2
-		if m.comp(m.elements[i], m.elements[parent]) == 1 {
+		if m.compare(m.elements[i], m.elements[parent]) > 0 {
 			break
 		}
 		m.elements[i], m.elements[parent] = m.elements[parent], m.elements[i]
@@ -123,20 +124,19 @@ func (m *Heap[T]) downHeap(i int) {
 		right := 2*i + 2
 		smallest := i
 
-		if left < m.Size() && m.comp(m.elements[left], m.elements[smallest]) == -1 {
+		if left < m.Size() && m.compare(m.elements[left], m.elements[smallest]) < 0 {
 			smallest = left
 		}
 
-		if right < m.Size() && m.comp(m.elements[right], m.elements[smallest]) == -1 {
+		if right < m.Size() && m.compare(m.elements[right], m.elements[smallest]) < 0 {
 			smallest = right
 		}
 
 		if smallest == i {
 			break
 		}
-    
+
 		m.elements[i], m.elements[smallest] = m.elements[smallest], m.elements[i]
 		i = smallest
 	}
-
 }
