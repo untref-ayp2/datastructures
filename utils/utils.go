@@ -3,14 +3,14 @@ package utils
 
 import "github.com/untref-ayp2/data-structures/types"
 
-// Compare returns
+// Compare devuelve
 //
-//	-1 if x is less than y,
-//	 0 if x equals y,
-//	+1 if x is greater than y.
+//	-1 si x es menor que y,
+//	 0 si x es igual a y,
+//	+1 si x es mayor que y.
 //
-// For floating-point types, a NaN is considered less than any non-NaN,
-// a NaN is considered equal to a NaN, and -0.0 is equal to 0.0.
+// Para tipos de punto flotante, un NaN se considera menor que cualquier valor no-NaN,
+// un NaN se considera igual a un NaN, y -0.0 es igual a 0.0.
 func Compare[T types.Ordered](x, y T) int {
 	xNaN := isNaN(x)
 	yNaN := isNaN(y)
@@ -27,8 +27,8 @@ func Compare[T types.Ordered](x, y T) int {
 	return 0
 }
 
-// isNaN reports whether x is a NaN without requiring the math package.
-// This will always return false if T is not floating-point.
+// isNaN informa si x es un NaN sin requerir el paquete math.
+// Esto siempre devolverá falso si T no es de punto flotante.
 func isNaN[T types.Ordered](x T) bool {
 	return x != x
 }
