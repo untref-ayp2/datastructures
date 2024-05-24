@@ -1,7 +1,10 @@
-// Package tree provee una implementación de árboles.
-package tree
+// Package binarytree provee una implementación de árboles.
+package binarytree
 
-import "github.com/untref-ayp2/data-structures/types"
+import (
+	"github.com/untref-ayp2/data-structures/stack"
+	"github.com/untref-ayp2/data-structures/types"
+)
 
 type BinaryTree[T types.Ordered] struct {
 	root *BinaryNode[T]
@@ -24,7 +27,7 @@ func NewBinaryTree[T types.Ordered](data T) *BinaryTree[T] {
 	return &BinaryTree[T]{root: node}
 }
 
-// Obtiene el nodo raíz del árbol.
+// GetRoot obtiene el nodo raíz del árbol.
 //
 // Uso:
 //
@@ -37,7 +40,7 @@ func (t *BinaryTree[T]) GetRoot() *BinaryNode[T] {
 	return t.root
 }
 
-// Inserta del lado izquierdo de la raíz, el árbol que se pasa por parámetro
+// InsertLeft inserta del lado izquierdo de la raíz, el árbol que se pasa por parámetro
 //
 // Uso:
 //
@@ -55,7 +58,7 @@ func (t *BinaryTree[T]) InsertLeft(bt *BinaryTree[T]) {
 	}
 }
 
-// Inserta del lado derecho de la raíz, el árbol que se pasa por parámetro
+// InsertRight inserta del lado derecho de la raíz, el árbol que se pasa por parámetro
 //
 // Uso:
 //
@@ -73,7 +76,7 @@ func (t *BinaryTree[T]) InsertRight(bt *BinaryTree[T]) {
 	}
 }
 
-// Retorna un slice de T con el recorrido en Post-Order del árbol.
+// GetPostOrder retorna un slice de T con el recorrido en Post-Order del árbol.
 // La responsabilidad la delega en nodo raíz, que sabe obtener su
 // recorrido en Post-Order.
 //
@@ -95,7 +98,7 @@ func (t *BinaryTree[T]) GetPostOrder() []T {
 	return s
 }
 
-// Retorna un slice de T con el recorrido en Pre-Order del árbol.
+// GetPreOrder retorna un slice de T con el recorrido en Pre-Order del árbol.
 // La responsabilidad la delega en nodo raíz, que sabe obtener su
 // recorrido en Pre-Order.
 //
@@ -117,7 +120,7 @@ func (t *BinaryTree[T]) GetPreOrder() []T {
 	return s
 }
 
-// Retorna un slice de T con el recorrido en In-Order del árbol.
+// GetInOrder retorna un slice de T con el recorrido en In-Order del árbol.
 // La responsabilidad la delega en nodo raíz, que sabe obtener su
 // recorrido en In-Order.
 //
@@ -139,7 +142,7 @@ func (t *BinaryTree[T]) GetInOrder() []T {
 	return s
 }
 
-// Retorna un string que representa el recorrido en Pre-Order de todo el árbol.
+// StringPreOrder retorna un string que representa el recorrido en Pre-Order de todo el árbol.
 // La responsabilidad la delega en nodo raíz,
 // que sabe obtener su recorrido en Pre-Order.
 //
@@ -160,7 +163,7 @@ func (t *BinaryTree[T]) StringPreOrder() string {
 	return ""
 }
 
-// Retorna un string que representa el recorrido en Post-Order de todo el árbol.
+// StringPostOrder retorna un string que representa el recorrido en Post-Order de todo el árbol.
 // La responsabilidad la delega en nodo raíz,
 // que sabe obtener su recorrido en Post-Order.
 //
@@ -181,7 +184,7 @@ func (t *BinaryTree[T]) StringPostOrder() string {
 	return ""
 }
 
-// Retorna un string que representa el recorrido en In-Order de todo el árbol.
+// StringInOrder retorna un string que representa el recorrido en In-Order de todo el árbol.
 // La responsabilidad la delega en nodo raíz,
 // que sabe obtener su recorrido en In-Order.
 //
@@ -202,17 +205,17 @@ func (t *BinaryTree[T]) StringInOrder() string {
 	return ""
 }
 
-// Limpia el árbol poniendo la raíz en nil.
+// Clear limpia el árbol poniendo la raíz en nil.
 //
 // Uso:
 //
 //	bt := binarytree.NewBinaryTree[int](data)
-//	bt.Empty()
-func (t *BinaryTree[T]) Empty() {
+//	bt.Clear()
+func (t *BinaryTree[T]) Clear() {
 	t.root = nil
 }
 
-// Evalúa si el árbol está vacío.
+// IsEmpty evalúa si el árbol está vacío.
 //
 // Uso:
 //
@@ -225,7 +228,7 @@ func (t *BinaryTree[T]) IsEmpty() bool {
 	return t.root == nil
 }
 
-// Retorna la cantidad de nodos del árbol.
+// Size retorna la cantidad de nodos del árbol.
 //
 // Uso:
 //
@@ -235,14 +238,10 @@ func (t *BinaryTree[T]) IsEmpty() bool {
 // Retorna:
 //   - la cantidad de nodos del árbol.
 func (t *BinaryTree[T]) Size() int {
-	if t.root != nil {
-		return t.root.Size()
-	}
-
-	return 0
+	return t.root.Size()
 }
 
-// Retorna la altura del árbol, o sea, la distancia desde la raíz al nodo más profundo.
+// Height etorna la altura del árbol, o sea, la distancia desde la raíz al nodo más profundo.
 //
 // Uso:
 //
@@ -252,9 +251,35 @@ func (t *BinaryTree[T]) Size() int {
 // Retorna:
 //   - la altura del árbol.
 func (t *BinaryTree[T]) Height() int {
-	if t.root != nil {
-		return t.root.Height()
+	return t.root.Height()
+}
+
+// Iterator devuelve un iterador para recorrer el árbol.
+//
+// Uso:
+//
+//	bt := tree.NewBinaryTree[int](0)
+//	// ...
+//	it := bt.Iterator()
+//
+// Retorna:
+//   - un Iterator.
+func (t *BinaryTree[T]) Iterator() types.Iterator[T] {
+	return newBinaryTreeIterator[T](t)
+}
+
+// newBinaryTreeIterator crea un nuevo BinaryTreeIterator.
+//
+// Parámetros:
+//   - `bt` un puntero a un BinaryTree.
+//
+// Retorna:
+//   - un Iterator.
+func newBinaryTreeIterator[T types.Ordered](bt *BinaryTree[T]) types.Iterator[T] {
+	it := &binaryTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
+	if bt.root != nil {
+		it.pushLeftNodes(bt.root)
 	}
 
-	return -1
+	return it
 }

@@ -1,6 +1,7 @@
-package tree
+package binarytree
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -49,7 +50,7 @@ func (bst *BinarySearchTree[T]) GetRoot() *BinaryNode[T] {
 //
 // Retorna:
 //   - un string con el recorrido InOrder del árbol.
-func (bst BinarySearchTree[T]) String() string {
+func (bst *BinarySearchTree[T]) String() string {
 	return bst.InOrder()
 }
 
@@ -65,7 +66,7 @@ func (bst BinarySearchTree[T]) String() string {
 //
 // Retorna:
 //   - un string con el recorrido InOrder del árbol.
-func (bst BinarySearchTree[T]) InOrder() string {
+func (bst *BinarySearchTree[T]) InOrder() string {
 	return bst.inOrderByNode(bst.root)
 }
 
@@ -76,7 +77,7 @@ func (bst BinarySearchTree[T]) InOrder() string {
 //
 // Retorna:
 //   - un string con el recorrido InOrder del árbol local.
-func (bst BinarySearchTree[T]) inOrderByNode(root *BinaryNode[T]) string {
+func (bst *BinarySearchTree[T]) inOrderByNode(root *BinaryNode[T]) string {
 	if root == nil {
 		return ""
 	}
@@ -109,7 +110,7 @@ func (bst *BinarySearchTree[T]) Insert(k T) {
 //
 // Retorna:
 //   - un puntero al nodo raíz del árbol.
-func (bst BinarySearchTree[T]) insertByNode(node *BinaryNode[T], k T) *BinaryNode[T] {
+func (bst *BinarySearchTree[T]) insertByNode(node *BinaryNode[T], k T) *BinaryNode[T] {
 	if node == nil {
 		return NewBinaryNode(k, nil, nil)
 	}
@@ -137,8 +138,9 @@ func (bst BinarySearchTree[T]) insertByNode(node *BinaryNode[T], k T) *BinaryNod
 //
 // Retorna:
 //   - un puntero al nodo encontrado.
-func (bst *BinarySearchTree[T]) Search(k T) *BinaryNode[T] {
+func (bst *BinarySearchTree[T]) Search(k T) bool {
 	node := bst.root
+
 	for node != nil {
 		switch {
 		case k < node.data:
@@ -147,11 +149,11 @@ func (bst *BinarySearchTree[T]) Search(k T) *BinaryNode[T] {
 			node = node.right
 		default:
 
-			return node
+			return true
 		}
 	}
 
-	return nil
+	return false
 }
 
 // FindMin busca el nodo con el valor mínimo en el árbol.
@@ -166,16 +168,32 @@ func (bst *BinarySearchTree[T]) Search(k T) *BinaryNode[T] {
 //
 // Retorna:
 //   - un puntero al nodo con el valor mínimo.
-func (bst *BinarySearchTree[T]) FindMin() *BinaryNode[T] {
+func (bst *BinarySearchTree[T]) FindMin() (T, error) {
 	if bst.root == nil {
-		return nil
+		var nullElement T
+
+		return nullElement, errors.New("árbol vacío")
 	}
 	nextLeft := bst.root
 	for nextLeft.left != nil {
 		nextLeft = nextLeft.left
 	}
 
-	return nextLeft
+	return nextLeft.GetData(), nil
+}
+
+func (bst *BinarySearchTree[T]) FindMax() (T, error) {
+	if bst.root == nil {
+		var nullElement T
+
+		return nullElement, errors.New("árbol vacío")
+	}
+	nextRight := bst.root
+	for nextRight.right != nil {
+		nextRight = nextRight.right
+	}
+
+	return nextRight.GetData(), nil
 }
 
 // Remove elimina un nodo del árbol.
@@ -253,16 +271,15 @@ func (bst *BinarySearchTree[T]) Size() int {
 // Retorna:
 //   - la cantidad de nodos en el árbol local.
 func size[T types.Ordered](node *BinaryNode[T]) int {
-	if node == nil {
-		return 0
-	}
-
-	return 1 + size(node.left) + size(node.right)
+	return node.Size()
 }
 
-// BinarySearchTreeIterator es un iterador para recorrer un BinarySearchTree.
-type BinarySearchTreeIterator[T types.Ordered] struct {
-	stack *stack.Stack[*BinaryNode[T]]
+func (bst *BinarySearchTree[T]) IsEmpty() bool {
+	return bst.Size() == 0
+}
+
+func (bst *BinarySearchTree[T]) Clear() {
+	bst.root = nil
 }
 
 // Iterator devuelve un iterador para recorrer el árbol.
@@ -274,8 +291,8 @@ type BinarySearchTreeIterator[T types.Ordered] struct {
 //	it := bst.Iterator()
 //
 // Retorna:
-//   - un puntero a un BinarySearchTreeIterator.
-func (bst *BinarySearchTree[T]) Iterator() *BinarySearchTreeIterator[T] {
+//   - un puntero a un Iterator.
+func (bst *BinarySearchTree[T]) Iterator() types.Iterator[T] {
 	return newBinarySearchTreeIterator(bst)
 }
 
@@ -285,68 +302,12 @@ func (bst *BinarySearchTree[T]) Iterator() *BinarySearchTreeIterator[T] {
 //   - `bst` un puntero a un BinarySearchTree.
 //
 // Retorna:
-//   - un puntero a un BinarySearchTreeIterator.
-func newBinarySearchTreeIterator[T types.Ordered](bst *BinarySearchTree[T]) *BinarySearchTreeIterator[T] {
-	stack := stack.NewStack[*BinaryNode[T]]()
-	it := &BinarySearchTreeIterator[T]{stack: stack}
+//   - un Iterator.
+func newBinarySearchTreeIterator[T types.Ordered](bst *BinarySearchTree[T]) types.Iterator[T] {
+	it := &binarySearchTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
 	if bst.root != nil {
 		it.pushLeftNodes(bst.root)
 	}
 
 	return it
-}
-
-// pushLeftNodes apila los nodos izquierdos desde un nodo.
-//
-// Parámetros:
-//   - `node` un puntero a un BinaryNode.
-func (it *BinarySearchTreeIterator[T]) pushLeftNodes(node *BinaryNode[T]) {
-	for node != nil {
-		it.stack.Push(node)
-		node = node.left
-	}
-}
-
-// HasNext indica si hay un siguiente dato.
-//
-// Uso:
-//
-//	bst := tree.NewBinarySearchTree[int]()
-//	// ...
-//	it := bst.Iterator()
-//	for it.HasNext() {
-//		fmt.Println(it.Next())
-//	}
-//
-// Retorna:
-//   - true si hay un siguiente nodo, false en caso contrario.
-func (it *BinarySearchTreeIterator[T]) HasNext() bool {
-	return !it.stack.IsEmpty()
-}
-
-// Next devuelve el siguiente dato, respetando el recorrido InOrder.
-//
-// Uso:
-//
-//	bst := tree.NewBinarySearchTree[int]()
-//	// ...
-//	it := bst.Iterator()
-//	for it.HasNext() {
-//		fmt.Println(it.Next())
-//	}
-//
-// Retorna:
-//   - el dato del siguiente nodo.
-func (it *BinarySearchTreeIterator[T]) Next() T {
-	if it.stack.IsEmpty() {
-		var emptyValue T
-
-		return emptyValue
-	}
-	node, _ := it.stack.Pop()
-	if node.right != nil {
-		it.pushLeftNodes(node.right)
-	}
-
-	return node.data
 }

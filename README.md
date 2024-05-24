@@ -41,7 +41,7 @@ ese proyecto.
 
    func main() {
        palabra := "omtirogla"
-       s := stack.New[rune]()
+       s := stack.NewStack[rune]()
        for _, letra := range palabra {
            s.Push(letra)
        }
@@ -123,11 +123,11 @@ siguientes pasos.
 
 5. Para verificar que todo está funcionando correctamente podemos modificar el
    código de algún paquete de `data-structures`. Por ejemplo, si agregámos un
-   mensaje de log en la función `stack.New`:
+   mensaje de log en la función `stack.NewStack`:
 
    ```go
-   // New crea una nueva pila vacía.
-    func New[T any]() *Stack[T] {
+   // NewStack crea una nueva pila vacía.
+    func NewStack[T any]() *Stack[T] {
         fmt.Println("Usando la pila de forma local")
         return &Stack[T]{}
     }
@@ -161,25 +161,13 @@ siguientes pasos.
    a l g o r i t m o
    ```
 
-## Algunas notas sobre la estructura de este repositorio
-
-Siguiendo las guías de Go, la estructura de este repositorio es la siguiente:
-
-```bash
-data-structures/ # módulo github.com/untref-ayp2/data-structures
-├── bitmap       # paquete github.com/untref-ayp2/data-structures/bitmap
-├── dictionary   # paquete github.com/untref-ayp2/data-structures/dictionary
-├── list         # paquete github.com/untref-ayp2/data-structures/list
-├── queue        # paquete github.com/untref-ayp2/data-structures/queue
-├── set          # paquete github.com/untref-ayp2/data-structures/set
-└── stack        # paquete github.com/untref-ayp2/data-structures/stack
-```
+## Algunas notas sobre este repositorio
 
 El objetivo de publicar todas la estructuras de datos en un unico repositorio es
 para facilitar su mantenimiento y distribución. Además, se busca que sea
 sencillo de utilizar como dependencia en otros proyectos.
 
-Esta estructura está basada en la organización de los módulos estandar de Go.
+Su estructura está basada en la organización de los módulos estandar de Go.
 
 Algunas de las guías y tutoriales oficiales de Go que sirvieron de referencia
 para la creación de este repositorio son:

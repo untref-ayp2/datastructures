@@ -1,12 +1,13 @@
-package tree
+package avltree
 
 import (
 	"fmt"
 
 	"github.com/untref-ayp2/data-structures/types"
+	"github.com/untref-ayp2/data-structures/utils"
 )
 
-// Nodo del árbol AVL, además del dato y los hijos, registra la altura.
+// AVLNode es un nodo del árbol AVL, además del dato y los hijos, registra la altura.
 type AVLNode[T types.Ordered] struct {
 	data   T           // dato
 	height int         // altura
@@ -14,26 +15,59 @@ type AVLNode[T types.Ordered] struct {
 	right  *AVLNode[T] // hijo derecho
 }
 
+// newAVLNode crea un nuevo nodo AVL con el dato, y los hijos izquierdo y derecho pasados como parámetros.
+//
+// Parámetros:
+//   - data: dato del nodo.
+//   - left: hijo izquierdo.
+//   - right: hijo derecho.
+//
+// Retorna:
+//   - un puntero al nodo creado.
 func newAVLNode[T types.Ordered](data T, left *AVLNode[T], right *AVLNode[T]) *AVLNode[T] {
 	return &AVLNode[T]{left: left, right: right, data: data, height: 0}
 }
 
+// GetData retorna el dato del nodo.
+//
+// Uso:
+//
+//	data := node.GetData()
+//
+// Retorna:
+//   - el dato del nodo.
 func (n *AVLNode[T]) GetData() T {
 	return n.data
 }
 
+// string retorna el dato del nodo en formato string.
+//
+// Retorna:
+//   - el dato del nodo en formato string.
 func (n *AVLNode[T]) string() string {
 	return fmt.Sprintf("%v", n.data)
 }
 
+// getLeft retorna el hijo izquierdo del nodo.
+//
+// Retorna:
+//   - el hijo izquierdo del nodo.
 func (n *AVLNode[T]) getLeft() *AVLNode[T] {
 	return n.left
 }
 
+// getRight retorna el hijo derecho del nodo.
+//
+// Retorna:
+//   - el hijo derecho del nodo.
 func (n *AVLNode[T]) getRight() *AVLNode[T] {
 	return n.right
 }
 
+// getHeight retorna la altura del nodo.
+//
+// Retorna:
+//   - la altura del nodo.
 func (n *AVLNode[T]) getHeight() int {
 	if n == nil {
 		return -1
@@ -42,6 +76,10 @@ func (n *AVLNode[T]) getHeight() int {
 	return n.height
 }
 
+// getBalance retorna el balance del nodo.
+//
+// Retorna:
+//   - el balance del nodo.
 func (n *AVLNode[T]) getBalance() int {
 	if n == nil {
 		return 0
@@ -50,10 +88,18 @@ func (n *AVLNode[T]) getBalance() int {
 	return n.left.getHeight() - n.right.getHeight()
 }
 
+// updateHeight actualiza la altura del nodo.
 func (n *AVLNode[T]) updateHeight() {
-	n.height = max(n.left.getHeight(), n.right.getHeight()) + 1
+	n.height = 1 + utils.Max(n.left.getHeight(), n.right.getHeight())
 }
 
+// insert inserta un nuevo nodo en el árbol AVL.
+//
+// Parámetros:
+//   - value: valor a insertar.
+//
+// Retorna:
+//   - un puntero al nodo insertado.
 func (n *AVLNode[T]) insert(value T) *AVLNode[T] {
 	// Si el nodo es nil, lo crea
 	if n == nil {
@@ -74,6 +120,7 @@ func (n *AVLNode[T]) insert(value T) *AVLNode[T] {
 	return n.applyRotation()
 }
 
+// rotateRight realiza una rotación simple a la derecha.
 func (n *AVLNode[T]) rotateRight() *AVLNode[T] {
 	y := n.left   // y es el hijo izquierdo de n
 	t2 := y.right // t2 es el hijo derecho de y
@@ -89,6 +136,7 @@ func (n *AVLNode[T]) rotateRight() *AVLNode[T] {
 	return y
 }
 
+// rotateLeft realiza una rotación simple a la izquierda.
 func (n *AVLNode[T]) rotateLeft() *AVLNode[T] {
 	x := n.right // x es el hijo derecho de n
 	t2 := x.left // t2 es el hijo izquierdo de x
@@ -104,6 +152,13 @@ func (n *AVLNode[T]) rotateLeft() *AVLNode[T] {
 	return x
 }
 
+// remove elimina un nodo del árbol AVL.
+//
+// Parámetros:
+//   - value: valor a eliminar.
+//
+// Retorna:
+//   - un puntero al nodo eliminado.
 func (n *AVLNode[T]) remove(value T) *AVLNode[T] {
 	if n == nil {
 		return n
@@ -133,6 +188,10 @@ func (n *AVLNode[T]) remove(value T) *AVLNode[T] {
 	return n.applyRotation()
 }
 
+// applyRotation aplica rotaciones al árbol AVL para balancearlo.
+//
+// Retorna:
+//   - un puntero al nodo raiz del sub-arbol, resultante de aplicar las rotaciones.
 func (n *AVLNode[T]) applyRotation() *AVLNode[T] {
 	balance := n.getBalance()
 
@@ -166,6 +225,10 @@ func (n *AVLNode[T]) applyRotation() *AVLNode[T] {
 	return n
 }
 
+// findMin retorna el nodo con el valor mínimo del árbol AVL.
+//
+// Retorna:
+//   - un puntero al nodo con el valor mínimo.
 func (n *AVLNode[T]) findMin() *AVLNode[T] {
 	if n.left == nil {
 		return n
@@ -174,6 +237,10 @@ func (n *AVLNode[T]) findMin() *AVLNode[T] {
 	return n.left.findMin()
 }
 
+// findMax retorna el nodo con el valor máximo del árbol AVL.
+//
+// Retorna:
+//   - un puntero al nodo con el valor máximo.
 func (n *AVLNode[T]) findMax() *AVLNode[T] {
 	if n.right == nil {
 		return n
@@ -182,6 +249,13 @@ func (n *AVLNode[T]) findMax() *AVLNode[T] {
 	return n.right.findMax()
 }
 
+// search busca un valor en el árbol AVL.
+//
+// Parámetros:
+//   - k: valor a buscar.
+//
+// Retorna:
+//   - true si el valor se encuentra en el árbol, false en caso contrario.
 func (n *AVLNode[T]) search(k T) bool {
 	if n == nil {
 		return false
@@ -198,18 +272,14 @@ func (n *AVLNode[T]) search(k T) bool {
 	return true
 }
 
+// inOrder devuelve una representación en orden del árbol AVL.
+//
+// Retorna:
+//   - una representación en orden del árbol AVL.
 func (n *AVLNode[T]) inOrder() string {
 	if n == nil {
 		return ""
 	}
 
 	return n.left.inOrder() + " " + n.string() + " " + n.right.inOrder()
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-
-	return b
 }

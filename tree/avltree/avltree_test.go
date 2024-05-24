@@ -1,4 +1,4 @@
-package tree
+package avltree
 
 import (
 	"testing"
@@ -12,6 +12,14 @@ func TestAVLTreeVacio(t *testing.T) {
 	assert.True(t, avl.IsEmpty())
 	assert.Equal(t, -1, avl.GetHeight())
 	assert.Equal(t, 0, avl.GetBalance())
+
+	minValue, errMin := avl.FindMin()
+	assert.Zero(t, minValue)
+	assert.Error(t, errMin)
+
+	maxValue, errMax := avl.FindMax()
+	assert.Zero(t, maxValue)
+	assert.Error(t, errMax)
 }
 
 func TestAVLTreeClear(t *testing.T) {
@@ -86,8 +94,13 @@ func TestAVLTreeSearchMinMax(t *testing.T) {
 	avl.Insert(4)
 	avl.Insert(5)
 
-	assert.Equal(t, 1, avl.FindMin())
-	assert.Equal(t, 5, avl.FindMax())
+	minValue, errMin := avl.FindMin()
+	assert.Equal(t, 1, minValue)
+	assert.NoError(t, errMin)
+
+	maxValue, errMax := avl.FindMax()
+	assert.Equal(t, 5, maxValue)
+	assert.NoError(t, errMax)
 }
 
 func TestAVLTreePrintInOrder(t *testing.T) {
