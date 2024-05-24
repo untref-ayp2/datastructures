@@ -1,3 +1,4 @@
+// Package heap provee una implementación de un heap binario.
 package heap
 
 import (
@@ -11,23 +12,61 @@ type Heap[T types.Ordered] struct {
 	isMinHeap bool
 }
 
+// NewMinHeap crea un nuevo heap binario de mínimos.
+//
+// Uso:
+//
+//	heap := heap.NewMinHeap[int]()
+//
+// Retorna:
+//   - un puntero a un heap binario de mínimos.
 func NewMinHeap[T types.Ordered]() *Heap[T] {
 	return &Heap[T]{isMinHeap: true}
 }
 
+// NewMaxHeap crea un nuevo heap binario de máximos.
+//
+// Uso:
+//
+//	heap := heap.NewMaxHeap[int]()
+//
+// Retorna:
+//   - un puntero a un heap binario de máximos.
 func NewMaxHeap[T types.Ordered]() *Heap[T] {
 	return &Heap[T]{isMinHeap: false}
 }
 
+// Size retorna la cantidad de elementos en el heap.
+//
+// Uso:
+//
+//	size := heap.Size()
+//
+// Retorna:
+//   - la cantidad de elementos en el heap.
 func (m *Heap[T]) Size() int {
 	return len(m.elements)
 }
 
+// Insert agrega un elemento al heap.
+//
+// Uso:
+//
+//	heap := heap.NewMinHeap[int]()
+//	heap.Insert(5)
+//
+// Parámetros:
+//
+//	element: elemento a agregar al heap.
 func (m *Heap[T]) Insert(element T) {
 	m.elements = append(m.elements, element)
 	m.upHeap(len(m.elements) - 1)
 }
 
+// upHeap reordena el heap hacia arriba.
+//
+// Parámetros:
+//   - `i` índice del elemento a reordenar.
 func (m *Heap[T]) upHeap(i int) {
 	for i > 0 {
 		parent := (i - 1) / 2
@@ -39,6 +78,16 @@ func (m *Heap[T]) upHeap(i int) {
 	}
 }
 
+// Remove elimina y retorna el elemento en la cima del heap.
+//
+// Uso:
+//
+//	heap := heap.NewMinHeap[int]()
+//	heap.Insert(5)
+//	element, _ := heap.Remove()
+//
+// Retorna:
+//   - el elemento en la cima del heap.
 func (m *Heap[T]) Remove() (T, error) {
 	var element T
 	if m.Size() == 0 {
@@ -52,6 +101,10 @@ func (m *Heap[T]) Remove() (T, error) {
 	return element, nil
 }
 
+// downHeap reordena el heap hacia abajo.
+//
+// Parámetros:
+//   - `i` índice del elemento a reordenar.
 func (m *Heap[T]) downHeap(i int) {
 	for {
 		left := 2*i + 1
@@ -71,6 +124,14 @@ func (m *Heap[T]) downHeap(i int) {
 	}
 }
 
+// compareOrEqual compara o verifica igualdad de dos elementos de acuerdo al tipo de heap.
+//
+// Parámetros:
+//   - `a` primer elemento a comparar.
+//   - `b` segundo elemento a comparar.
+//
+// Retorna:
+//   - true si `a` es menor/mayor o igual a `b`, false en caso contrario.
 func (m *Heap[T]) compareOrEqual(a T, b T) bool {
 	if m.isMinHeap {
 		return a <= b
@@ -79,6 +140,14 @@ func (m *Heap[T]) compareOrEqual(a T, b T) bool {
 	return a >= b
 }
 
+// compare compara dos elementos de acuerdo al tipo de heap.
+//
+// Parámetros:
+//   - `a` primer elemento a comparar.
+//   - `b` segundo elemento a comparar.
+//
+// Retorna:
+//   - true si `a` es menor/mayor a `b`, false en caso contrario.
 func (m *Heap[T]) compare(a T, b T) bool {
 	if m.isMinHeap {
 		return a < b
