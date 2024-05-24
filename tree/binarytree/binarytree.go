@@ -276,7 +276,7 @@ func (t *BinaryTree[T]) Iterator() types.Iterator[T] {
 // Retorna:
 //   - un Iterator.
 func newBinaryTreeIterator[T types.Ordered](bt *BinaryTree[T]) types.Iterator[T] {
-	it := &BinaryTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
+	it := &binaryTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
 	if bt.root != nil {
 		it.pushLeftNodes(bt.root)
 	}

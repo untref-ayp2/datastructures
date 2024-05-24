@@ -8,7 +8,7 @@ import (
 )
 
 // BinaryTreeIterator es un iterador para recorrer un BinaryTree.
-type BinaryTreeIterator[T types.Ordered] struct {
+type binaryTreeIterator[T types.Ordered] struct {
 	internalStack *stack.Stack[*BinaryNode[T]]
 }
 
@@ -16,7 +16,7 @@ type BinaryTreeIterator[T types.Ordered] struct {
 //
 // Parámetros:
 //   - `node` un puntero a un BinaryNode.
-func (it *BinaryTreeIterator[T]) pushLeftNodes(node *BinaryNode[T]) {
+func (it *binaryTreeIterator[T]) pushLeftNodes(node *BinaryNode[T]) {
 	for node != nil {
 		it.internalStack.Push(node)
 		node = node.left
@@ -36,7 +36,7 @@ func (it *BinaryTreeIterator[T]) pushLeftNodes(node *BinaryNode[T]) {
 //
 // Retorna:
 //   - true si hay un siguiente nodo, false en caso contrario.
-func (it *BinaryTreeIterator[T]) HasNext() bool {
+func (it *binaryTreeIterator[T]) HasNext() bool {
 	return !it.internalStack.IsEmpty()
 }
 
@@ -53,7 +53,7 @@ func (it *BinaryTreeIterator[T]) HasNext() bool {
 //
 // Retorna:
 //   - el dato del siguiente nodo.
-func (it *BinaryTreeIterator[T]) Next() (T, error) {
+func (it *binaryTreeIterator[T]) Next() (T, error) {
 	if it.internalStack.IsEmpty() {
 		var emptyValue T
 
