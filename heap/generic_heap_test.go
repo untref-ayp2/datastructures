@@ -2,7 +2,6 @@ package heap
 
 import (
 	"testing"
-	"fmt"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -95,7 +94,6 @@ func TestHeapCrearInsertarYExtraer(t *testing.T) {
 
 	for i := 0; i < len(secuenciaDeInsercion); i++ {
 		_, err := m.Remove()
-		fmt.Println(i)
 		assert.Equal(t, ordenEsperadoDespuesDeEliminar[i], m.elements)
 		assert.NoError(t, err)
 	}
