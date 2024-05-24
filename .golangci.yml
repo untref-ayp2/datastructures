@@ -39,6 +39,9 @@ linters:
 linters-settings:
   cyclop:
     max-complexity: 15
+  gocritic:
+    disabled-checks:
+      - dupSubExpr
   gomnd:
     ignored-numbers:
       - '0b0'

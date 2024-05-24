@@ -2,10 +2,10 @@
 package heap
 
 import (
-	"cmp"
 	"errors"
 
 	"github.com/untref-ayp2/data-structures/types"
+	"github.com/untref-ayp2/data-structures/utils"
 )
 
 type Heap[T any] struct {
@@ -26,7 +26,7 @@ type Heap[T any] struct {
 // Retorna:
 //   - un puntero a un heap binario de mínimos.
 func NewMinHeap[T types.Ordered]() *Heap[T] {
-	return &Heap[T]{compare: cmp.Compare[T], elements: make([]T, 0)}
+	return &Heap[T]{compare: utils.Compare[T], elements: make([]T, 0)}
 }
 
 // NewMaxHeap crea un nuevo heap binario de máximos.
@@ -39,7 +39,7 @@ func NewMinHeap[T types.Ordered]() *Heap[T] {
 //   - un puntero a un heap binario de máximos.
 func NewMaxHeap[T types.Ordered]() *Heap[T] {
 	comp := func(a T, b T) int {
-		return cmp.Compare[T](b, a)
+		return utils.Compare[T](b, a)
 	}
 
 	return &Heap[T]{compare: comp, elements: make([]T, 0)}
