@@ -45,6 +45,25 @@ func NewMaxHeap[T types.Ordered]() *Heap[T] {
 	return &Heap[T]{compare: comp, elements: make([]T, 0)}
 }
 
+// NewGenericHeap crea un nuevo heap binario con una función de comparación personalizada.
+//
+// Uso:
+//
+//	heap := heap.NewGenericHeap[int](func(a int, b int) int {
+//		if a < b {
+//			return -1
+//		}
+//		if a > b {
+//			return 1
+//		}
+//		return 0
+//	})
+//
+// Parámetros:
+//   - `comp` función de comparación personalizada.
+//
+// Retorna:
+//   - un puntero a un heap binario con una función de comparación personalizada.
 func NewGenericHeap[T any](comp func(a T, b T) int) *Heap[T] {
 	return &Heap[T]{compare: comp, elements: make([]T, 0)}
 }
