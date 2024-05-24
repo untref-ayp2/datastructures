@@ -11,7 +11,14 @@ func TestBSTNuevo(t *testing.T) {
 
 	assert.Equal(t, 0, bstree.Size())
 	assert.Nil(t, bstree.GetRoot())
-	assert.Nil(t, bstree.FindMin())
+
+	minValue, errMin := bstree.FindMin()
+	assert.Zero(t, minValue)
+	assert.Error(t, errMin)
+
+	maxValue, errMax := bstree.FindMax()
+	assert.Zero(t, maxValue)
+	assert.Error(t, errMax)
 }
 
 func TestBSTInsertarUnElemento(t *testing.T) {
@@ -60,7 +67,7 @@ func TestBSTBuscarElementoInexistente(t *testing.T) {
 	assert.Nil(t, found)
 }
 
-func TestBSTBuscarMinimo(t *testing.T) {
+func TestBSTBuscarMinMax(t *testing.T) {
 	bstree := NewBinarySearchTree[int]()
 	bstree.Insert(4)
 	bstree.Insert(1)
@@ -68,9 +75,13 @@ func TestBSTBuscarMinimo(t *testing.T) {
 	bstree.Insert(5)
 	bstree.Insert(3)
 
-	min := bstree.FindMin()
+	minValue, errMin := bstree.FindMin()
+	assert.Equal(t, 1, minValue)
+	assert.NoError(t, errMin)
 
-	assert.Equal(t, 1, min.GetData())
+	maxValue, errMax := bstree.FindMax()
+	assert.Equal(t, 5, maxValue)
+	assert.NoError(t, errMax)
 }
 
 func TestBSTRecorrerInOrder(t *testing.T) {

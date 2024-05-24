@@ -33,16 +33,28 @@ func (avl *AVLTree[T]) Search(k T) bool {
 	return avl.root.search(k)
 }
 
-func (avl *AVLTree[T]) FindMin() T {
+func (avl *AVLTree[T]) FindMin() (T, error) {
+	if avl.root == nil {
+		var emptyValue T
+
+		return emptyValue, errors.New("árbol vacío")
+	}
+
 	min := avl.root.findMin()
 
-	return min.GetData()
+	return min.GetData(), nil
 }
 
-func (avl *AVLTree[T]) FindMax() T {
+func (avl *AVLTree[T]) FindMax() (T, error) {
+	if avl.root == nil {
+		var emptyValue T
+
+		return emptyValue, errors.New("árbol vacío")
+	}
+
 	max := avl.root.findMax()
 
-	return max.GetData()
+	return max.GetData(), nil
 }
 
 func (avl *AVLTree[T]) GetHeight() int {

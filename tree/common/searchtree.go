@@ -2,10 +2,13 @@ package common
 
 import "github.com/untref-ayp2/data-structures/types"
 
-type Tree[T types.Ordered] interface {
+type SearchTree[T types.Ordered] interface {
 	Insert(k T)
 	Remove(k T)
 	IsEmpty() bool
+	FindMin() (T, error)
+	FindMax() (T, error)
+	Search(k T) bool
 	Clear()
 	String() string
 	Iterator() types.Iterator[T]

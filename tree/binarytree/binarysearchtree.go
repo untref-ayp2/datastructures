@@ -166,16 +166,32 @@ func (bst *BinarySearchTree[T]) Search(k T) *BinaryNode[T] {
 //
 // Retorna:
 //   - un puntero al nodo con el valor mínimo.
-func (bst *BinarySearchTree[T]) FindMin() *BinaryNode[T] {
+func (bst *BinarySearchTree[T]) FindMin() (T, error) {
 	if bst.root == nil {
-		return nil
+		var nullElement T
+
+		return nullElement, errors.New("árbol vacío")
 	}
 	nextLeft := bst.root
 	for nextLeft.left != nil {
 		nextLeft = nextLeft.left
 	}
 
-	return nextLeft
+	return nextLeft.GetData(), nil
+}
+
+func (bst *BinarySearchTree[T]) FindMax() (T, error) {
+	if bst.root == nil {
+		var nullElement T
+
+		return nullElement, errors.New("árbol vacío")
+	}
+	nextRight := bst.root
+	for nextRight.right != nil {
+		nextRight = nextRight.right
+	}
+
+	return nextRight.GetData(), nil
 }
 
 // Remove elimina un nodo del árbol.
