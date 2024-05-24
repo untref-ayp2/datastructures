@@ -1,11 +1,11 @@
-package tree
+package binarytree
 
 import (
 	"fmt"
-	"math"
 	"strings"
 
 	"github.com/untref-ayp2/data-structures/types"
+	"github.com/untref-ayp2/data-structures/utils"
 )
 
 // BinaryNode implementa el tipo BinaryNode con dos campos de tipo
@@ -225,15 +225,11 @@ func (n *BinaryNode[T]) stringPostOrder() string {
 // Retorna:
 //   - la cantidad de nodos del árbol
 func (n *BinaryNode[T]) Size() int {
-	size := 1
-	if n.left != nil {
-		size += n.left.Size()
-	}
-	if n.right != nil {
-		size += n.right.Size()
+	if n == nil {
+		return 0
 	}
 
-	return size
+	return 1 + n.left.Size() + n.right.Size()
 }
 
 // Retorna la altura del árbol.
@@ -241,6 +237,10 @@ func (n *BinaryNode[T]) Size() int {
 // Retorna:
 //   - la altura del árbol.
 func (n *BinaryNode[T]) Height() int {
+	if n == nil {
+		return -1
+	}
+
 	leftHeight := -1
 	rightHeight := -1
 	if n.left != nil {
@@ -250,5 +250,5 @@ func (n *BinaryNode[T]) Height() int {
 		rightHeight = n.right.Height()
 	}
 
-	return int(1 + math.Max(float64(leftHeight), float64(rightHeight)))
+	return 1 + utils.Max(leftHeight, rightHeight)
 }

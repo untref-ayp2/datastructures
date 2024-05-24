@@ -1,9 +1,10 @@
-package tree
+package avltree
 
 import (
 	"fmt"
 
 	"github.com/untref-ayp2/data-structures/types"
+	"github.com/untref-ayp2/data-structures/utils"
 )
 
 // Nodo del árbol AVL, además del dato y los hijos, registra la altura.
@@ -51,7 +52,7 @@ func (n *AVLNode[T]) getBalance() int {
 }
 
 func (n *AVLNode[T]) updateHeight() {
-	n.height = max(n.left.getHeight(), n.right.getHeight()) + 1
+	n.height = 1 + utils.Max(n.left.getHeight(), n.right.getHeight())
 }
 
 func (n *AVLNode[T]) insert(value T) *AVLNode[T] {
@@ -204,12 +205,4 @@ func (n *AVLNode[T]) inOrder() string {
 	}
 
 	return n.left.inOrder() + " " + n.string() + " " + n.right.inOrder()
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-
-	return b
 }

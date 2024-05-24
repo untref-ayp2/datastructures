@@ -30,6 +30,11 @@ tidy:
 lint:
 	go run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.53 run
 
+## lint: run linters and fix
+.PHONY: lint/fix
+lint/fix:
+	go run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.53 run --fix
+
 ## audit: run quality control checks
 .PHONY: audit
 audit:

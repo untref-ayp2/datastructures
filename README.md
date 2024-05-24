@@ -161,25 +161,13 @@ siguientes pasos.
    a l g o r i t m o
    ```
 
-## Algunas notas sobre la estructura de este repositorio
-
-Siguiendo las guías de Go, la estructura de este repositorio es la siguiente:
-
-```bash
-data-structures/ # módulo github.com/untref-ayp2/data-structures
-├── bitmap       # paquete github.com/untref-ayp2/data-structures/bitmap
-├── dictionary   # paquete github.com/untref-ayp2/data-structures/dictionary
-├── list         # paquete github.com/untref-ayp2/data-structures/list
-├── queue        # paquete github.com/untref-ayp2/data-structures/queue
-├── set          # paquete github.com/untref-ayp2/data-structures/set
-└── stack        # paquete github.com/untref-ayp2/data-structures/stack
-```
+## Algunas notas sobre este repositorio
 
 El objetivo de publicar todas la estructuras de datos en un unico repositorio es
 para facilitar su mantenimiento y distribución. Además, se busca que sea
 sencillo de utilizar como dependencia en otros proyectos.
 
-Esta estructura está basada en la organización de los módulos estandar de Go.
+Su estructura está basada en la organización de los módulos estandar de Go.
 
 Algunas de las guías y tutoriales oficiales de Go que sirvieron de referencia
 para la creación de este repositorio son:

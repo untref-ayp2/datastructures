@@ -1,4 +1,4 @@
-package tree
+package binarytree
 
 import (
 	"testing"
@@ -37,6 +37,11 @@ func TestSize(t *testing.T) {
 	nodo4 := NewBinaryNode(4, nodo2, nodo5)
 	raiz := nodo4
 	assert.Equal(t, 5, raiz.Size())
+}
+
+func TestHeightOnEmptyTree(t *testing.T) {
+	nodo := NewBinaryNode(1, nil, nil)
+	assert.Equal(t, 0, nodo.Height())
 }
 
 func TestHeight(t *testing.T) {
