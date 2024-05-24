@@ -304,8 +304,7 @@ func (bst *BinarySearchTree[T]) Iterator() types.Iterator[T] {
 // Retorna:
 //   - un puntero a un BinarySearchTreeIterator.
 func newBinarySearchTreeIterator[T types.Ordered](bst *BinarySearchTree[T]) types.Iterator[T] {
-	stack := stack.NewStack[*BinaryNode[T]]()
-	it := &BinarySearchTreeIterator[T]{stack: stack}
+	it := &BinarySearchTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
 	if bst.root != nil {
 		it.pushLeftNodes(bst.root)
 	}
