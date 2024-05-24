@@ -41,7 +41,7 @@ ese proyecto.
 
    func main() {
        palabra := "omtirogla"
-       s := stack.New[rune]()
+       s := stack.NewStack[rune]()
        for _, letra := range palabra {
            s.Push(letra)
        }
@@ -123,11 +123,11 @@ siguientes pasos.
 
 5. Para verificar que todo está funcionando correctamente podemos modificar el
    código de algún paquete de `data-structures`. Por ejemplo, si agregámos un
-   mensaje de log en la función `stack.New`:
+   mensaje de log en la función `stack.NewStack`:
 
    ```go
-   // New crea una nueva pila vacía.
-    func New[T any]() *Stack[T] {
+   // NewStack crea una nueva pila vacía.
+    func NewStack[T any]() *Stack[T] {
         fmt.Println("Usando la pila de forma local")
         return &Stack[T]{}
     }
