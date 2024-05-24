@@ -1,6 +1,7 @@
 package binarytree
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -49,7 +50,7 @@ func (bst *BinarySearchTree[T]) GetRoot() *BinaryNode[T] {
 //
 // Retorna:
 //   - un string con el recorrido InOrder del árbol.
-func (bst BinarySearchTree[T]) String() string {
+func (bst *BinarySearchTree[T]) String() string {
 	return bst.InOrder()
 }
 
@@ -65,7 +66,7 @@ func (bst BinarySearchTree[T]) String() string {
 //
 // Retorna:
 //   - un string con el recorrido InOrder del árbol.
-func (bst BinarySearchTree[T]) InOrder() string {
+func (bst *BinarySearchTree[T]) InOrder() string {
 	return bst.inOrderByNode(bst.root)
 }
 
@@ -76,7 +77,7 @@ func (bst BinarySearchTree[T]) InOrder() string {
 //
 // Retorna:
 //   - un string con el recorrido InOrder del árbol local.
-func (bst BinarySearchTree[T]) inOrderByNode(root *BinaryNode[T]) string {
+func (bst *BinarySearchTree[T]) inOrderByNode(root *BinaryNode[T]) string {
 	if root == nil {
 		return ""
 	}
@@ -109,7 +110,7 @@ func (bst *BinarySearchTree[T]) Insert(k T) {
 //
 // Retorna:
 //   - un puntero al nodo raíz del árbol.
-func (bst BinarySearchTree[T]) insertByNode(node *BinaryNode[T], k T) *BinaryNode[T] {
+func (bst *BinarySearchTree[T]) insertByNode(node *BinaryNode[T], k T) *BinaryNode[T] {
 	if node == nil {
 		return NewBinaryNode(k, nil, nil)
 	}
@@ -137,8 +138,9 @@ func (bst BinarySearchTree[T]) insertByNode(node *BinaryNode[T], k T) *BinaryNod
 //
 // Retorna:
 //   - un puntero al nodo encontrado.
-func (bst *BinarySearchTree[T]) Search(k T) *BinaryNode[T] {
+func (bst *BinarySearchTree[T]) Search(k T) bool {
 	node := bst.root
+
 	for node != nil {
 		switch {
 		case k < node.data:
@@ -147,11 +149,11 @@ func (bst *BinarySearchTree[T]) Search(k T) *BinaryNode[T] {
 			node = node.right
 		default:
 
-			return node
+			return true
 		}
 	}
 
-	return nil
+	return false
 }
 
 // FindMin busca el nodo con el valor mínimo en el árbol.

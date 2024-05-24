@@ -43,15 +43,8 @@ func TestBSTBuscarElementoExistente(t *testing.T) {
 	bstree.Insert(5)
 	bstree.Insert(3)
 
-	found := bstree.Search(2)
-
-	assert.NotNil(t, found)
-	assert.Equal(t, 2, found.GetData())
-
-	found = bstree.Search(5)
-
-	assert.NotNil(t, found)
-	assert.Equal(t, 5, found.GetData())
+	assert.True(t, bstree.Search(2))
+	assert.False(t, bstree.Search(6))
 }
 
 func TestBSTBuscarElementoInexistente(t *testing.T) {
@@ -62,9 +55,7 @@ func TestBSTBuscarElementoInexistente(t *testing.T) {
 	bstree.Insert(5)
 	bstree.Insert(3)
 
-	found := bstree.Search(6)
-
-	assert.Nil(t, found)
+	assert.False(t, bstree.Search(6))
 }
 
 func TestBSTBuscarMinMax(t *testing.T) {
@@ -114,12 +105,12 @@ func TestBSTBorrarRaiz(t *testing.T) {
 	bstree.Insert(5)
 	bstree.Insert(3)
 
-	assert.NotNil(t, bstree.Search(4))
+	assert.True(t, bstree.Search(4))
 	assert.Equal(t, 5, bstree.Size())
 
 	bstree.Remove(4)
 
-	assert.Nil(t, bstree.Search(4))
+	assert.False(t, bstree.Search(4))
 	assert.Equal(t, 4, bstree.Size())
 }
 
@@ -134,23 +125,23 @@ func TestBSTBorrarTodosDeAUno(t *testing.T) {
 	assert.Equal(t, 5, bstree.Size())
 
 	bstree.Remove(1)
-	assert.Nil(t, bstree.Search(1))
+	assert.False(t, bstree.Search(1))
 	assert.Equal(t, 4, bstree.Size())
 
 	bstree.Remove(2)
-	assert.Nil(t, bstree.Search(2))
+	assert.False(t, bstree.Search(2))
 	assert.Equal(t, 3, bstree.Size())
 
 	bstree.Remove(3)
-	assert.Nil(t, bstree.Search(3))
+	assert.False(t, bstree.Search(3))
 	assert.Equal(t, 2, bstree.Size())
 
 	bstree.Remove(5)
-	assert.Nil(t, bstree.Search(5))
+	assert.False(t, bstree.Search(5))
 	assert.Equal(t, 1, bstree.Size())
 
 	bstree.Remove(4)
-	assert.Nil(t, bstree.Search(4))
+	assert.False(t, bstree.Search(4))
 	assert.Equal(t, 0, bstree.Size())
 }
 
@@ -184,7 +175,7 @@ func TestBSTBorrarRaizConUnHijo(t *testing.T) {
 
 	bstree.Remove(4)
 
-	assert.Nil(t, bstree.Search(4))
+	assert.False(t, bstree.Search(4))
 	assert.Equal(t, 1, bstree.Size())
 }
 
