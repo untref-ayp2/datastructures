@@ -1,3 +1,4 @@
+// Package common provee la interfaz SearchTree para los árboles de búsqueda.
 package common
 
 import "github.com/untref-ayp2/data-structures/types"

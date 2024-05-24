@@ -1,3 +1,4 @@
+// Package types provee tipos de utilidad para el resto de los paquetes.
 package types
 
 type Ordered interface {

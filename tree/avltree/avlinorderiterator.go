@@ -11,6 +11,18 @@ type AVLInOrderIterator[T types.Ordered] struct {
 	stack *stack.Stack[AVLNode[T]] // pila de nodos
 }
 
+// NewAVLInOrderIterator crea un iterador en orden para un árbol AVL.
+//
+// Uso:
+//
+//	avl := avltree.NewAVLTree[int]()
+//	iterator := avltree.NewAVLInOrderIterator(avl.GetRoot())
+//
+// Parámetros:
+//   - `root` la raíz del árbol AVL.
+//
+// Retorna:
+//   - un iterador en orden para el árbol AVL.
 func NewAVLInOrderIterator[T types.Ordered](root *AVLNode[T]) *AVLInOrderIterator[T] {
 	iterator := &AVLInOrderIterator[T]{
 		stack: stack.NewStack[AVLNode[T]](),
@@ -20,6 +32,10 @@ func NewAVLInOrderIterator[T types.Ordered](root *AVLNode[T]) *AVLInOrderIterato
 	return iterator
 }
 
+// stackLeftChildren apila los nodos hijos izquierdos de un nodo.
+//
+// Parámetros:
+//   - `node` el nodo a partir del cual se apilarán los nodos hijos izquierdos.
 func (it *AVLInOrderIterator[T]) stackLeftChildren(node *AVLNode[T]) {
 	for node != nil {
 		it.stack.Push(*node)
@@ -27,10 +43,30 @@ func (it *AVLInOrderIterator[T]) stackLeftChildren(node *AVLNode[T]) {
 	}
 }
 
+// HasNext indica si hay más elementos para recorrer.
+//
+// Uso:
+//
+//	avl := avltree.NewAVLTree[int]()
+//	iterator := avltree.NewAVLInOrderIterator(avl.GetRoot())
+//	iterator.HasNext()
+//
+// Retorna:
+//   - `true` si hay más elementos para recorrer, `false` en caso contrario.
 func (it *AVLInOrderIterator[T]) HasNext() bool {
 	return !it.stack.IsEmpty()
 }
 
+// Next devuelve el siguiente elemento del recorrido.
+//
+// Uso:
+//
+//	avl := avltree.NewAVLTree[int]()
+//	iterator := avltree.NewAVLInOrderIterator(avl.GetRoot())
+//	iterator.Next()
+//
+// Retorna:
+//   - el siguiente elemento del recorrido.
 func (it *AVLInOrderIterator[T]) Next() (T, error) {
 	var data T
 	if it.stack.IsEmpty() {
