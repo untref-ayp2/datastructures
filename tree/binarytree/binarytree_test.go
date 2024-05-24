@@ -39,16 +39,15 @@ func TestGetRoot(t *testing.T) {
 
 func TestRecorridosArbolVacio(t *testing.T) {
 	raiz := NewBinaryTree("algo")
-	raiz.Empty()
+	raiz.Clear()
 	// Recorrido en Pre-Order
-	vacio := []string{}
-	assert.Equal(t, vacio, raiz.GetPreOrder())
+	assert.Empty(t, raiz.GetPreOrder())
 	assert.Equal(t, "", raiz.StringPreOrder())
 	// Recorrido en In-Order
-	assert.Equal(t, vacio, raiz.GetInOrder())
+	assert.Empty(t, raiz.GetInOrder())
 	assert.Equal(t, "", raiz.StringInOrder())
 	// Recorrido en Post-Order
-	assert.Equal(t, vacio, raiz.GetPostOrder())
+	assert.Empty(t, raiz.GetPostOrder())
 	assert.Equal(t, "", raiz.StringPostOrder())
 }
 
@@ -88,13 +87,13 @@ func TestSizeHeightEmptyDiapo(t *testing.T) {
 	assert.False(t, mas.IsEmpty())
 
 	// Vaciar el arbol
-	mas.Empty()
+	mas.Clear()
 	assert.True(t, mas.IsEmpty())
 }
 
 func TestSizeHeightEmptyOnEmptyTree(t *testing.T) {
 	tree := NewBinaryTree("+")
-	tree.Empty()
+	tree.Clear()
 
 	// Size del arbol(cantidad de nodos)
 	assert.Equal(t, 0, tree.Size())
@@ -112,11 +111,54 @@ func TestInertsOnEmptyTree(t *testing.T) {
 	uno := NewBinaryTree("1")
 	dos := NewBinaryTree("2")
 
-	tree.Empty()
+	tree.Clear()
 	tree.InsertLeft(uno)
 	assert.False(t, tree.IsEmpty())
 
-	tree.Empty()
+	tree.Clear()
 	tree.InsertRight(dos)
 	assert.False(t, tree.IsEmpty())
+}
+
+func TestIteratorUnoPorUno(t *testing.T) {
+	mas := NewBinaryTree("+")
+	menos := NewBinaryTree("-")
+	mult := NewBinaryTree("*")
+	a := NewBinaryTree("a")
+	b := NewBinaryTree("b")
+	c := NewBinaryTree("c")
+	d := NewBinaryTree("d")
+	menos.InsertLeft(b)
+	menos.InsertRight(c)
+	mult.InsertLeft(menos)
+	mult.InsertRight(d)
+	mas.InsertLeft(a)
+	mas.InsertRight(mult)
+	tree := mas
+
+	it := tree.Iterator()
+
+	expectedValues := []string{"a", "+", "b", "-", "c", "*", "d"}
+
+	for _, expected := range expectedValues {
+		assert.True(t, it.HasNext())
+		val, err := it.Next()
+		assert.Equal(t, expected, val)
+		assert.NoError(t, err)
+	}
+	assert.False(t, it.HasNext())
+}
+
+func TestIteratorWhenEmpty(t *testing.T) {
+	btree := NewBinaryTree[int](0)
+	btree.Clear()
+
+	it := btree.Iterator()
+
+	assert.False(t, it.HasNext())
+
+	val, err := it.Next()
+
+	assert.Zero(t, val)
+	assert.Error(t, err)
 }

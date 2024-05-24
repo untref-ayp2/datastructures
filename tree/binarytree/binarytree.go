@@ -1,7 +1,10 @@
-// Package bt provee una implementación de árboles.
+// Package binarytree provee una implementación de árboles.
 package binarytree
 
-import "github.com/untref-ayp2/data-structures/types"
+import (
+	"github.com/untref-ayp2/data-structures/stack"
+	"github.com/untref-ayp2/data-structures/types"
+)
 
 type BinaryTree[T types.Ordered] struct {
 	root *BinaryNode[T]
@@ -249,4 +252,34 @@ func (t *BinaryTree[T]) Size() int {
 //   - la altura del árbol.
 func (t *BinaryTree[T]) Height() int {
 	return t.root.Height()
+}
+
+// Iterator devuelve un iterador para recorrer el árbol.
+//
+// Uso:
+//
+//	bt := tree.NewBinaryTree[int](0)
+//	// ...
+//	it := bt.Iterator()
+//
+// Retorna:
+//   - un Iterator.
+func (t *BinaryTree[T]) Iterator() types.Iterator[T] {
+	return newBinaryTreeIterator[T](t)
+}
+
+// newBinaryTreeIterator crea un nuevo BinaryTreeIterator.
+//
+// Parámetros:
+//   - `bt` un puntero a un BinaryTree.
+//
+// Retorna:
+//   - un Iterator.
+func newBinaryTreeIterator[T types.Ordered](bt *BinaryTree[T]) types.Iterator[T] {
+	it := &BinaryTreeIterator[T]{internalStack: stack.NewStack[*BinaryNode[T]]()}
+	if bt.root != nil {
+		it.pushLeftNodes(bt.root)
+	}
+
+	return it
 }
