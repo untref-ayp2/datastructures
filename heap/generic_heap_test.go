@@ -11,25 +11,23 @@ type Persona struct {
 	edad   int
 }
 
-func personasDeMayorAMenorEdad() func(a Persona, b Persona) int {
-	return func(a Persona, b Persona) int {
-		if a.edad < b.edad {
-			return 1
-		} else if a.edad > b.edad {
-			return -1
-		}
-
-		return 0
+func personasDeMayorAMenorEdad(a Persona, b Persona) int {
+	if a.edad < b.edad {
+		return 1
+	} else if a.edad > b.edad {
+		return -1
 	}
+
+	return 0
 }
 
 func TestHeapCrearVacio(t *testing.T) {
-	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad())
+	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad)
 	assert.Equal(t, 0, m.Size())
 }
 
 func TestHeapRemoveVacio(t *testing.T) {
-	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad())
+	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad)
 	_, err := m.Remove()
 	assert.NotNil(t, err)
 }
@@ -62,7 +60,7 @@ func TestHeapCrearInsertarYExtraer(t *testing.T) {
 	}
 
 	// Verificaciones iniciales
-	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad())
+	m := NewGenericHeap[Persona](personasDeMayorAMenorEdad)
 	assert.Equal(t, 0, m.Size())
 
 	// Verificaciones a medida que vamos insertando
