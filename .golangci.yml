@@ -13,6 +13,7 @@ linters:
     - execinquery
     - exhaustruct
     - forbidigo
+    - gci
     - goerr113
     - misspell
     - paralleltest
@@ -38,11 +39,16 @@ linters:
 linters-settings:
   cyclop:
     max-complexity: 15
+  gocritic:
+    disabled-checks:
+      - dupSubExpr
   gomnd:
     ignored-numbers:
       - '0b0'
       - '0b1'
       - 2
+  lll:
+    line-length: 150
   mnd:
     ignored-numbers:
       - '0b0'
