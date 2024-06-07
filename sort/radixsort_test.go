@@ -34,3 +34,9 @@ func TestRadixSortt(t *testing.T) {
 	RadixSort(arr)
 	assert.Equal(t, []string{"120", "120aac", "120abc", "123abc", "12a"}, arr)
 }
+
+func TestRadixSorttFloat(t *testing.T) {
+	arr := []string{"123.5", "12", "123", "0.201", "0.200"}
+	RadixSort(arr)
+	assert.Equal(t, []string{"0.200", "0.201", "12", "123", "123.5"}, arr)
+}

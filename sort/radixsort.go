@@ -7,7 +7,7 @@ import (
 	"github.com/untref-ayp2/data-structures/list"
 )
 
-const abecedario = "*0123456789abcdefghijklmnñopqrstuvwxyz"
+const abecedario = "*.0123456789abcdefghijklmnñopqrstuvwxyz"
 
 func RadixSort(arr []string) {
 	if len(arr) < 2 {
