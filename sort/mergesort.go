@@ -27,7 +27,7 @@ func merge[T any](left, right []T, compare func(T, T) int) []T {
 		} else if j > lenRight && i <= lenLeft {
 			array[k] = left[i]
 			i++
-		} else if compare(left[i], right[j]) < 0 {
+		} else if compare(left[i], right[j]) <= 0 {
 			array[k] = left[i]
 			i++
 		} else {
