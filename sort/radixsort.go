@@ -2,6 +2,7 @@ package sort
 
 import (
 	"strings"
+	"unicode/utf8"
 
 	"github.com/untref-ayp2/data-structures/dictionary"
 	"github.com/untref-ayp2/data-structures/list"
@@ -23,16 +24,16 @@ func RadixSort(arr []string) {
 }
 
 func initBuckets(b *dictionary.Dictionary[string, list.LinkedList[string]]) {
-	for i := 0; i < len(abecedario); i++ {
-		b.Put(string(abecedario[i]), *list.NewLinkedList[string]())
+	for _, key := range abecedario {
+		b.Put(string(key), *list.NewLinkedList[string]())
 	}
 }
 
 func fillBuckets(arr []string, b *dictionary.Dictionary[string, list.LinkedList[string]], pos int) {
 	for _, value := range arr {
 		key := "*"
-		if pos < len(value) {
-			key = strings.ToLower(string(value[pos]))
+		if pos < utf8.RuneCountInString(value) {
+			key = strings.ToLower(string([]rune(value)[pos]))
 		}
 		list, _ := b.Get(key)
 		list.Append(value)
@@ -54,10 +55,10 @@ func emptyBuckets(arr []string, b *dictionary.Dictionary[string, list.LinkedList
 }
 
 func maxLen(arr []string) int {
-	max := len(arr[0])
+	max := utf8.RuneCountInString(arr[0])
 	for _, value := range arr {
-		if len(value) > max {
-			max = len(value)
+		if utf8.RuneCountInString(value) > max {
+			max = utf8.RuneCountInString(value)
 		}
 	}
 	return max
