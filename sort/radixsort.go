@@ -42,15 +42,14 @@ func fillBuckets(arr []string, b *dictionary.Dictionary[string, list.LinkedList[
 
 func emptyBuckets(arr []string, b *dictionary.Dictionary[string, list.LinkedList[string]]) {
 	index := 0
-	for i := 0; i < len(abecedario); i++ {
-		key := string(abecedario[i])
-		list, _ := b.Get(key)
+	for _, key := range abecedario {
+		list, _ := b.Get(string(key))
 		for !list.IsEmpty() {
 			arr[index] = list.Head().Data()
 			list.RemoveFirst()
 			index++
 		}
-		b.Put(key, list)
+		b.Put(string(key), list)
 	}
 }
 
